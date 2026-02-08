@@ -1,3 +1,3 @@
-web: gunicorn polepositionautomations.wsgi:application
+web: gunicorn polepositionautomation.wsgi:application
 
 
