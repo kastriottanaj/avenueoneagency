@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Contact – Avenue One Agency{% endblock %}
+{% block description %}Contact Avenue One Agency for inquiries about social media marketing and influencer partnerships.{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h1 class="mb-4">Contact</h1>
+    <p class="lead">Here you can find our contact details and get in touch with us.</p>
+
+    <div class="row mt-4">
+      <!-- CONTACT INFO -->
+      <div class="col-md-6 mb-4">
+        <h4>New York City</h4>
+        <ul class="list-unstyled">
+          <li><strong>E-Mail:</strong> 
+            <a href="mailto:avenueoneagency@gmail.com">
+              avenueoneagency@gmail.com
+            </a>
+          </li>
+          <li><strong>Telefon:</strong> 
+            <a href="+1 (917) 717-8150">
+              +1 (917) 717-8150
+            </a>
+          </li>
+          <li><strong><Address></Address>:</strong><br>
+              New York City<br>
+          </li>
+        </ul>
+      </div>
+
+      <!-- CONTACT FORM -->
+      <div class="col-md-6">
+        <h4>Contact Form</h4>
+
+        {% if success %}
+          <div class="alert alert-success">
+            Your message was sent successfully. We will get back to you as soon as possible.
+          </div>
+        {% endif %}
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+          
+          {% for field in form %}
+            <div class="mb-3">
+              <label class="form-label">{{ field.label }}</label>
+              {{ field }}
+              {% if field.errors %}
+                <div class="text-danger small">{{ field.errors }}</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

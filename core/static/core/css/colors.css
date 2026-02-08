@@ -1,0 +1,212 @@
+/* Main Colors for the PolePosition Automation */
+:root {
+    --primary-color: #1E90FF; /* Persian Blue */
+    --secondary-color: #00ffff; /* Cyan */
+    --pastel-green: #99ff99; /* Pastel Green */
+    --light-peach: #fff7d7; /* Light Peach */
+    --pale-sky-blue: #dce9f4; /* Pale Sky Blue */
+    --vivid-orange: #f26622; /* Vivid Orange */
+    --vibrant-red: #ed1b35; /* Vibrant Red */
+    --bright-pink: #ee4c9b; /* Bright Pink */
+    --bright-cyan: #4cc5d7; /* Bright Cyan */
+}
+
+.cta-button {
+    background-color: var(--vivid-orange);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cta-button:hover {
+    background-color: var(--vibrant-red);
+}
+
+.navbar-nav .nav-link {
+    color: #222;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--primary-color);
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.logo-img {
+  height: 90px;
+  width: auto;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
+
+/* Breadcrumb link colors */
+.breadcrumb .breadcrumb-item a {
+  color: #000 !important;
+  text-decoration: none;
+}
+
+.breadcrumb .breadcrumb-item a:hover {
+  text-decoration: underline;
+  color: #000 !important;
+}
+
+/* Optional: Make the slash separator darker too */
+.breadcrumb-item + .breadcrumb-item::before {
+  color: #444 !important;
+}
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 75vh; /* minimum height for large screens */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* HERO IMAGE */
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; /* makes the image cover the container */
+  object-position: center; /* keeps the important part of image centered */
+  display: block;
+}
+
+/* OVERLAY & TEXT */
+.hero-overlay {
+  position: relative; /* above image */
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35); /* semi-transparent overlay for contrast */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.hero-content {
+  max-width: 900px;
+  color: white;
+}
+
+.hero-content h1 {
+  font-size: clamp(2rem, 3vw, 3.2rem);
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+}
+
+.hero-content p {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+}
+
+.hero-btn {
+  background-color: var(--vivid-orange);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.hero-btn:hover {
+  background-color: var(--vibrant-red);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero-section {
+    min-height: 50vh;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+
+  .hero-content p {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+  }
+}
+
+
+.hero-section {
+  position: relative; /* This keeps the text inside the section */
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* Optional: Add a slight dark filter so text is easier to read */
+  filter: brightness(70%); 
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 50%;         /* Center vertically */
+  left: 50%;        /* Center horizontally */
+  transform: translate(-50%, -50%); /* Precise centering trick */
+  width: 80%;       /* Prevents text from hitting the edges */
+  text-align: center;
+  color: white;     /* Ensure text is visible on the image */
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds readability */
+}
+
+.hero-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #007bff; /* Adjust to your brand color */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
