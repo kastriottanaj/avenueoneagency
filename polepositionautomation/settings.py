@@ -1,5 +1,8 @@
 import os
 from pathlib import Path
+import dj_database_url
+import os
+
 
 """
 Django settings for polepositionautomation project.
@@ -26,9 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-cv0c#guqen-(lu#n4fmq)(5)xo(6$ao4#guep+spc=ztnnbvmm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 
