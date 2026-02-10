@@ -2,11 +2,10 @@
 
 from django.db import migrations, models
 
-
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0002_blogpost_delete_blospost'),
+        ('blog', '0001_initial'),  # <- make sure this exists
     ]
 
     operations = [
