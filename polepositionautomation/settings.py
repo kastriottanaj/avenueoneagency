@@ -33,7 +33,7 @@ SECRET_KEY = 'mx%l0-=8+&#tu$8j3&xkfnj4ie&3kz5k(9o7&$$cy2r_pm^*#9'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['wwww.avenueoneagency.com', 'avenueoneagency.com']
 
