@@ -99,15 +99,19 @@ WSGI_APPLICATION = 'polepositionautomation.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+#DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': 'avenueone',          # the database you created
+        #'USER': 'avenueone',          # the user you created
+        #'PASSWORD': 'avenueoneagency', # the password
+        #'HOST': 'localhost',
+        #'PORT': '5432',
+    #}
+#}
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'avenueone',          # the database you created
-        'USER': 'avenueone',          # the user you created
-        'PASSWORD': 'avenueoneagency', # the password
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default="postgresql://granexv2_user:0HqvQTlahpArf99U5ByzVt9LjgRg8Qow@dpg-d0rlecbipnbc73bbse30-a/granexv2")
 }
 
 
