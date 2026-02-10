@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-cv0c#guqen-(lu#n4fmq)(5)xo(6$ao4#guep+spc=ztnnbvmm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['wwww.avenueoneagency.com', 'avenueoneagency.com']
 
 
 
