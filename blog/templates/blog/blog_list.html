@@ -12,7 +12,7 @@
       <div class="col-12 mb-4">
         <form method="get" action="{% url 'blog' %}" class="row gx-2">
           <div class="col-md-4 col-8">
-            <input type="text" name="q" class="form-control" placeholder="Suche nach Blogposts..." value="{{ request.GET.q }}">
+            <input type="text" name="q" class="form-control" placeholder="Search for blog posts..." value="{{ request.GET.q }}">
           </div>
           <div class="col-md-3 col-4">
             <button type="submit" class="btn btn-primary w-100">Search</button>
@@ -27,10 +27,10 @@
 
       <!-- 🧭 Sidebar -->
       <aside class="col-md-3 d-none d-md-block">
-        <h5>Kategorien</h5>
+        <h5>Categories</h5>
         <ul class="list-group">
           <li class="list-group-item {% if not current_category %}active{% endif %}">
-            <a href="{% url 'blog' %}">Alle</a>
+            <a href="{% url 'blog' %}">All</a>
           </li>
           {% for category in categories %}
             <li class="list-group-item {% if current_category == category.slug %}active{% endif %}">
