@@ -1,12 +1,12 @@
 # blog/feeds.py
 from django.contrib.syndication.views import Feed
-from django.urls import reverse
 from .models import BlogPost
 
+
 class LatestPostsFeed(Feed):
-    title = "PolePosition Automation – Blog Feed"
+    title = "Avenue One Agency – Blog Feed"
     link = "/blog/"
-    description = "Aktuelle Artikel zur Prozessautomatisierung und Digitalisierung."
+    description = "Latest posts on social media marketing, influencer partnerships and brand development."
 
     def items(self):
         return BlogPost.objects.filter(published=True).order_by('-created_at')[:10]
@@ -18,4 +18,4 @@ class LatestPostsFeed(Feed):
         return item.meta_description or item.content[:200]
 
     def item_link(self, item):
-        return reverse("blog_detail", args=[item.slug])
+        return f'/blog/{item.slug}/'

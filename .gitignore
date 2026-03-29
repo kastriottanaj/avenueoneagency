@@ -24,3 +24,7 @@ venv/
 
 # Database backups
 *.dump
+
+# React / Node
+frontend/node_modules/
+frontend/dist/

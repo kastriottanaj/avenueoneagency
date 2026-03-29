@@ -1,9 +1,9 @@
-from django.urls import reverse
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from PIL import Image
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -11,11 +11,12 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-     
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
@@ -33,20 +34,10 @@ class BlogPost(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     tags = TaggableManager(blank=True)
 
-    def blog_list(request, tag_slug=None):
-        if tag_slug:
-            tag = get_object_or_404(Tag, slug=tag_slug)
-            posts = posts.filter(tags__in=[tag])
-
     def save(self, *args, **kwargs):
-        # Slug generation
         if not self.slug:
             self.slug = slugify(self.title)
-
-        # Save initially to ensure the image file is available
         super().save(*args, **kwargs)
-
-        # Image size detection
         if self.featured_image:
             try:
                 img = Image.open(self.featured_image.path)
@@ -60,12 +51,13 @@ class BlogPost(models.Model):
         if self.featured_image:
             return self.featured_image.url.replace(".jpg", ".webp").replace(".png", ".webp")
         return ""
-    
+
     def get_absolute_url(self):
-        return reverse('blog_detail', args=[self.slug])
+        return f'/blog/{self.slug}/'
 
     def __str__(self):
         return self.title
+
 
 class NewsletterSignup(models.Model):
     name = models.CharField(max_length=100, blank=True)
@@ -74,5 +66,3 @@ class NewsletterSignup(models.Model):
 
     def __str__(self):
         return self.email
-    
-
