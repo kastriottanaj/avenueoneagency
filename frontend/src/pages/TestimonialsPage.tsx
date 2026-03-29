@@ -1,40 +1,76 @@
+import { Link } from 'react-router-dom'
+
 const testimonials = [
   {
     quote:
-      'Through Avenue One Agency, we were able to streamline our services, increase local visibility and improve customer engagement, also increase the booking rate by 25%.',
-    author: 'Edwin Kornmann Rudi, Faralda Crane Hotel',
+      'Through Avenue One Agency, we were able to streamline our services, increase local visibility and improve customer engagement — increasing our booking rate by 25%.',
+    author: 'Edwin Kornmann Rudi',
+    role: 'Faralda Crane Hotel',
   },
   {
     quote:
-      'Social Media Marketing services provided by Avenue One Agency, helped us increase our online presence and customer engagement.',
-    author: 'Fregi Mathew, Chef, Chatti New York',
+      'Social Media Marketing services provided by Avenue One Agency helped us increase our online presence and customer engagement significantly.',
+    author: 'Fregi Mathew',
+    role: 'Chef, Chatti New York',
   },
 ]
 
 export default function TestimonialsPage() {
   return (
-    <section className="py-5">
-      <div className="container">
-        <h1 className="mb-4">What Our Customers Say</h1>
-        <p className="lead">
-          Feedback and testimonials from customers who have successfully grown their brand with us.
-        </p>
+    <>
+      <section className="page-hero">
+        <div className="container">
+          <span className="section-label">Testimonials</span>
+          <h1>
+            What our clients<br />
+            <span className="pink">say about us</span>.
+          </h1>
+          <p>Real results from real brands we have worked with.</p>
+        </div>
+      </section>
 
-        <div className="row mt-5">
-          {testimonials.map((t) => (
-            <div key={t.author} className="col-md-6 mb-4">
-              <div className="border rounded p-4 h-100">
-                <p className="mb-2">&ldquo;{t.quote}&rdquo;</p>
-                <strong>– {t.author}</strong>
+      <section className="page-section">
+        <div className="container">
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '1.5rem',
+              marginBottom: '4rem',
+            }}
+          >
+            {testimonials.map((t) => (
+              <div key={t.author} className="testimonial-card">
+                <div style={{ color: 'var(--pink)', fontSize: '2rem', marginBottom: '1rem' }}>
+                  &ldquo;
+                </div>
+                <blockquote>{t.quote}</blockquote>
+                <cite>
+                  {t.author}
+                  <span style={{ color: 'var(--gray)', fontWeight: 400, marginLeft: '0.5rem' }}>
+                    — {t.role}
+                  </span>
+                </cite>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="alert alert-info mt-5">
-          <strong>More testimonials coming soon.</strong>
+          <div
+            className="card-dark"
+            style={{ textAlign: 'center', padding: '3rem', borderStyle: 'dashed' }}
+          >
+            <h3 style={{ color: 'var(--white)', marginBottom: '0.75rem' }}>
+              More testimonials coming soon
+            </h3>
+            <p style={{ color: 'var(--gray)', marginBottom: '2rem' }}>
+              We are constantly growing our client base. Want to be next?
+            </p>
+            <Link to="/kontakt/" className="btn-primary">
+              Start a Project ↗
+            </Link>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }

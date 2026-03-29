@@ -1,57 +1,72 @@
-import { NavLink } from 'react-router-dom'
+import { useState } from 'react'
+import { NavLink, Link } from 'react-router-dom'
+
+const links = [
+  { to: '/', label: 'Home', end: true },
+  { to: '/ueber-uns/', label: 'About' },
+  { to: '/services/', label: 'Services' },
+  { to: '/branchen/', label: 'Industries' },
+  { to: '/blog/', label: 'Blog' },
+  { to: '/testimonials/', label: 'Testimonials' },
+]
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false)
+
   return (
-    <header>
-      <nav className="navbar navbar-expand-lg bg-white border-bottom shadow-sm">
+    <>
+      <header className="site-header">
         <div className="container">
-          <NavLink className="navbar-brand" to="/">
-            <img
-              src="/static/core/css/img/avenueone.png"
-              alt="Avenue One Agency"
-              className="logo-img"
-            />
-          </NavLink>
+          <nav className="nav-inner">
+            <Link to="/" className="nav-logo" onClick={() => setOpen(false)}>
+              <img src="/static/core/css/img/avenueone.png" alt="Avenue One Agency" />
+            </Link>
 
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#mainNavbar"
-            aria-controls="mainNavbar"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-
-          <div className="collapse navbar-collapse" id="mainNavbar">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/" end>Home</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/ueber-uns/">About Us</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/services/">Services</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/branchen/">Industries</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/blog/">Blog</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/testimonials/">Testimonials</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/kontakt/">Contact</NavLink>
+            <ul className="nav-links">
+              {links.map((l) => (
+                <li key={l.to}>
+                  <NavLink to={l.to} end={l.end}>
+                    {l.label}
+                  </NavLink>
+                </li>
+              ))}
+              <li>
+                <NavLink to="/kontakt/" className="nav-cta">
+                  Work With Us
+                </NavLink>
               </li>
             </ul>
-          </div>
+
+            <button
+              className="nav-hamburger"
+              onClick={() => setOpen((o) => !o)}
+              aria-label="Toggle menu"
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </nav>
         </div>
-      </nav>
-    </header>
+      </header>
+
+      {/* Mobile menu */}
+      <div className={`nav-mobile ${open ? 'open' : ''}`}>
+        <ul>
+          {links.map((l) => (
+            <li key={l.to}>
+              <NavLink to={l.to} end={l.end} onClick={() => setOpen(false)}>
+                {l.label}
+              </NavLink>
+            </li>
+          ))}
+          <li>
+            <NavLink to="/kontakt/" className="active" onClick={() => setOpen(false)}>
+              Work With Us
+            </NavLink>
+          </li>
+        </ul>
+      </div>
+    </>
   )
 }

@@ -18,117 +18,155 @@ export default function BlogDetailPage() {
       .finally(() => setLoading(false))
   }, [slug])
 
-  if (loading) return <div className="container py-5"><p>Loading…</p></div>
-  if (error || !post) {
+  if (loading) {
     return (
-      <div className="container py-5">
-        <div className="alert alert-danger">{error || 'Post not found.'}</div>
-        <Link to="/blog/" className="btn btn-outline-primary">← Back to Blog</Link>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <p style={{ color: 'var(--gray)' }}>Loading…</p>
       </div>
     )
   }
 
+  if (error || !post) {
+    return (
+      <section className="page-section">
+        <div className="container" style={{ textAlign: 'center' }}>
+          <h1 style={{ color: 'var(--white)', marginBottom: '1rem' }}>Post not found</h1>
+          <Link to="/blog/" className="btn-primary">← Back to Blog</Link>
+        </div>
+      </section>
+    )
+  }
+
   return (
-    <section className="py-5">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-9">
+    <>
+      {/* Hero */}
+      <section
+        style={{
+          paddingTop: '120px',
+          paddingBottom: '60px',
+          background: 'var(--black)',
+          borderBottom: '1px solid var(--border)',
+        }}
+      >
+        <div className="container" style={{ maxWidth: '800px' }}>
+          <div className="breadcrumb">
+            <Link to="/blog/">Blog</Link>
+            <span className="breadcrumb-sep">/</span>
+            <span style={{ color: 'var(--gray-light)' }}>{post.title}</span>
+          </div>
 
-            {/* Breadcrumb */}
-            <nav aria-label="breadcrumb">
-              <ol className="breadcrumb">
-                <li className="breadcrumb-item">
-                  <Link to="/blog/">Blog</Link>
-                </li>
-                <li className="breadcrumb-item active" aria-current="page">
-                  {post.title}
-                </li>
-              </ol>
-            </nav>
+          {post.category && (
+            <span className="tag-pill" style={{ marginBottom: '1.25rem', display: 'inline-block' }}>
+              {post.category.name}
+            </span>
+          )}
 
-            <article>
-              <h1>{post.title}</h1>
-              <p className="text-muted">
-                Published on{' '}
-                {new Date(post.created_at).toLocaleDateString('en-US', {
-                  year: 'numeric', month: 'long', day: 'numeric',
-                })}
-                {post.author_name && ` by ${post.author_name}`}
-              </p>
+          <h1
+            style={{
+              fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+              fontWeight: 900,
+              letterSpacing: '-0.03em',
+              color: 'var(--white)',
+              marginBottom: '1rem',
+            }}
+          >
+            {post.title}
+          </h1>
 
-              {post.featured_image_url && (
-                <img
-                  src={post.featured_image_url}
-                  alt={post.title}
-                  width={post.image_width ?? undefined}
-                  height={post.image_height ?? undefined}
-                  className="img-fluid mb-4"
-                  loading="lazy"
-                />
-              )}
-
-              {/* Render HTML content from the admin */}
-              <div
-                className="blog-content"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-              />
-
-              {post.tags.length > 0 && (
-                <div className="mt-4">
-                  <h5>Tags:</h5>
-                  <ul className="list-inline">
-                    {post.tags.map((tag) => (
-                      <li key={tag.slug} className="list-inline-item">
-                        <Link
-                          to={`/blog/?tag=${tag.slug}`}
-                          className="badge bg-secondary text-decoration-none"
-                        >
-                          {tag.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </article>
-
-            {/* Related posts */}
-            {post.related_posts && post.related_posts.length > 0 && (
-              <>
-                <hr className="my-5" />
-                <h3>Related posts</h3>
-                <div className="row">
-                  {post.related_posts.map((related) => (
-                    <div key={related.id} className="col-md-6 mb-4">
-                      <div className="card h-100 shadow-sm">
-                        <div className="card-body">
-                          {related.featured_image_url && (
-                            <img
-                              src={related.featured_image_url}
-                              alt={related.title}
-                              className="img-fluid mb-3"
-                              loading="lazy"
-                            />
-                          )}
-                          <h5>
-                            <Link to={`/blog/${related.slug}/`}>{related.title}</Link>
-                          </h5>
-                          <Link
-                            to={`/blog/${related.slug}/`}
-                            className="btn btn-outline-primary btn-sm"
-                          >
-                            Read more
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </>
+          <p style={{ color: 'var(--gray)', fontSize: '0.875rem' }}>
+            {new Date(post.created_at).toLocaleDateString('en-US', {
+              year: 'numeric', month: 'long', day: 'numeric',
+            })}
+            {post.author_name && (
+              <span> &nbsp;·&nbsp; by <strong style={{ color: 'var(--gray-light)' }}>{post.author_name}</strong></span>
             )}
+          </p>
+        </div>
+      </section>
+
+      <section className="page-section">
+        <div className="container" style={{ maxWidth: '800px' }}>
+          {post.featured_image_url && (
+            <img
+              src={post.featured_image_url}
+              alt={post.title}
+              style={{
+                width: '100%',
+                borderRadius: '16px',
+                marginBottom: '3rem',
+                objectFit: 'cover',
+                maxHeight: '480px',
+              }}
+              loading="lazy"
+            />
+          )}
+
+          <div
+            className="blog-content"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+
+          {post.tags.length > 0 && (
+            <div style={{ marginTop: '2.5rem', paddingTop: '2rem', borderTop: '1px solid var(--border)' }}>
+              <p style={{ color: 'var(--gray)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+                Tags
+              </p>
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                {post.tags.map((tag) => (
+                  <Link
+                    key={tag.slug}
+                    to={`/blog/?tag=${tag.slug}`}
+                    className="tag-pill"
+                  >
+                    {tag.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div style={{ marginTop: '2.5rem', paddingTop: '2rem', borderTop: '1px solid var(--border)' }}>
+            <Link to="/blog/" className="btn-outline">← Back to Blog</Link>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Related posts */}
+      {post.related_posts && post.related_posts.length > 0 && (
+        <section className="page-section page-section--dark">
+          <div className="container">
+            <span className="section-label">Continue Reading</span>
+            <h2 className="section-title" style={{ marginBottom: '2rem' }}>Related Posts</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
+              {post.related_posts.map((related) => (
+                <div key={related.id} className="blog-card">
+                  {related.featured_image_url && (
+                    <img
+                      src={related.featured_image_url}
+                      alt={related.title}
+                      className="blog-card-img"
+                      loading="lazy"
+                    />
+                  )}
+                  <div className="blog-card-body">
+                    <p className="blog-card-date">
+                      {new Date(related.created_at).toLocaleDateString('en-US', {
+                        year: 'numeric', month: 'long', day: 'numeric',
+                      })}
+                    </p>
+                    <h4>
+                      <Link to={`/blog/${related.slug}/`}>{related.title}</Link>
+                    </h4>
+                    <Link to={`/blog/${related.slug}/`} className="btn-primary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.8rem' }}>
+                      Read ↗
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+    </>
   )
 }

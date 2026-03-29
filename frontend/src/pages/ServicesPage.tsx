@@ -1,55 +1,112 @@
+import { Link } from 'react-router-dom'
+
 const services = [
   {
-    title: 'Advertising',
-    description: 'Optimize your advertising campaigns with AI-driven insights and automated targeting.',
+    n: '01',
+    title: 'Social Media Strategy',
+    desc: 'Data-driven strategies tailored to your brand that grow your audience, deepen community engagement, and hit measurable KPIs.',
   },
   {
-    title: 'Digital Marketing',
-    description: 'Enhance your digital marketing efforts with data-driven strategies and automated execution.',
-  },
-  {
-    title: 'Search Engine Optimization',
-    description: 'Improve your online visibility and organic search rankings with our SEO services.',
-  },
-  {
-    title: 'Social Media Marketing',
-    description: 'Grow your brand presence and engagement on social media with our marketing solutions.',
-  },
-  {
+    n: '02',
     title: 'Content Creation',
-    description:
-      'Generate high-quality content for your website, blog, and social media channels.',
+    desc: 'Scroll-stopping content — photography, video, copy — crafted for your brand voice and optimized for each platform\u2019s algorithm.',
   },
   {
-    title: 'Web Development',
-    description:
-      'Build and maintain modern, responsive websites and web applications tailored to your business needs.',
+    n: '03',
+    title: 'Influencer Partnerships',
+    desc: 'Curated creator collaborations and UGC direction that put your brand in front of the right audiences at the right moment.',
   },
   {
-    title: 'AEO (AI Engine Optimization)',
-    description:
-      'We optimize your website to perform better in AI engines like ChatGPT, Perplexity, and Google AI Overview — including content, structure, and metadata.',
+    n: '04',
+    title: 'Brand Identity & Creative Direction',
+    desc: 'We build iconic, recognizable brand aesthetics from visual identity to tone of voice — everything that makes you memorable.',
+  },
+  {
+    n: '05',
+    title: 'Campaign Production & Storytelling',
+    desc: 'End-to-end campaign management: concept, production, execution, and analysis. We tell stories that move people to act.',
+  },
+  {
+    n: '06',
+    title: 'Hospitality & Lifestyle Marketing',
+    desc: 'Specialist expertise in hotels, restaurants, F&B and luxury lifestyle brands — we understand your audience deeply.',
+  },
+  {
+    n: '07',
+    title: 'Advertising & Paid Media',
+    desc: 'AI-driven ad targeting, creative strategy, and budget optimization across Meta, TikTok, Google, and beyond.',
+  },
+  {
+    n: '08',
+    title: 'AEO — AI Engine Optimization',
+    desc: 'Optimize your brand for ChatGPT, Perplexity, and Google AI Overview — the new frontier of discoverability.',
   },
 ]
 
 export default function ServicesPage() {
   return (
-    <section className="py-5">
-      <div className="container">
-        <h1 className="mb-4">Our Services</h1>
-        <p className="lead">
-          We offer a wide range of digital services for automating and optimizing your brand presence.
-        </p>
-
-        <div className="row mt-4">
-          {services.map((s) => (
-            <div key={s.title} className="col-md-6 mb-4">
-              <h4>{s.title}</h4>
-              <p>{s.description}</p>
-            </div>
-          ))}
+    <>
+      <section className="page-hero">
+        <div className="container">
+          <span className="section-label">Services</span>
+          <h1>
+            Everything your brand<br />
+            needs to <span className="pink">dominate</span>.
+          </h1>
+          <p>Full-service creative and marketing solutions for modern brands.</p>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="page-section">
+        <div className="container">
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '1rem',
+            }}
+          >
+            {services.map((s) => (
+              <div key={s.n} className="card-dark">
+                <div className="card-number">{s.n}</div>
+                <h4>{s.title}</h4>
+                <p>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="page-section"
+        style={{
+          background: 'linear-gradient(135deg, var(--pink) 0%, #a0103e 100%)',
+          textAlign: 'center',
+        }}
+      >
+        <div className="container">
+          <h2
+            style={{
+              fontSize: 'clamp(2rem, 4vw, 3rem)',
+              color: 'white',
+              marginBottom: '1rem',
+              letterSpacing: '-0.03em',
+            }}
+          >
+            Not sure where to start?
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '2rem' }}>
+            Let's talk. We'll figure out exactly what your brand needs.
+          </p>
+          <Link
+            to="/kontakt/"
+            className="btn-primary"
+            style={{ background: 'white', color: 'var(--pink)' }}
+          >
+            Get a Free Consultation ↗
+          </Link>
+        </div>
+      </section>
+    </>
   )
 }

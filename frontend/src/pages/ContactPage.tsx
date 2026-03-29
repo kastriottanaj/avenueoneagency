@@ -45,91 +45,150 @@ export default function ContactPage() {
   }
 
   return (
-    <section className="py-5">
-      <div className="container">
-        <h1 className="mb-4">Contact</h1>
-        <p className="lead">Get in touch with us — we'd love to hear from you.</p>
+    <>
+      <section className="page-hero">
+        <div className="container">
+          <span className="section-label">Contact</span>
+          <h1>
+            Let&apos;s build<br />
+            something <span className="pink">iconic</span>.
+          </h1>
+          <p>
+            Tell us about your brand and what you want to achieve.
+            We will get back to you within 24 hours.
+          </p>
+        </div>
+      </section>
 
-        <div className="row mt-4">
-          {/* Contact info */}
-          <div className="col-md-6 mb-4">
-            <h4>New York City</h4>
-            <ul className="list-unstyled">
-              <li>
-                <strong>E-Mail:</strong>{' '}
-                <a href="mailto:info@avenueoneagency.com">info@avenueoneagency.com</a>
-              </li>
-              <li>
-                <strong>Address:</strong>
-                <br />
-                New York City, USA
-              </li>
-            </ul>
-          </div>
+      <section className="page-section">
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '4rem', alignItems: 'start' }}>
 
-          {/* Contact form */}
-          <div className="col-md-6">
-            <h4>Contact Form</h4>
+            {/* Info */}
+            <div>
+              <span className="section-label">Reach Us</span>
+              <h2 className="section-title" style={{ fontSize: '2rem', marginBottom: '2rem' }}>
+                New York City
+              </h2>
 
-            {success && (
-              <div className="alert alert-success">
-                Your message was sent successfully. We will get back to you as soon as possible.
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div>
+                  <p style={{ color: 'var(--gray)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.25rem' }}>
+                    Email
+                  </p>
+                  <a
+                    href="mailto:info@avenueoneagency.com"
+                    style={{ color: 'var(--white)', fontSize: '1rem', transition: 'color 0.2s' }}
+                    onMouseOver={(e) => (e.currentTarget.style.color = 'var(--pink)')}
+                    onMouseOut={(e) => (e.currentTarget.style.color = 'var(--white)')}
+                  >
+                    info@avenueoneagency.com
+                  </a>
+                </div>
+                <div>
+                  <p style={{ color: 'var(--gray)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.25rem' }}>
+                    Instagram
+                  </p>
+                  <a
+                    href="https://www.instagram.com/avenueone.agency/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'var(--white)', fontSize: '1rem', transition: 'color 0.2s' }}
+                    onMouseOver={(e) => (e.currentTarget.style.color = 'var(--pink)')}
+                    onMouseOut={(e) => (e.currentTarget.style.color = 'var(--white)')}
+                  >
+                    @avenueone.agency
+                  </a>
+                </div>
+                <div>
+                  <p style={{ color: 'var(--gray)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.25rem' }}>
+                    Location
+                  </p>
+                  <span style={{ color: 'var(--white)', fontSize: '1rem' }}>New York City, USA</span>
+                </div>
               </div>
-            )}
-            {serverError && (
-              <div className="alert alert-danger">{serverError}</div>
-            )}
+            </div>
 
-            {!success && (
-              <form onSubmit={handleSubmit} noValidate>
-                <div className="mb-3">
-                  <label className="form-label">Your Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-                    value={form.name}
-                    onChange={handleChange}
-                  />
-                  {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+            {/* Form */}
+            <div className="card-dark" style={{ padding: '2.5rem' }}>
+              {success ? (
+                <div style={{ textAlign: 'center', padding: '2rem 0' }}>
+                  <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
+                  <h3 style={{ color: 'var(--white)', marginBottom: '0.75rem' }}>Message sent!</h3>
+                  <p style={{ color: 'var(--gray)' }}>
+                    Thank you! We will get back to you within 24 hours.
+                  </p>
                 </div>
+              ) : (
+                <form onSubmit={handleSubmit} noValidate>
+                  <h3 style={{ color: 'var(--white)', marginBottom: '1.5rem', fontSize: '1.25rem' }}>
+                    Send us a message
+                  </h3>
 
-                <div className="mb-3">
-                  <label className="form-label">Your Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                    value={form.email}
-                    onChange={handleChange}
-                  />
-                  {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-                </div>
+                  {serverError && (
+                    <div
+                      style={{
+                        background: 'rgba(255,68,68,0.1)',
+                        border: '1px solid #ff4444',
+                        borderRadius: '10px',
+                        padding: '1rem',
+                        color: '#ff4444',
+                        fontSize: '0.9rem',
+                        marginBottom: '1.25rem',
+                      }}
+                    >
+                      {serverError}
+                    </div>
+                  )}
 
-                <div className="mb-3">
-                  <label className="form-label">Message</label>
-                  <textarea
-                    name="message"
-                    rows={5}
-                    className={`form-control ${errors.message ? 'is-invalid' : ''}`}
-                    value={form.message}
-                    onChange={handleChange}
-                  />
-                  {errors.message && <div className="invalid-feedback">{errors.message}</div>}
-                </div>
+                  <div className="form-field">
+                    <label>Your Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      className={errors.name ? 'error' : ''}
+                      value={form.name}
+                      onChange={handleChange}
+                      placeholder="Linda Kafexholli"
+                    />
+                    {errors.name && <p className="error-msg">{errors.name}</p>}
+                  </div>
 
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={submitting}
-                >
-                  {submitting ? 'Sending…' : 'Send Message'}
-                </button>
-              </form>
-            )}
+                  <div className="form-field">
+                    <label>Your Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      className={errors.email ? 'error' : ''}
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="you@brand.com"
+                    />
+                    {errors.email && <p className="error-msg">{errors.email}</p>}
+                  </div>
+
+                  <div className="form-field">
+                    <label>Message</label>
+                    <textarea
+                      name="message"
+                      rows={5}
+                      className={errors.message ? 'error' : ''}
+                      value={form.message}
+                      onChange={handleChange}
+                      placeholder="Tell us about your brand and what you want to achieve..."
+                    />
+                    {errors.message && <p className="error-msg">{errors.message}</p>}
+                  </div>
+
+                  <button type="submit" className="btn-primary" disabled={submitting} style={{ width: '100%', justifyContent: 'center' }}>
+                    {submitting ? 'Sending…' : 'Send Message ↗'}
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
