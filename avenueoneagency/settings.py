@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'polepositionautomation.urls'
+ROOT_URLCONF = 'avenueoneagency.urls'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'polepositionautomation.wsgi.application'
+WSGI_APPLICATION = 'avenueoneagency.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(

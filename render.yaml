@@ -8,4 +8,4 @@ services:
       cd frontend && npm install && npm run build && cd ..
       python manage.py collectstatic --noinput
       python manage.py migrate
-    startCommand: gunicorn polepositionautomation.wsgi:application
+    startCommand: gunicorn avenueoneagency.wsgi:application
