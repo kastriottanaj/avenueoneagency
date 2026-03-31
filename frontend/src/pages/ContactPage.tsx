@@ -62,10 +62,10 @@ export default function ContactPage() {
 
       <section className="page-section">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '4rem', alignItems: 'start' }}>
+          <div className="contact-layout">
 
             {/* Info */}
-            <div>
+            <div className="contact-info">
               <span className="section-label">Reach Us</span>
               <h2 className="section-title" style={{ fontSize: '2rem', marginBottom: '2rem' }}>
                 New York City
@@ -110,7 +110,7 @@ export default function ContactPage() {
             </div>
 
             {/* Form */}
-            <div className="card-dark" style={{ padding: '2.5rem' }}>
+            <div className="contact-form card-dark">
               {success ? (
                 <div style={{ textAlign: 'center', padding: '2rem 0' }}>
                   <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
