@@ -33,6 +33,7 @@ export async function getCategories(): Promise<Category[]> {
 export async function submitContact(data: {
   name: string
   email: string
+  phone?: string
   message: string
 }): Promise<{ success: boolean }> {
   const res = await fetch(`${API_BASE}/contact/`, {

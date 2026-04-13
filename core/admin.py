@@ -8,8 +8,8 @@ admin.site.index_title = "Welcome to Avenue One Agency Panel"
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
-    list_display=("name", "email", "created_at")
-    search_fields = ("name", "email", "message")
+    list_display=("name", "email", "phone", "created_at")
+    search_fields = ("name", "email", "phone", "message")
     list_filter = ("created_at",)
     ordering = ("-created_at",)
 

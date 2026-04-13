@@ -9,17 +9,21 @@ class ContactView(APIView):
     def post(self, request):
         name = request.data.get('name', '').strip()
         email = request.data.get('email', '').strip()
+        phone = request.data.get('phone', '').strip()
         message = request.data.get('message', '').strip()
 
         if not all([name, email, message]):
             return Response({'error': 'All fields are required.'}, status=400)
 
-        ContactMessage.objects.create(name=name, email=email, message=message)
+        ContactMessage.objects.create(name=name, email=email, phone=phone, message=message)
 
         try:
+            email_body = message
+            if phone:
+                email_body = f"Phone: {phone}\n\n{message}"
             send_mail(
                 subject=f"New contact request from {name}",
-                message=message,
+                message=email_body,
                 from_email=email,
                 recipient_list=[settings.CONTACT_RECEIVER_EMAIL],
                 fail_silently=False,

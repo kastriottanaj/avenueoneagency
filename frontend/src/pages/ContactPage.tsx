@@ -4,11 +4,12 @@ import { submitContact } from '../api/client'
 interface FormState {
   name: string
   email: string
+  phone: string
   message: string
 }
 
 export default function ContactPage() {
-  const [form, setForm] = useState<FormState>({ name: '', email: '', message: '' })
+  const [form, setForm] = useState<FormState>({ name: '', email: '', phone: '', message: '' })
   const [errors, setErrors] = useState<Partial<FormState>>({})
   const [success, setSuccess] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -31,7 +32,7 @@ export default function ContactPage() {
     try {
       await submitContact(form)
       setSuccess(true)
-      setForm({ name: '', email: '', message: '' })
+      setForm({ name: '', email: '', phone: '', message: '' })
     } catch (err) {
       setServerError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
     } finally {
@@ -165,6 +166,17 @@ export default function ContactPage() {
                       placeholder="you@brand.com"
                     />
                     {errors.email && <p className="error-msg">{errors.email}</p>}
+                  </div>
+
+                  <div className="form-field">
+                    <label>Phone <span style={{ color: 'var(--gray)', fontWeight: 400 }}>(optional)</span></label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={form.phone}
+                      onChange={handleChange}
+                      placeholder="+1 (555) 123-4567"
+                    />
                   </div>
 
                   <div className="form-field">
