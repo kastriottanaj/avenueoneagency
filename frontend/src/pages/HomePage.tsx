@@ -89,7 +89,7 @@ export default function HomePage() {
       {/* ── WHO WE ARE ───────────────────────── */}
       <section className="page-section">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+          <div className="who-we-are-grid">
             <div>
               <span className="section-label">Who We Are</span>
               <h2 className="section-title">
@@ -110,16 +110,16 @@ export default function HomePage() {
                 About Us ↗
               </Link>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div className="industry-cards">
               {[
                 { label: 'Hospitality & Hotels', icon: '🏨' },
                 { label: 'Fashion & Luxury', icon: '👗' },
                 { label: 'Beauty & Wellness', icon: '✨' },
                 { label: 'F&B & Restaurants', icon: '🍽' },
               ].map((item) => (
-                <div key={item.label} className="card-dark" style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>{item.icon}</div>
-                  <p style={{ color: 'var(--gray-light)', fontSize: '0.85rem', margin: 0 }}>{item.label}</p>
+                <div key={item.label} className="card-dark industry-card">
+                  <div className="industry-card__icon">{item.icon}</div>
+                  <p className="industry-card__label">{item.label}</p>
                 </div>
               ))}
             </div>
@@ -137,7 +137,7 @@ export default function HomePage() {
               content. They need <span className="highlight">direction.</span>
             </h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+          <div className="services-grid">
             {services.map((s) => (
               <div key={s.n} className="card-dark">
                 <div className="card-number">{s.n}</div>
@@ -159,7 +159,7 @@ export default function HomePage() {
           <h2 className="section-title" style={{ marginBottom: '2.5rem' }}>
             What our clients say
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+          <div className="testimonials-grid">
             <div className="testimonial-card">
               <blockquote>
                 "Through Avenue One Agency, we were able to streamline our services, increase

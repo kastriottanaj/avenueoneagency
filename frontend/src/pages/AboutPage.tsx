@@ -20,7 +20,7 @@ export default function AboutPage() {
 
       <section className="page-section">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
+          <div className="two-col-grid">
             <div>
               <span className="section-label">Our Story</span>
               <h2 className="section-title">

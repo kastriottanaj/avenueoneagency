@@ -79,7 +79,7 @@ export default function BlogListPage() {
 
       <section className="page-section">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: '3rem', alignItems: 'start' }}>
+          <div className="blog-layout">
 
             {/* Sidebar */}
             <aside>
@@ -211,10 +211,7 @@ export default function BlogListPage() {
           </div>
 
           {/* Newsletter */}
-          <div
-            className="card-dark"
-            style={{ marginTop: '4rem', padding: '2.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', alignItems: 'center' }}
-          >
+          <div className="card-dark newsletter-card">
             <div>
               <span className="section-label">Newsletter</span>
               <h3 style={{ color: 'var(--white)', fontSize: '1.5rem', margin: '0.5rem 0 0.75rem' }}>
