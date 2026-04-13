@@ -14,4 +14,5 @@ urlpatterns = [
     path('contact/', lambda req: redirect('kontakt', permanent=True)),
     path('impressum/', views.react_app, name='impressum'),
     path('robots.txt', views.robots_txt, name='robots'),
+    path('llms.txt', views.llms_txt, name='llms'),
 ]

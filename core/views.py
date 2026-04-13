@@ -26,10 +26,48 @@ def react_app(request, **kwargs):
 def robots_txt(request):
     lines = [
         "User-agent: *",
-        "Disallow:",
+        "Allow: /",
+        "Allow: /ueber-uns/",
+        "Allow: /services/",
+        "Allow: /branchen/",
+        "Allow: /testimonials/",
+        "Allow: /blog/",
+        "Allow: /kontakt/",
+        "Allow: /impressum/",
+        "Allow: /datenschutz/",
+        "",
+        "Disallow: /admin/",
+        "Disallow: /api/",
+        "",
         "Sitemap: https://avenueoneagency.com/sitemap.xml",
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
+
+
+def llms_txt(request):
+    content = """# Avenue One Agency
+
+> NYC-born, creator-led social media & marketing agency founded by Linda Kafexholli. Full-service strategy, content, influencer partnerships, and brand building for hospitality, fashion, beauty, lifestyle, and F&B brands across the U.S. and Europe.
+
+## Pages
+
+- [Home](https://avenueoneagency.com/): Building iconic brands through strategy & influence. Social media & marketing agency overview, key stats, and core offerings.
+- [About](https://avenueoneagency.com/ueber-uns/): NYC-born, creator-led story. Founder Linda Kafexholli's background as a global digital creator with a 1M+ audience and cross-continental marketing expertise.
+- [Services](https://avenueoneagency.com/services/): Social media strategy, content creation, influencer partnerships, brand identity, campaign production, hospitality marketing, paid media, and AI Engine Optimization (AEO).
+- [Industries](https://avenueoneagency.com/branchen/): Hospitality & hotels, restaurants & F&B, fashion & luxury, beauty & wellness, lifestyle & culture, real estate & development.
+- [Testimonials](https://avenueoneagency.com/testimonials/): Client results and reviews, including Faralda Crane Hotel and Chatti New York.
+- [Blog](https://avenueoneagency.com/blog/): Insights on social media marketing, creator economy, brand strategy, and hospitality/lifestyle marketing.
+- [Contact](https://avenueoneagency.com/kontakt/): Get in touch for a free brand audit or discovery call. Replies within 24 hours.
+- [Imprint](https://avenueoneagency.com/impressum/): Legal and company information.
+- [Privacy Policy](https://avenueoneagency.com/datenschutz/): Data protection and privacy policy.
+
+## Contact
+
+- Email: info@avenueoneagency.com
+- Instagram: https://www.instagram.com/avenueone.agency/
+- Location: New York City, USA
+"""
+    return HttpResponse(content, content_type="text/plain; charset=utf-8")
 
 
 def kontakt(request):
