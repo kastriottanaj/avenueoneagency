@@ -70,6 +70,102 @@ def llms_txt(request):
     return HttpResponse(content, content_type="text/plain; charset=utf-8")
 
 
+def llms_full_txt(request):
+    content = """# Avenue One Agency
+
+> NYC-born, creator-led social media & marketing agency founded by Linda Kafexholli. Full-service strategy, content, influencer partnerships, and brand building for hospitality, fashion, beauty, lifestyle, and F&B brands across the U.S. and Europe.
+
+- Email: info@avenueoneagency.com
+- Instagram: https://www.instagram.com/avenueone.agency/
+- Location: New York City, USA
+- Founded: 2020
+- Markets: NYC & EU
+
+---
+
+## Home — https://avenueoneagency.com/
+
+**Tagline:** Building iconic brands through strategy & influence.
+
+Full-service social media & marketing agency helping brands grow with strategy, content & creator partnerships.
+
+**Key stats**
+- 1M+ creator audience
+- 50+ brands served
+- NYC based & global
+- 5-star client rating
+
+---
+
+## About — https://avenueoneagency.com/ueber-uns/
+
+**NYC-Born. Creator-Led. Built for Modern Brands.**
+
+Avenue One was founded with one mission: to help brands build iconic identities that resonate with culture and convert in the market. We work with hospitality, fashion, beauty, lifestyle, and F&B brands — crafting moments, elevating identity, and building communities with purpose.
+
+**Founder — Linda Kafexholli**
+Global digital creator, marketing strategist, and 1M+ audience builder. Combines creative direction with real-world influence and deep industry expertise across the U.S. and Europe.
+
+---
+
+## Services — https://avenueoneagency.com/services/
+
+1. **Social Media Strategy** — Data-driven strategies that grow audience and deepen engagement.
+2. **Content Creation** — Photography, video, and copy tailored for brand voice and platform algorithms.
+3. **Influencer Partnerships** — Curated creator collaborations and UGC direction.
+4. **Brand Identity & Creative Direction** — Iconic, recognizable brand aesthetics end-to-end.
+5. **Campaign Production & Storytelling** — Concept, production, execution, and analysis.
+6. **Hospitality & Lifestyle Marketing** — Specialist expertise in hotels, restaurants, F&B, and luxury.
+7. **Advertising & Paid Media** — AI-driven targeting across Meta, TikTok, Google, and beyond.
+8. **AEO — AI Engine Optimization** — Optimization for ChatGPT, Perplexity, and Google AI Overview.
+
+---
+
+## Industries — https://avenueoneagency.com/branchen/
+
+- **Hospitality & Hotels** — Boutique hotels to luxury chains.
+- **Restaurants & F&B** — Dining experiences turned into viral moments.
+- **Fashion & Luxury** — Editorial content and influencer strategy.
+- **Beauty & Wellness** — Authentic content and creator partnerships.
+- **Lifestyle & Culture** — Plugging brands into culture authentically.
+- **Real Estate & Development** — Premium visual storytelling for residential and commercial brands.
+
+---
+
+## Testimonials — https://avenueoneagency.com/testimonials/
+
+> "Through Avenue One Agency, we were able to streamline our services, increase local visibility and improve customer engagement — increasing booking rate by 25%."
+> — Edwin Kornmann Rudi, Faralda Crane Hotel
+
+> "Social Media Marketing services provided by Avenue One Agency helped us increase our online presence and customer engagement significantly."
+> — Fregi Mathew, Chef, Chatti New York
+
+---
+
+## Blog — https://avenueoneagency.com/blog/
+
+Insights on social media marketing, creator economy, brand strategy, and hospitality/lifestyle marketing.
+
+---
+
+## Contact — https://avenueoneagency.com/kontakt/
+
+Tell us about your brand and what you want to achieve. Replies within 24 hours.
+
+- Email: info@avenueoneagency.com
+- Instagram: @avenueone.agency
+- Location: New York City, USA
+
+---
+
+## Legal
+
+- [Imprint](https://avenueoneagency.com/impressum/) — Legal and company information.
+- [Privacy Policy](https://avenueoneagency.com/datenschutz/) — Data protection and privacy policy.
+"""
+    return HttpResponse(content, content_type="text/plain; charset=utf-8")
+
+
 def kontakt(request):
     success = False
 
