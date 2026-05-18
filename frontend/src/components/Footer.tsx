@@ -42,8 +42,8 @@ export default function Footer() {
         <div className="footer-bottom">
           <small>&copy; {year} Avenue One Agency™ — All rights reserved</small>
           <small>
-            <a href="mailto:info@avenueoneagency.com" style={{ color: 'var(--gray)' }}>
-              info@avenueoneagency.com
+            <a href="mailto:avenueoneagency@gmail.com" style={{ color: 'var(--gray)' }}>
+              avenueoneagency@gmail.com
             </a>
           </small>
         </div>

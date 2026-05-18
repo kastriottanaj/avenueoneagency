@@ -172,14 +172,19 @@ def kontakt(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
+            phone = form.cleaned_data['phone']
             ContactMessage.objects.create(
                 name=form.cleaned_data['name'],
                 email=form.cleaned_data['email'],
+                phone=phone,
                 message=form.cleaned_data['message'],
             )
+            email_body = form.cleaned_data['message']
+            if phone:
+                email_body = f"Phone: {phone}\n\n{email_body}"
             send_mail(
                 subject=f"New contact request from {form.cleaned_data['name']}",
-                message=form.cleaned_data['message'],
+                message=email_body,
                 from_email=form.cleaned_data['email'],
                 recipient_list=[settings.CONTACT_RECEIVER_EMAIL],
                 fail_silently=False,

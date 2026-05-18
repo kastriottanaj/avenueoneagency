@@ -78,12 +78,12 @@ export default function ContactPage() {
                     Email
                   </p>
                   <a
-                    href="mailto:info@avenueoneagency.com"
+                    href="mailto:avenueoneagency@gmail.com"
                     style={{ color: 'var(--white)', fontSize: '1rem', transition: 'color 0.2s' }}
                     onMouseOver={(e) => (e.currentTarget.style.color = 'var(--pink)')}
                     onMouseOut={(e) => (e.currentTarget.style.color = 'var(--white)')}
                   >
-                    info@avenueoneagency.com
+                    avenueoneagency@gmail.com
                   </a>
                 </div>
                 <div>
