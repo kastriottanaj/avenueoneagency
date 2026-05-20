@@ -131,3 +131,8 @@ CORS_ALLOWED_ORIGINS = [
     'https://avenueoneagency.com',
     'https://www.avenueoneagency.com',
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://avenueoneagency.com',
+    'https://www.avenueoneagency.com',
+]
