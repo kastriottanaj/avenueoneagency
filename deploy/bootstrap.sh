@@ -18,6 +18,9 @@ APP_DIR="/srv/${APP_NAME}"
 ENV_DIR="/etc/${APP_NAME}"
 ENV_FILE="${ENV_DIR}/env"
 REPO_URL="${REPO_URL:-https://github.com/kastriottanaj/avenueoneagency.git}"
+# Deploy from the migration branch until the cutover is done: Render
+# auto-deploys `main`, so leaving main alone keeps the old site untouched.
+BRANCH="${BRANCH:-hetzner-deployment}"
 NODE_MAJOR="22"
 
 log() { printf '\n\033[1;34m==>\033[0m %s\n' "$*"; }
@@ -79,8 +82,8 @@ chown "${APP_USER}:www-data" "${APP_DIR}"
 chmod 755 "${APP_DIR}"
 
 if [[ ! -d "${APP_DIR}/.git" ]]; then
-    log "Cloning ${REPO_URL}"
-    sudo -u "${APP_USER}" git clone "${REPO_URL}" "${APP_DIR}"
+    log "Cloning ${REPO_URL} (branch ${BRANCH})"
+    sudo -u "${APP_USER}" git clone --branch "${BRANCH}" "${REPO_URL}" "${APP_DIR}"
 else
     log "Repository already cloned"
 fi

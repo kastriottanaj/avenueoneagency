@@ -13,7 +13,10 @@ APP_NAME="avenueoneagency"
 APP_DIR="/srv/${APP_NAME}"
 ENV_FILE="/etc/${APP_NAME}/env"
 VENV="${APP_DIR}/venv"
-BRANCH="${BRANCH:-main}"
+# Deploy whatever branch the checkout is on, so this keeps working both before
+# the cutover (hetzner-deployment) and after it is merged to main. Override
+# with BRANCH=... to switch deliberately.
+BRANCH="${BRANCH:-$(git -C "${APP_DIR}" rev-parse --abbrev-ref HEAD)}"
 
 log() { printf '\n\033[1;34m==>\033[0m %s\n' "$*"; }
 

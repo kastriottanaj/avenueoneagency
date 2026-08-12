@@ -66,28 +66,25 @@ Note the IP, then confirm access:
 ssh root@<server-ip>
 ```
 
-## 2. Push this branch to GitHub
+## 2. Push the migration branch to GitHub
 
 Bootstrap clones from GitHub, so the deploy files and the environment-driven
-`settings.py` have to be on `main` first:
+`settings.py` need to be pushed — but **to the `hetzner-deployment` branch, not
+`main`**:
 
 ```bash
-git add -A && git commit -m "Add Hetzner deployment setup" && git push origin main
+git push -u origin hetzner-deployment
 ```
 
-Render auto-deploys on push, and `settings.py` no longer carries the hardcoded
-`SECRET_KEY` and database URL — so **add these environment variables in the
-Render dashboard *before* you push**, or the redeploy won't boot:
+Render auto-deploys `main` only. Keeping this work on a branch means Render
+never rebuilds, so the live site stays exactly as it is while the new server
+is built and tested. `main` gets merged in step 11, after the cutover has
+proven itself.
 
-| Variable | Value |
-|---|---|
-| `SECRET_KEY` | any long random string (`python3 -c "import secrets; print(secrets.token_urlsafe(64))"`) |
-| `DATABASE_URL` | Render's **Internal** Database URL |
-| `EMAIL_HOST_PASSWORD` | the Gmail app password |
-| `DJANGO_ALLOWED_HOSTS` | `avenueoneagency.com,www.avenueoneagency.com,<your-service>.onrender.com` |
-
-A failed Render build leaves the previous deploy serving, so the live site
-survives a mistake here — but it's easier to just set them first.
+This matters because `settings.py` no longer carries the hardcoded `SECRET_KEY`
+and database URL. If you ever *do* redeploy Render from `main` after merging,
+set `SECRET_KEY`, `DATABASE_URL`, `EMAIL_HOST_PASSWORD` and
+`DJANGO_ALLOWED_HOSTS` in its dashboard first, or it won't boot.
 
 ## 3. Bootstrap the server
 
@@ -254,13 +251,22 @@ the site unreachable. Don't jump straight to a year.
 
 After a few days on Hetzner:
 
-1. Delete the Render web service and Postgres instance (download a final
+1. Merge the migration branch and switch the server onto `main`:
+   ```bash
+   git checkout main && git merge hetzner-deployment && git push origin main
+   ssh root@<server-ip> 'cd /srv/avenueoneagency && sudo -u avenue git checkout main'
+   sudo -u avenue /srv/avenueoneagency/deploy/deploy.sh
+   ```
+   Do this *after* deleting the Render service, or set the Render environment
+   variables from step 2 first — otherwise this push triggers a Render rebuild
+   that fails to boot.
+2. Delete the Render web service and Postgres instance (download a final
    Render backup first if you want one).
-2. Remove the now-dead config from the repo:
+3. Remove the now-dead config from the repo:
    ```bash
    git rm render.yaml Procfile && git commit -m "Remove Render deployment config"
    ```
-3. Remove the temporary `/etc/hosts` line on your Mac.
+4. Remove the temporary `/etc/hosts` line on your Mac.
 
 ---
 
