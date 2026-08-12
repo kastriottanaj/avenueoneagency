@@ -3,6 +3,7 @@ import os
 from django.shortcuts import render
 from django.core.mail import send_mail
 from django.conf import settings
+from django.db import connection
 from django.http import HttpResponse
 from .forms import ContactForm
 from .models import ContactMessage
@@ -21,6 +22,35 @@ def react_app(request, **kwargs):
             status=503,
             content_type='text/html',
         )
+
+
+def healthz(request):
+    """Liveness probe for deploys and uptime monitoring.
+
+    Checks the two things that actually break a deploy: the database is
+    reachable, and the frontend bundle was built. Returns 503 on either
+    failure so `deploy.sh` fails loudly instead of leaving a broken site up.
+    """
+    problems = []
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute('SELECT 1')
+    except Exception as exc:                     # noqa: BLE001 - reported, not raised
+        problems.append(f'database: {exc.__class__.__name__}')
+
+    index_html = os.path.join(settings.BASE_DIR, 'frontend', 'dist', 'index.html')
+    if not os.path.isfile(index_html):
+        problems.append('frontend: dist/index.html missing (run npm run build)')
+
+    if problems:
+        return HttpResponse(
+            'unhealthy\n' + '\n'.join(problems) + '\n',
+            status=503,
+            content_type='text/plain',
+        )
+
+    return HttpResponse('ok\n', content_type='text/plain')
 
 
 def robots_txt(request):

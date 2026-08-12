@@ -1,20 +1,38 @@
 import os
 from pathlib import Path
+
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'mx%l0-=8+&#tu$8j3&xkfnj4ie&3kz5k(9o7&$$cy2r_pm^*#9')
+
+def env_list(name, default):
+    """Read a comma-separated environment variable into a list of strings."""
+    raw = os.environ.get(name)
+    if not raw:
+        return default
+    return [item.strip() for item in raw.split(',') if item.strip()]
+
 
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = [
+SECRET_KEY = os.environ.get('SECRET_KEY')
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = 'django-insecure-local-development-only'
+    else:
+        raise ImproperlyConfigured(
+            'SECRET_KEY is not set. In production it must come from the environment '
+            '(see deploy/env.example); for local work run with DEBUG=True.'
+        )
+
+ALLOWED_HOSTS = env_list('DJANGO_ALLOWED_HOSTS', [
     'www.avenueoneagency.com',
     'avenueoneagency.com',
-    '*.onrender.com',
     'localhost',
     '127.0.0.1',
-]
+])
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -72,22 +90,63 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'avenueoneagency.wsgi.application'
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get(
-            'DATABASE_URL',
-            'postgresql://granexv2_user:0HqvQTlahpArf99U5ByzVt9LjgRg8Qow@dpg-d0rlecbipnbc73bbse30-a/granexv2'
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if not DATABASE_URL:
+    if DEBUG:
+        DATABASE_URL = 'postgresql://postgres@localhost:5432/avenueoneagency'
+    else:
+        raise ImproperlyConfigured(
+            'DATABASE_URL is not set (see deploy/env.example).'
         )
-    )
+
+DATABASES = {
+    'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600),
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '587'))
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'avenueoneagency@gmail.com')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'pezr soea jhvv gpkh')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
 CONTACT_RECEIVER_EMAIL = os.environ.get('CONTACT_RECEIVER_EMAIL', 'avenueoneagency@gmail.com')
+
+# Log to stdout, which gunicorn hands to journald (`journalctl -u gunicorn`).
+# Django's built-in config only forwards production errors to ADMINS by email,
+# so without this an unhandled 500 would leave no trace on the server at all.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '[{asctime}] {levelname} {name}: {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
+    },
+    'loggers': {
+        # Unhandled exceptions (ERROR) and rejected requests (WARNING).
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
+        # Keep a DEBUG root level from turning into SQL-statement spam.
+        'django.db.backends': {
+            'level': 'WARNING',
+        },
+    },
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -125,14 +184,31 @@ REST_FRAMEWORK = {
 }
 
 # CORS – allow React dev server and the production domain
-CORS_ALLOWED_ORIGINS = [
+CORS_ALLOWED_ORIGINS = env_list('DJANGO_CORS_ALLOWED_ORIGINS', [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     'https://avenueoneagency.com',
     'https://www.avenueoneagency.com',
-]
+])
 
-CSRF_TRUSTED_ORIGINS = [
+CSRF_TRUSTED_ORIGINS = env_list('DJANGO_CSRF_TRUSTED_ORIGINS', [
     'https://avenueoneagency.com',
     'https://www.avenueoneagency.com',
-]
+])
+
+# Behind nginx: trust the X-Forwarded-Proto header so Django knows the original
+# request was HTTPS (nginx terminates TLS and proxies over a unix socket).
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+
+if not DEBUG:
+    # nginx already redirects http -> https; this covers anything that reaches Django.
+    SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'True') == 'True'
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = int(os.environ.get('SECURE_HSTS_SECONDS', '0'))
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_REFERRER_POLICY = 'same-origin'
+    X_FRAME_OPTIONS = 'DENY'

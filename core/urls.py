@@ -13,6 +13,7 @@ urlpatterns = [
     path('kontakt/', views.react_app, name='kontakt'),
     path('contact/', lambda req: redirect('kontakt', permanent=True)),
     path('impressum/', views.react_app, name='impressum'),
+    path('healthz', views.healthz, name='healthz'),
     path('robots.txt', views.robots_txt, name='robots'),
     path('llms.txt', views.llms_txt, name='llms'),
     path('llms-full.txt', views.llms_full_txt, name='llms_full'),

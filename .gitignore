@@ -28,3 +28,6 @@ venv/
 # React / Node
 frontend/node_modules/
 frontend/dist/
+
+# Claude Code local config
+.claude/

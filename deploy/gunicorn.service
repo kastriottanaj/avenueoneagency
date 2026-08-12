@@ -1,0 +1,42 @@
+[Unit]
+Description=Avenue One Agency (gunicorn/Django)
+Requires=postgresql.service
+After=network-online.target postgresql.service
+
+[Service]
+Type=notify
+User=avenue
+Group=www-data
+WorkingDirectory=/srv/avenueoneagency
+EnvironmentFile=/etc/avenueoneagency/env
+
+# Creates /run/gunicorn owned by avenue:www-data and removes it on stop.
+RuntimeDirectory=gunicorn
+RuntimeDirectoryMode=0750
+
+# --umask 007 makes the socket group-writable so nginx (www-data) can reach it.
+ExecStart=/srv/avenueoneagency/venv/bin/gunicorn \
+    --workers 3 \
+    --timeout 60 \
+    --bind unix:/run/gunicorn/avenueoneagency.sock \
+    --umask 007 \
+    --access-logfile - \
+    --error-logfile - \
+    avenueoneagency.wsgi:application
+
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+Restart=always
+RestartSec=3
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target
