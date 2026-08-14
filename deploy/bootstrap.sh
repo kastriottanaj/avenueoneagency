@@ -169,6 +169,9 @@ ln -sfn "/etc/nginx/sites-available/${APP_NAME}" "/etc/nginx/sites-enabled/${APP
 rm -f /etc/nginx/sites-enabled/default
 nginx -t
 systemctl enable --now nginx
+# apt starts nginx at install time, so `enable --now` is a no-op on a fresh
+# box and the vhost above would never be read. Reload explicitly.
+systemctl reload nginx
 
 log "Allowing '${APP_USER}' to restart the app without a password"
 cat > /etc/sudoers.d/${APP_USER}-deploy <<EOF

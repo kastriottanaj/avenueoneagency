@@ -200,6 +200,12 @@ curl -s  --resolve avenueoneagency.com:80:<server-ip> http://avenueoneagency.com
 `/healthz` returns `ok` when the database is reachable and the frontend bundle
 is built; on failure it returns 503 naming which one broke.
 
+Note that `SECURE_SSL_REDIRECT` must be `False` in `/etc/avenueoneagency/env`
+for this step. nginx sends `X-Forwarded-Proto: $scheme`, so before TLS exists
+every request looks like plain http to Django and gets 301'd to an https URL
+that nothing is listening on yet. Set it back to `True` and restart gunicorn
+immediately after step 10 issues the certificates.
+
 To click through it in a browser, add a temporary line to your Mac's
 `/etc/hosts` (remove it after the cutover):
 
