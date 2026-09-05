@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import HeroCanvas from '../components/HeroCanvas'
 import Reveal from '../components/Reveal'
 import { useMagnetic } from '../lib/useMagnetic'
+import Icon, { type IconName } from '../components/Icon'
 
 const services = [
   { n: '01', title: 'Social Media Strategy', desc: 'Data-driven strategies that grow your audience and deepen community engagement.' },
@@ -114,14 +115,14 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="industry-cards">
-              {[
-                { label: 'Hospitality & Hotels', icon: '🏨' },
-                { label: 'Fashion & Luxury', icon: '👗' },
-                { label: 'Beauty & Wellness', icon: '✨' },
-                { label: 'F&B & Restaurants', icon: '🍽' },
-              ].map((item) => (
+              {([
+                { label: 'Hospitality & Hotels', icon: 'hotel' },
+                { label: 'Fashion & Luxury', icon: 'fashion' },
+                { label: 'Beauty & Wellness', icon: 'beauty' },
+                { label: 'F&B & Restaurants', icon: 'restaurant' },
+              ] as { label: string; icon: IconName }[]).map((item) => (
                 <div key={item.label} className="card-dark industry-card">
-                  <div className="industry-card__icon" aria-hidden="true">{item.icon}</div>
+                  <div className="industry-card__icon"><Icon name={item.icon} /></div>
                   <p className="industry-card__label">{item.label}</p>
                 </div>
               ))}

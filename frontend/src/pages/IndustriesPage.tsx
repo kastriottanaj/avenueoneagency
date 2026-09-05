@@ -1,35 +1,36 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import { VERTICALS } from '../data/verticals'
+import Icon, { type IconName } from '../components/Icon'
 
-const industries = [
+const industries: { icon: IconName; title: string; desc: string }[] = [
   {
-    icon: '🏨',
+    icon: 'hotel',
     title: 'Hospitality & Hotels',
     desc: 'From boutique hotels to luxury chains — we craft storytelling that fills rooms and builds brand loyalty.',
   },
   {
-    icon: '🍽',
+    icon: 'restaurant',
     title: 'Restaurants & F&B',
     desc: 'We turn dining experiences into viral moments, growing your reservation list and community simultaneously.',
   },
   {
-    icon: '👗',
+    icon: 'fashion',
     title: 'Fashion & Luxury',
     desc: 'Editorial content and influencer strategy for fashion brands ready to stand out in a crowded market.',
   },
   {
-    icon: '✨',
+    icon: 'beauty',
     title: 'Beauty & Wellness',
     desc: 'Authentic content creation and creator partnerships that build trust and drive conversions.',
   },
   {
-    icon: '🌆',
+    icon: 'lifestyle',
     title: 'Lifestyle & Culture',
     desc: 'We understand culture. We help lifestyle brands plug into it authentically and grow their community.',
   },
   {
-    icon: '🏢',
+    icon: 'realEstate',
     title: 'Real Estate & Development',
     desc: 'Premium visual storytelling and digital campaigns for residential and commercial real estate brands.',
   },
@@ -59,7 +60,7 @@ export default function IndustriesPage() {
               const vertical = VERTICALS[i]
               return (
                 <Reveal key={ind.title} className="card-dark" delay={i * 55}>
-                  <div aria-hidden="true" style={{ fontSize: '2.25rem', marginBottom: '1rem' }}>{ind.icon}</div>
+                  <div className="card-icon"><Icon name={ind.icon} size={34} /></div>
                   <h4>{ind.title}</h4>
                   <p>{ind.desc}</p>
                   {vertical && (

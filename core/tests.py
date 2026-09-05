@@ -605,3 +605,61 @@ class LegacyUrlRedirectTests(TestCase):
             for old in LEGACY_REDIRECTS:
                 with self.subTest(path=path, old=old):
                     self.assertNotIn(f'href="/{old}"', html)
+
+
+class ButtonCascadeTests(TestCase):
+    """The inverted CTA button vanished on hover.
+
+    `.btn-primary:hover:not(:disabled)` scores (0,4,0) and beat the plain
+    `.btn-invert:hover` at (0,2,0), so the background reverted to dark pink
+    while the text colour stayed dark pink — an invisible button on the pink
+    band, on the single most important call to action on the site.
+    """
+
+    def css(self):
+        from django.conf import settings as dj
+
+        return (dj.BASE_DIR / 'frontend' / 'src' / 'index.css').read_text()
+
+    def test_invert_hover_is_qualified_with_btn_primary(self):
+        css = self.css()
+        self.assertIn('.btn-primary.btn-invert:hover:not(:disabled)', css)
+
+    def test_no_unqualified_invert_hover_rule(self):
+        """An unqualified `.btn-invert:hover` cannot outrank the base button."""
+        css = self.css()
+        for line in css.splitlines():
+            stripped = line.strip()
+            if stripped.startswith('.btn-invert:hover'):
+                self.fail(f'unqualified rule would lose the cascade: {stripped}')
+
+
+class IconTests(TestCase):
+    """Emoji were replaced with line-art SVG.
+
+    Emoji render as a different picture on every platform, carry their own
+    colours, and cannot inherit the brand palette.
+    """
+
+    # The six that were replaced. Deliberately explicit rather than a
+    # pictographic range: the ★ in "5★ Client Rating" is a typographic glyph
+    # that belongs, and a broad range would flag it.
+    REPLACED_EMOJI = ['\U0001F3E8', '\U0001F37D', '\U0001F457',
+                      '\u2728', '\U0001F306', '\U0001F3E2']
+
+    def test_industry_pages_ship_svg_not_emoji(self):
+        for path in ('/', '/industries/'):
+            with self.subTest(path=path):
+                html = self.client.get(path).content.decode()
+                self.assertIn('<svg', html)
+                for ch in self.REPLACED_EMOJI:
+                    self.assertNotIn(ch, html, f'emoji still rendered on {path}')
+
+    def test_every_icon_is_hidden_from_assistive_tech(self):
+        import re
+
+        html = self.client.get('/industries/').content.decode()
+        svgs = re.findall(r'<svg[^>]*>', html)
+        self.assertTrue(svgs, 'no icons rendered')
+        for tag in svgs:
+            self.assertIn('aria-hidden="true"', tag, f'icon not hidden: {tag[:70]}')
