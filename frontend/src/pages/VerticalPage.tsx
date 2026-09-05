@@ -78,14 +78,20 @@ export default function VerticalPage() {
         <section className="page-section">
           <div className="container">
             <span className="section-label">Client Result</span>
-            <div className="testimonial-card" style={{ maxWidth: '46rem' }}>
-              <blockquote>{v.proof.quote}</blockquote>
-              <cite>
-                {v.proof.author}
-                <span style={{ color: 'var(--gray)', fontWeight: 400, marginLeft: '0.5rem' }}>
-                  — {v.proof.role}
-                </span>
-              </cite>
+            <div className="quote-list quote-list--single">
+              <div className="quote-row">
+                <div className="quote-meta">
+                  <cite className="quote-cite">
+                    <span className="quote-author">{v.proof.author}</span>
+                    <span className="quote-role">{v.proof.role}</span>
+                  </cite>
+                </div>
+                <blockquote className="quote-body">
+                  <span className="quote-mark" aria-hidden="true">&ldquo;</span>
+                  {v.proof.quote}
+                  <span aria-hidden="true">&rdquo;</span>
+                </blockquote>
+              </div>
             </div>
           </div>
         </section>

@@ -1,20 +1,6 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-
-const testimonials = [
-  {
-    quote:
-      'Through Avenue One Agency, we were able to streamline our services, increase local visibility and improve customer engagement — increasing our booking rate by 25%.',
-    author: 'Edwin Kornmann Rudi',
-    role: 'Faralda Crane Hotel',
-  },
-  {
-    quote:
-      'Social Media Marketing services provided by Avenue One Agency helped us increase our online presence and customer engagement significantly.',
-    author: 'Fregi Mathew',
-    role: 'Chef, Chatti New York',
-  },
-]
+import Testimonials from '../components/Testimonials'
 
 export default function TestimonialsPage() {
   return (
@@ -32,30 +18,8 @@ export default function TestimonialsPage() {
 
       <section className="page-section">
         <div className="container">
-          <Reveal
-            stagger={140}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '1.5rem',
-              marginBottom: '4rem',
-            }}
-          >
-            {testimonials.map((t) => (
-              <div key={t.author} className="testimonial-card">
-                <div style={{ color: 'var(--pink-text)', fontSize: '2rem', marginBottom: '1rem' }}>
-                  &ldquo;
-                </div>
-                <blockquote>{t.quote}</blockquote>
-                <cite>
-                  {t.author}
-                  <span style={{ color: 'var(--gray)', fontWeight: 400, marginLeft: '0.5rem' }}>
-                    — {t.role}
-                  </span>
-                </cite>
-              </div>
-            ))}
-          </Reveal>
+          <Testimonials />
+
 
           <Reveal
             className="card-dark"

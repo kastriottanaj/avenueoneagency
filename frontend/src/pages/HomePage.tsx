@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import HeroCanvas from '../components/HeroCanvas'
 import Reveal from '../components/Reveal'
 import SectionHead from '../components/SectionHead'
+import Testimonials from '../components/Testimonials'
 import { useMagnetic } from '../lib/useMagnetic'
 import Icon, { type IconName } from '../components/Icon'
 
@@ -157,22 +158,7 @@ export default function HomePage() {
       <section className="page-section">
         <div className="container">
           <SectionHead label="Testimonials" title="What our clients say" />
-          <Reveal className="testimonials-grid" stagger={130}>
-            <div className="testimonial-card">
-              <blockquote>
-                "Through Avenue One Agency, we were able to streamline our services, increase
-                local visibility and improve customer engagement — increasing booking rate by 25%."
-              </blockquote>
-              <cite>Edwin Kornmann Rudi — Faralda Crane Hotel</cite>
-            </div>
-            <div className="testimonial-card">
-              <blockquote>
-                "Social Media Marketing services provided by Avenue One Agency helped us increase
-                our online presence and customer engagement significantly."
-              </blockquote>
-              <cite>Fregi Mathew, Chef — Chatti New York</cite>
-            </div>
-          </Reveal>
+          <Testimonials />
         </div>
       </section>
 
