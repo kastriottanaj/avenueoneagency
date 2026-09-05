@@ -83,18 +83,23 @@ void main() {
     texture2D(uTex, uv + disp - dir * ca).b
   );
 
-  col *= 0.30;
+  col *= 0.40;
 
-  vec3 pink = vec3(0.910, 0.094, 0.361);
+  /* Claret, not fuchsia — matches --claret in index.css. */
+  vec3 accent = vec3(0.659, 0.118, 0.271);
+  vec3 warm   = vec3(0.604, 0.482, 0.310);  /* brass, for the highlights */
 
   /* light bleed from the upper left, and around the cursor */
   float bleed = smoothstep(1.25, 0.0, distance(vUv, vec2(0.12, 0.88))) * 0.17;
   bleed += ripple * 0.11;
-  col += pink * bleed;
+  col += accent * bleed;
 
   /* pink caught in the highlights */
+  /* Brass caught in the highlights, claret in the mid-tones. Two-temperature
+     grading is what stops a duotone reading as a filter. */
   float lum = dot(col, vec3(0.2126, 0.7152, 0.0722));
-  col += pink * smoothstep(0.22, 0.62, lum) * 0.14;
+  col += warm   * smoothstep(0.26, 0.70, lum) * 0.13;
+  col += accent * smoothstep(0.05, 0.34, lum) * 0.10;
 
   /* animated grain */
   float g = hash(vUv * uRes + fract(uTime) * vec2(37.0, 17.0));
@@ -102,7 +107,7 @@ void main() {
 
   /* vignette so the headline always has a ground */
   float vig = smoothstep(1.15, 0.22, length((vUv - 0.5) * vec2(1.15, 1.0)));
-  col *= mix(0.5, 1.0, vig);
+  col *= mix(0.58, 1.0, vig);
 
   gl_FragColor = vec4(col, 1.0);
 }`

@@ -5,36 +5,52 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Neutrals carry a slight violet bias so they sit under the pink
-     rather than fighting it. */
-  --black:       #0A090C;
-  --black-2:     #101015;
-  --black-3:     #16151B;
-  --card:        #131218;
-  --border:      #262330;
-  --border-soft: #1C1A23;
+  /* ── Couture noir ──────────────────────────────────────────────
+     Warm ink rather than pure black, bone rather than white, and the
+     brand pink deepened out of fuchsia into claret. Pure #000/#fff and
+     a saturated magenta read as software; warm neutrals with a muted
+     accent read as a fashion house. Brass appears only as hairline
+     detail — never as a fill, which is where metallics turn tacky.
+     ───────────────────────────────────────────────────────────── */
 
-  --white:       #F8F6F9;
-  --gray-light:  #B6B0BE;
-  --gray:        #857E8E;
+  --ink:        #0C0B0C;
+  --ink-2:      #121011;
+  --ink-3:      #171416;
+  --card:       #141113;
+  --border:     #2B2529;
+  --border-soft: #1E1A1D;
 
-  /* Bone — a single warm note, used sparingly for editorial contrast. */
-  --bone:        #E8DFD2;
+  /* Bone is the primary "light". Display type set in bone on warm ink is
+     the single biggest step away from a generic dark theme. */
+  --bone:       #E9E2D6;   /* 15.3:1 on --ink */
+  --bone-dim:   #B5AEA3;   /* 8.5:1  */
+  --bone-mute:  #8A8379;   /* 4.7:1  */
 
-  /* Brand hue. Large display type only — it does NOT meet WCAG AA as a
-     text or button colour. Use the two tokens below for those. */
-  --pink:          #E8185C;
-  --pink-dark:     #C0134D;
-  --pink-cta:      #C0134D;   /* button fill under white text — 6.10:1 */
-  --pink-cta-hover:#A3103F;
-  --pink-text:     #FF4778;   /* pink text on dark — 5.78:1 to 6.13:1 */
+  --claret:      #A81E45;  /* button fill — bone on it is 5.56:1 */
+  --claret-deep: #8A1638;
+  --rose:        #E9899F;  /* accent text — 7.99:1 on --ink */
+  --brass:       #9A7B4F;  /* hairlines and marginalia only */
+
+  /* Legacy aliases so existing rules keep resolving. */
+  --black: var(--ink);
+  --black-2: var(--ink-2);
+  --black-3: var(--ink-3);
+  --white: var(--bone);
+  --gray-light: var(--bone-dim);
+  --gray: var(--bone-mute);
+  --pink: var(--claret);
+  --pink-dark: var(--claret-deep);
+  --pink-cta: var(--claret);
+  --pink-cta-hover: var(--claret-deep);
+  --pink-text: var(--rose);
 
   --ff-display: 'Bodoni Moda', 'Didot', 'Times New Roman', serif;
   --ff-body: 'Archivo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --gutter: 32px;
-  --shell: 1280px;
+  /* Longer, flatter curve. Luxury motion is slow to start and slow to stop. */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --gutter: 40px;
+  --shell: 1340px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -42,6 +58,33 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+}
+
+/* Grain. A single fixed layer of monochrome noise at very low opacity —
+   the cheapest possible way to stop large flat fields reading as flat vector
+   colour, and the reason print-derived design feels physical. */
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+  will-change: transform;
+  animation: grain-shift 6s steps(6) infinite;
+}
+
+@keyframes grain-shift {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-4%, 3%); }
+  40%  { transform: translate(3%, -4%); }
+  60%  { transform: translate(-3%, -3%); }
+  80%  { transform: translate(4%, 2%); }
+  100% { transform: translate(0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain { animation: none; }
 }
 
 body {
@@ -60,8 +103,11 @@ body {
 h1, h2, h3 {
   font-family: var(--ff-display);
   font-weight: 400;
-  line-height: 0.98;
-  letter-spacing: -0.02em;
+  line-height: 0.94;
+  /* Didones tighten as they grow. Optical sizing does the rest. */
+  letter-spacing: -0.028em;
+  font-optical-sizing: auto;
+  color: var(--bone);
   margin: 0 0 1rem;
   text-wrap: balance;
 }
@@ -87,8 +133,10 @@ a { color: inherit; text-decoration: none; }
    jobs at once. */
 .highlight,
 .pink {
-  color: var(--pink-text);
+  color: var(--rose);
   font-style: italic;
+  /* Slight optical compensation — italics of a didone read wider. */
+  letter-spacing: -0.015em;
 }
 
 .text-gray { color: var(--gray); }
@@ -98,31 +146,34 @@ a { color: inherit; text-decoration: none; }
 .hero-label {
   display: inline-block;
   font-family: var(--ff-body);
-  font-size: 0.688rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-size: 0.625rem;
+  font-weight: 500;
+  /* Very wide tracking on very small type. Cramped uppercase reads cheap;
+     this reads like a masthead. */
+  letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: var(--pink-text);
-  margin-bottom: 1.25rem;
+  color: var(--bone-mute);
+  margin-bottom: 1.75rem;
 }
 
+/* Brass, not accent-coloured. The metallic appears only as a hairline. */
 .section-label::before {
   content: '';
   display: inline-block;
-  width: 24px;
+  width: 40px;
   height: 1px;
-  background: var(--pink-text);
+  background: var(--brass);
   vertical-align: middle;
-  margin-right: 12px;
+  margin-right: 16px;
 }
 
 .section-title {
-  font-size: clamp(2.25rem, 5vw, 4.25rem);
-  margin-bottom: 1.25rem;
+  font-size: clamp(2.5rem, 5.8vw, 5.25rem);
+  margin-bottom: 1.75rem;
 }
 
 .section-lead {
-  font-size: 1.075rem;
+  font-size: 1.15rem;
   color: var(--gray-light);
   max-width: 58ch;
   line-height: 1.72;
@@ -136,7 +187,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0 var(--gutter);
 }
 
-.page-section { padding: 120px 0; position: relative; }
+.page-section { padding: 168px 0; position: relative; }
 .page-section--dark { background-color: var(--black-2); }
 
 /* ─── SECTION FLOW ─────────────────────────────────────────────
@@ -185,7 +236,7 @@ a { color: inherit; text-decoration: none; }
   inset: 0 0 auto 0;
   height: 2px;
   z-index: 1200;
-  background: linear-gradient(90deg, var(--pink-cta), var(--pink-text));
+  background: linear-gradient(90deg, var(--claret), var(--rose));
   transform: scaleX(0);
   transform-origin: left;
   pointer-events: none;
@@ -300,9 +351,9 @@ a { color: inherit; text-decoration: none; }
 
 .nav-cta,
 .nav-links .nav-cta {
-  background: var(--pink-cta);
-  color: var(--white) !important;
-  border-radius: 100px;
+  background: var(--claret);
+  color: var(--bone) !important;
+  border-radius: 0;
   padding: 0.7rem 1.5rem !important;
   font-weight: 600;
   transition: background 0.25s var(--ease), transform 0.25s var(--ease);
@@ -385,15 +436,17 @@ a { color: inherit; text-decoration: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  border-radius: 100px;
+  gap: 0.75rem;
+  /* Squared off. A pill reads as an app control; a rectangle with a hairline
+     reads as a printed card. */
+  border-radius: 0;
   font-family: var(--ff-body);
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  padding: 1.05rem 2.25rem;
-  min-height: 48px;
+  padding: 1.25rem 2.75rem;
+  min-height: 52px;
   border: 1px solid transparent;
   cursor: pointer;
   transition: background 0.3s var(--ease), color 0.3s var(--ease),
@@ -448,7 +501,7 @@ a { color: inherit; text-decoration: none; }
 .cta-band {
   /* Starts at --pink-cta, not --pink: white body text on the brand hue is
      4.45:1 and misses AA. On this it is 6.10:1. */
-  background: linear-gradient(135deg, var(--pink-cta) 0%, #7E0B31 100%);
+  background: linear-gradient(135deg, var(--claret) 0%, #6E1030 100%);
   padding: 120px 0;
   text-align: center;
 }
@@ -496,7 +549,9 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: brightness(30%);
+  /* Below 900px and without WebGL this is the hero, unaided by the shader's
+     own grading — so it has to hold the image on its own. */
+  filter: brightness(42%) contrast(108%) saturate(80%);
 }
 
 /* The shader canvas sits over the image and fades in only once it is
@@ -518,19 +573,60 @@ a { color: inherit; text-decoration: none; }
   inset: 0;
   z-index: 1;
   background:
-    radial-gradient(120% 90% at 8% 0%, rgba(232, 24, 92, 0.18) 0%, transparent 55%),
+    radial-gradient(120% 90% at 8% 0%, rgba(168, 30, 69, 0.22) 0%, transparent 58%),
     /* Scrim under the headline — the skyline is bright enough in places to
        cost the white type its contrast. */
-    linear-gradient(90deg, rgba(10, 9, 12, 0.88) 0%, rgba(10, 9, 12, 0.55) 42%, transparent 78%),
+    linear-gradient(90deg, rgba(12, 11, 12, 0.9) 0%, rgba(12, 11, 12, 0.58) 44%, transparent 80%),
     linear-gradient(180deg, transparent 40%, var(--black) 100%);
 }
 
 .hero .container { position: relative; z-index: 2; }
-.hero-content { max-width: 58rem; }
+
+.hero-content {
+  max-width: 58rem;
+  position: relative;
+  padding-left: 4.5rem;
+}
+
+/* A hairline down the left margin with the year at its head — editorial
+   marginalia, and it breaks the block of text off the page edge. */
+.hero-content::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 1px;
+  background: linear-gradient(180deg, var(--brass), transparent 82%);
+}
+
+.hero-content::after {
+  content: 'EST. 2020 — NEW YORK';
+  position: absolute;
+  left: -0.15rem;
+  bottom: 0.5rem;
+  /* vertical-rl reads top-to-bottom; the rotation flips it to run upward.
+     No flex here — a flex container fought the vertical writing mode and
+     collapsed the glyphs into dots. */
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--ff-body);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  white-space: nowrap;
+  color: var(--brass);
+}
+
+@media (max-width: 768px) {
+  .hero-content { padding-left: 0; }
+  .hero-content::before,
+  .hero-content::after { display: none; }
+}
 
 .hero h1 {
-  font-size: clamp(2.6rem, 6.4vw, 6.75rem);
-  line-height: 0.94;
+  font-size: clamp(2.85rem, 6.6vw, 7.25rem);
+  line-height: 0.9;
   letter-spacing: -0.035em;
   margin-bottom: 2rem;
 }
@@ -594,13 +690,13 @@ a { color: inherit; text-decoration: none; }
 /* ─── PAGE HERO (inner pages) ──────────────────────────────── */
 
 .page-hero {
-  padding: 200px 0 100px;
+  padding: 248px 0 140px;
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border-soft);
   background:
-    radial-gradient(90% 120% at 100% 0%, rgba(232, 24, 92, 0.11) 0%, transparent 60%),
-    var(--black);
+    radial-gradient(90% 120% at 100% 0%, rgba(168, 30, 69, 0.14) 0%, transparent 62%),
+    var(--ink);
 }
 
 .page-hero h1 {
@@ -663,7 +759,7 @@ a { color: inherit; text-decoration: none; }
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--brass);
 }
 
 .stat-item {
@@ -677,9 +773,9 @@ a { color: inherit; text-decoration: none; }
 .stat-item strong {
   display: block;
   font-family: var(--ff-display);
-  font-size: clamp(2.75rem, 5vw, 4.5rem);
+  font-size: clamp(3rem, 5.6vw, 5.5rem);
   font-weight: 400;
-  line-height: 0.9;
+  line-height: 0.86;
   letter-spacing: -0.03em;
   color: var(--white);
   margin-bottom: 0.85rem;
@@ -765,7 +861,7 @@ a { color: inherit; text-decoration: none; }
 .card-dark {
   background: var(--card);
   border: 1px solid var(--border-soft);
-  border-radius: 4px;
+  border-radius: 0;
   padding: 2.25rem;
   transition: border-color 0.35s var(--ease), transform 0.35s var(--ease);
 }
@@ -1068,7 +1164,7 @@ a { color: inherit; text-decoration: none; }
 .tag-pill {
   display: inline-block;
   border: 1px solid var(--border);
-  border-radius: 100px;
+  border-radius: 0;
   padding: 0.35rem 0.9rem;
   font-size: 0.7rem;
   letter-spacing: 0.08em;
@@ -1111,7 +1207,7 @@ a { color: inherit; text-decoration: none; }
 /* ─── FORMS ────────────────────────────────────────────────── */
 
 .contact-layout { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 5rem; align-items: start; }
-.contact-form { background: var(--card); border: 1px solid var(--border-soft); border-radius: 4px; padding: 2.75rem; }
+.contact-form { background: var(--card); border: 1px solid var(--border-soft); border-radius: 0; padding: 3rem; }
 
 .form-field { margin-bottom: 1.5rem; }
 
@@ -1277,13 +1373,13 @@ textarea:focus-visible {
 .btn-ghost {
   background: none;
   border: 1px solid var(--border);
-  color: var(--gray-light);
-  padding: 0.85rem 1.5rem;
+  color: var(--bone-dim);
+  padding: 0.85rem 1.75rem;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 100px;
+  border-radius: 0;
   font-family: var(--ff-body);
   font-size: 0.75rem;
   font-weight: 600;

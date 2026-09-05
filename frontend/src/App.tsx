@@ -26,6 +26,7 @@ export default function App() {
     <>
       <ScrollToTop />
       <div className="scroll-progress" aria-hidden="true" />
+      <div className="grain" aria-hidden="true" />
       <a className="skip-link" href="#main">Skip to content</a>
       <div className="d-flex flex-column min-vh-100">
         <Navbar />

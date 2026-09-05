@@ -16,35 +16,54 @@ export default function HeroCanvas() {
   useEffect(() => {
     let teardown: (() => void) | null = null
     let cancelled = false
+    let started = false
 
-    // Deferred so the shader never competes with first paint.
-    const idle =
-      window.requestIdleCallback?.bind(window) ??
-      ((cb: () => void) => window.setTimeout(cb, 200))
+    // Deferred so the shader never competes with first paint — but with a
+    // deadline. requestIdleCallback only fires when the main thread goes
+    // quiet, and a page with a continuous animation (the grain layer) may
+    // never offer an idle window.
+    const idle = (cb: () => void) =>
+      window.requestIdleCallback
+        ? window.requestIdleCallback(cb, { timeout: 1200 })
+        : window.setTimeout(cb, 200)
 
-    const handle = idle(async () => {
-      if (cancelled) return
+    // The viewport can legitimately be too narrow when this first runs — a
+    // window that starts small, a tab restored in the background, a pane that
+    // has not settled. Evaluating once and giving up leaves the hero static
+    // forever, so the decision is re-taken whenever the conditions change.
+    const wide = window.matchMedia('(min-width: 900px)')
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+    async function attempt() {
+      if (cancelled || started) return
+
       const { shouldRunHeroGL, initHeroGL } = await import('../lib/heroGL')
-      if (cancelled || !shouldRunHeroGL()) return
+      if (cancelled || started || !shouldRunHeroGL()) return
 
       const canvas = canvasRef.current
       const img = imgRef.current
       if (!canvas || !img) return
 
       const run = () => {
-        if (cancelled || !img.naturalWidth) return
-        // Reveal only after the first frame is on the canvas, never merely
-        // because initialisation returned.
+        if (cancelled || started || !img.naturalWidth) return
+        started = true
         teardown = initHeroGL(canvas, img, () => setGlReady(true))
+        if (!teardown) started = false
       }
 
       if (img.complete) run()
       else img.addEventListener('load', run, { once: true })
-    })
+    }
+
+    const handle = idle(attempt)
+    wide.addEventListener('change', attempt)
+    still.addEventListener('change', attempt)
 
     return () => {
       cancelled = true
       window.cancelIdleCallback?.(handle as number)
+      wide.removeEventListener('change', attempt)
+      still.removeEventListener('change', attempt)
       teardown?.()
     }
   }, [])
