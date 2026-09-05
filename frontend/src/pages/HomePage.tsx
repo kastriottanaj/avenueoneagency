@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import HeroCanvas from '../components/HeroCanvas'
 import Reveal from '../components/Reveal'
+import SectionHead from '../components/SectionHead'
 import { useMagnetic } from '../lib/useMagnetic'
 import Icon, { type IconName } from '../components/Icon'
 
@@ -69,7 +70,7 @@ export default function HomePage() {
       {/* ── STATS ────────────────────────────── */}
       <section className="page-section page-section--dark">
         <div className="container">
-          <Reveal className="stat-grid">
+          <Reveal className="stat-grid" stagger={110}>
             <div className="stat-item">
               <strong>1M+</strong>
               <span>Creator Audience</span>
@@ -95,11 +96,10 @@ export default function HomePage() {
         <div className="container">
           <Reveal className="who-we-are-grid">
             <div>
-              <span className="section-label">Who We Are</span>
-              <h2 className="section-title">
-                Strategy. Content.<br />
-                <span className="highlight">Influence.</span>
-              </h2>
+              <SectionHead
+                label="Who We Are"
+                title={<>Strategy. Content.<br /><span className="highlight">Influence.</span></>}
+              />
               <p className="section-lead" style={{ marginBottom: '2rem' }}>
                 Avenue One™ is a NYC-born creative agency blending strategy, content,
                 influence, and culture. We help brands stand out with storytelling that
@@ -114,7 +114,7 @@ export default function HomePage() {
                 About Us ↗
               </Link>
             </div>
-            <div className="industry-cards">
+            <Reveal className="industry-cards" stagger={90}>
               {([
                 { label: 'Hospitality & Hotels', icon: 'hotel' },
                 { label: 'Fashion & Luxury', icon: 'fashion' },
@@ -126,7 +126,7 @@ export default function HomePage() {
                   <p className="industry-card__label">{item.label}</p>
                 </div>
               ))}
-            </div>
+            </Reveal>
           </Reveal>
         </div>
       </section>
@@ -134,22 +134,19 @@ export default function HomePage() {
       {/* ── SERVICES ─────────────────────────── */}
       <section className="page-section page-section--dark">
         <div className="container">
-          <div style={{ marginBottom: '3rem' }}>
-            <span className="section-label">What We Do</span>
-            <h2 className="section-title">
-              Brands don't need more<br />
-              content. They need <span className="highlight">direction.</span>
-            </h2>
-          </div>
-          <div className="services-grid">
-            {services.map((s, i) => (
-              <Reveal key={s.n} className="card-dark" delay={i * 60}>
+          <SectionHead
+            label="What We Do"
+            title={<>Brands don&apos;t need more<br />content. They need <span className="highlight">direction.</span></>}
+          />
+          <Reveal className="services-grid" variant="slide" stagger={85}>
+            {services.map((s) => (
+              <div key={s.n} className="card-dark">
                 <div className="card-number">{s.n}</div>
                 <h4>{s.title}</h4>
                 <p>{s.desc}</p>
-              </Reveal>
+              </div>
             ))}
-          </div>
+          </Reveal>
           <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
             <Link to="/services/" className="btn-outline">View All Services</Link>
           </div>
@@ -159,11 +156,8 @@ export default function HomePage() {
       {/* ── TESTIMONIALS ─────────────────────── */}
       <section className="page-section">
         <div className="container">
-          <span className="section-label">Testimonials</span>
-          <h2 className="section-title" style={{ marginBottom: '2.5rem' }}>
-            What our clients say
-          </h2>
-          <Reveal className="testimonials-grid">
+          <SectionHead label="Testimonials" title="What our clients say" />
+          <Reveal className="testimonials-grid" stagger={130}>
             <div className="testimonial-card">
               <blockquote>
                 "Through Avenue One Agency, we were able to streamline our services, increase
@@ -185,12 +179,12 @@ export default function HomePage() {
       {/* ── CTA ──────────────────────────────── */}
       <section className="cta-band">
         <div className="container text-center">
-          <h2>
-            Ready to build something iconic?
-          </h2>
-          <p>
-            Let's talk about your brand and what we can create together.
-          </p>
+          <Reveal variant="mask" className="mask-clip">
+            <h2>Ready to build something iconic?</h2>
+          </Reveal>
+          <Reveal variant="rise" delay={140}>
+            <p>Let&apos;s talk about your brand and what we can create together.</p>
+          </Reveal>
           <Link
             to="/contact/"
             className="btn-primary btn-invert"

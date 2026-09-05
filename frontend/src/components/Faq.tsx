@@ -1,4 +1,5 @@
 import Reveal from './Reveal'
+import SectionHead from './SectionHead'
 
 /**
  * Visible FAQ.
@@ -39,19 +40,18 @@ export default function Faq() {
   return (
     <section className="page-section" id="faq">
       <div className="container">
-        <span className="section-label">Questions</span>
-        <h2 className="section-title">
-          Frequently asked<br />
-          <span className="highlight">questions</span>
-        </h2>
-        <dl className="faq-list">
-          {FAQS.map(([q, a], i) => (
-            <Reveal key={q} className="faq-item" delay={i * 40}>
+        <SectionHead
+          label="Questions"
+          title={<>Frequently asked<br /><span className="highlight">questions</span></>}
+        />
+        <Reveal as="dl" className="faq-list" variant="slide" stagger={70}>
+          {FAQS.map(([q, a]) => (
+            <div className="faq-item" key={q}>
               <dt>{q}</dt>
               <dd>{a}</dd>
-            </Reveal>
+            </div>
           ))}
-        </dl>
+        </Reveal>
       </div>
     </section>
   )

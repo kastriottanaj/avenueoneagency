@@ -1290,15 +1290,76 @@ a { color: inherit; text-decoration: none; }
 
 /* ─── SCROLL REVEAL ────────────────────────────────────────── */
 
-/* Applied by JS on mount, so no-JS and crawlers get the visible state. */
-.reveal {
-  opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+/* All of these classes are applied by JS on mount, so no-JS visitors and
+   crawlers get the finished state. Nothing here hides content by default. */
+
+.rv {
   will-change: opacity, transform;
 }
 
-.reveal.is-in { opacity: 1; transform: none; }
+/* Rise — the default. Content lifts into place. */
+.rv--rise {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s var(--ease), transform 1.1s var(--ease);
+}
+
+/* Fade — for small marginal type like section labels, where movement would
+   be fussier than the element deserves. The rule draws instead. */
+.rv--fade {
+  opacity: 0;
+  transition: opacity 0.9s var(--ease);
+}
+
+.rv--fade.section-label::before {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.85s var(--ease) 0.1s;
+}
+
+.rv--fade.is-in.section-label::before { transform: scaleX(1); }
+
+/* Slide — editorial list rows deal in from the left, in sequence. */
+.rv--slide {
+  opacity: 0;
+  transform: translateX(-26px);
+  transition: opacity 0.85s var(--ease), transform 0.95s var(--ease);
+}
+
+/* Mask — the headline rises out from behind its own baseline. The signature
+   motion of the register this design is aiming at, and the reason the wrapper
+   needs overflow:hidden (.mask-clip). */
+.mask-clip { overflow: hidden; }
+
+.rv--mask {
+  transform: translateY(105%);
+  transition: transform 1.15s var(--ease);
+}
+
+.rv.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* A heading sliding out of a mask needs a little room below it, or descenders
+   clip against the container edge. */
+.mask-clip > * { margin-bottom: 0; padding-bottom: 0.12em; }
+
+.section-head { margin-bottom: 3.5rem; }
+.section-head .section-lead { margin-top: 0.5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rv,
+  .rv--rise,
+  .rv--fade,
+  .rv--slide,
+  .rv--mask {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .rv--fade.section-label::before { transform: scaleX(1) !important; }
+}
 
 /* ─── ACCESSIBILITY ────────────────────────────────────────── */
 

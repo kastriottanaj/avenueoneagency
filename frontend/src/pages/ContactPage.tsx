@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { submitContact } from '../api/client'
+import Reveal from '../components/Reveal'
 
 interface FormState {
   name: string
@@ -65,7 +66,7 @@ export default function ContactPage() {
 
       <section className="page-section">
         <div className="container">
-          <div className="contact-layout">
+          <Reveal className="contact-layout" stagger={170}>
 
             {/* Info */}
             <div className="contact-info">
@@ -213,7 +214,7 @@ export default function ContactPage() {
                 </form>
               )}
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

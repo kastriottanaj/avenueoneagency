@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import Reveal from '../components/Reveal'
+import SectionHead from '../components/SectionHead'
 import NotFoundPage from './NotFoundPage'
 import { VERTICAL_BY_SLUG, VERTICALS } from '../data/verticals'
 
@@ -44,33 +45,31 @@ export default function VerticalPage() {
       {/* ── The problem ─────────────────────── */}
       <section className="page-section">
         <div className="container">
-          <span className="section-label">The Problem</span>
-          <h2 className="section-title">{v.problemTitle}</h2>
-          <div className="problem-list">
+          <SectionHead label="The Problem" title={v.problemTitle} />
+          <Reveal className="problem-list" variant="slide" stagger={110}>
             {v.problems.map((p, i) => (
-              <Reveal key={p} className="problem-item" delay={i * 60}>
+              <div key={p} className="problem-item">
                 <span className="problem-num">{String(i + 1).padStart(2, '0')}</span>
                 <p>{p}</p>
-              </Reveal>
+              </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── Our approach ────────────────────── */}
       <section className="page-section page-section--dark">
         <div className="container">
-          <span className="section-label">Our Approach</span>
-          <h2 className="section-title">{v.approachTitle}</h2>
-          <div className="services-grid">
+          <SectionHead label="Our Approach" title={v.approachTitle} />
+          <Reveal className="services-grid" variant="slide" stagger={85}>
             {v.approach.map((a, i) => (
-              <Reveal key={a.title} className="card-dark" delay={i * 60}>
+              <div key={a.title} className="card-dark">
                 <div className="card-number">{String(i + 1).padStart(2, '0')}</div>
                 <h4>{a.title}</h4>
                 <p>{a.body}</p>
-              </Reveal>
+              </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -95,44 +94,44 @@ export default function VerticalPage() {
       {/* ── FAQ ─────────────────────────────── */}
       <section className="page-section page-section--dark">
         <div className="container">
-          <span className="section-label">Questions</span>
-          <h2 className="section-title">
-            What brands ask us<br />
-            <span className="highlight">about this</span>
-          </h2>
-          <dl className="faq-list">
-            {v.faqs.map(([q, a], i) => (
-              <Reveal key={q} className="faq-item" delay={i * 40}>
+          <SectionHead
+            label="Questions"
+            title={<>What brands ask us<br /><span className="highlight">about this</span></>}
+          />
+          <Reveal as="dl" className="faq-list" variant="slide" stagger={70}>
+            {v.faqs.map(([q, a]) => (
+              <div className="faq-item" key={q}>
                 <dt>{q}</dt>
                 <dd>{a}</dd>
-              </Reveal>
+              </div>
             ))}
-          </dl>
+          </Reveal>
         </div>
       </section>
 
       {/* ── Sibling verticals: real internal linking ─ */}
       <section className="page-section">
         <div className="container">
-          <span className="section-label">Other Industries</span>
-          <h2 className="section-title" style={{ marginBottom: '2.5rem' }}>
-            We also work with
-          </h2>
-          <div className="vertical-links">
+          <SectionHead label="Other Industries" title="We also work with" />
+          <Reveal className="vertical-links" stagger={70}>
             {others.map((o) => (
               <Link key={o.slug} to={`/${o.slug}/`} className="vertical-link">
                 <span className="vertical-link__label">{o.eyebrow}</span>
                 <span className="vertical-link__arrow" aria-hidden="true">↗</span>
               </Link>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="cta-band">
         <div className="container text-center">
-          <h2>Ready to talk about your brand?</h2>
-          <p>Tell us what you are trying to achieve. We reply within 24 hours.</p>
+          <Reveal variant="mask" className="mask-clip">
+            <h2>Ready to talk about your brand?</h2>
+          </Reveal>
+          <Reveal variant="rise" delay={140}>
+            <p>Tell us what you are trying to achieve. We reply within 24 hours.</p>
+          </Reveal>
           <Link to="/contact/" className="btn-primary btn-invert">
             Get in Touch ↗
           </Link>

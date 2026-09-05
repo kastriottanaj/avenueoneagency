@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Reveal from '../components/Reveal'
 
 const testimonials = [
   {
@@ -31,7 +32,8 @@ export default function TestimonialsPage() {
 
       <section className="page-section">
         <div className="container">
-          <div
+          <Reveal
+            stagger={140}
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -53,9 +55,9 @@ export default function TestimonialsPage() {
                 </cite>
               </div>
             ))}
-          </div>
+          </Reveal>
 
-          <div
+          <Reveal
             className="card-dark"
             style={{ textAlign: 'center', padding: '3rem', borderStyle: 'dashed' }}
           >
@@ -68,7 +70,7 @@ export default function TestimonialsPage() {
             <Link to="/contact/" className="btn-primary">
               Start a Project ↗
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

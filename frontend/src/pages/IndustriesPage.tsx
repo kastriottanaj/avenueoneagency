@@ -3,34 +3,40 @@ import Reveal from '../components/Reveal'
 import { VERTICALS } from '../data/verticals'
 import Icon, { type IconName } from '../components/Icon'
 
-const industries: { icon: IconName; title: string; desc: string }[] = [
+const industries: { icon: IconName; slug: string; title: string; desc: string }[] = [
   {
     icon: 'hotel',
+    slug: 'hotel-marketing-nyc',
     title: 'Hospitality & Hotels',
     desc: 'From boutique hotels to luxury chains — we craft storytelling that fills rooms and builds brand loyalty.',
   },
   {
     icon: 'restaurant',
+    slug: 'restaurant-marketing-nyc',
     title: 'Restaurants & F&B',
     desc: 'We turn dining experiences into viral moments, growing your reservation list and community simultaneously.',
   },
   {
     icon: 'fashion',
+    slug: 'fashion-marketing-nyc',
     title: 'Fashion & Luxury',
     desc: 'Editorial content and influencer strategy for fashion brands ready to stand out in a crowded market.',
   },
   {
     icon: 'beauty',
+    slug: 'beauty-marketing-nyc',
     title: 'Beauty & Wellness',
     desc: 'Authentic content creation and creator partnerships that build trust and drive conversions.',
   },
   {
     icon: 'lifestyle',
+    slug: 'lifestyle-marketing-nyc',
     title: 'Lifestyle & Culture',
     desc: 'We understand culture. We help lifestyle brands plug into it authentically and grow their community.',
   },
   {
     icon: 'realEstate',
+    slug: 'real-estate-marketing-nyc',
     title: 'Real Estate & Development',
     desc: 'Premium visual storytelling and digital campaigns for residential and commercial real estate brands.',
   },
@@ -55,11 +61,11 @@ export default function IndustriesPage() {
 
       <section className="page-section">
         <div className="container">
-          <div className="card-grid">
-            {industries.map((ind, i) => {
-              const vertical = VERTICALS[i]
+          <Reveal className="card-grid" stagger={80}>
+            {industries.map((ind) => {
+              const vertical = VERTICALS.find((v) => v.slug === ind.slug)
               return (
-                <Reveal key={ind.title} className="card-dark" delay={i * 55}>
+                <div key={ind.title} className="card-dark">
                   <div className="card-icon"><Icon name={ind.icon} size={34} /></div>
                   <h4>{ind.title}</h4>
                   <p>{ind.desc}</p>
@@ -68,10 +74,10 @@ export default function IndustriesPage() {
                       {vertical.navLabel} ↗
                     </Link>
                   )}
-                </Reveal>
+                </div>
               )
             })}
-          </div>
+          </Reveal>
         </div>
       </section>
 

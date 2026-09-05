@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import Reveal from '../components/Reveal'
+import SectionHead from '../components/SectionHead'
 
 export default function AboutPage() {
   return (
@@ -20,13 +22,12 @@ export default function AboutPage() {
 
       <section className="page-section">
         <div className="container">
-          <div className="two-col-grid">
+          <Reveal className="two-col-grid" stagger={150}>
             <div>
-              <span className="section-label">Our Story</span>
-              <h2 className="section-title">
-                Where culture meets<br />
-                <span className="highlight">strategy</span>
-              </h2>
+              <SectionHead
+                label="Our Story"
+                title={<>Where culture meets<br /><span className="highlight">strategy</span></>}
+              />
               <p className="section-lead">
                 Avenue One™ was founded with one mission: to help brands build iconic identities
                 that resonate with culture and convert in the market.
@@ -62,13 +63,13 @@ export default function AboutPage() {
                 Follow on Instagram ↗
               </a>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="page-section page-section--dark">
         <div className="container">
-          <div className="stat-grid">
+          <Reveal className="stat-grid" stagger={110}>
             <div className="stat-item">
               <strong>1M+</strong>
               <span>Creator Audience</span>
@@ -85,7 +86,7 @@ export default function AboutPage() {
               <strong>2020</strong>
               <span>Founded</span>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 

@@ -61,15 +61,15 @@ export default function ServicesPage() {
 
       <section className="page-section">
         <div className="container">
-          <div className="services-grid">
-            {services.map((s, i) => (
-              <Reveal key={s.n} className="card-dark" delay={i * 45}>
+          <Reveal className="services-grid" variant="slide" stagger={70}>
+            {services.map((s) => (
+              <div key={s.n} className="card-dark">
                 <div className="card-number">{s.n}</div>
                 <h4>{s.title}</h4>
                 <p>{s.desc}</p>
-              </Reveal>
+              </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -77,12 +77,12 @@ export default function ServicesPage() {
 
       <section className="cta-band">
         <div className="container text-center">
-          <h2>
-            Not sure where to start?
-          </h2>
-          <p>
-            Let's talk. We'll figure out exactly what your brand needs.
-          </p>
+          <Reveal variant="mask" className="mask-clip">
+            <h2>Not sure where to start?</h2>
+          </Reveal>
+          <Reveal variant="rise" delay={140}>
+            <p>Let&apos;s talk. We&apos;ll figure out exactly what your brand needs.</p>
+          </Reveal>
           <Link
             to="/contact/"
             className="btn-primary btn-invert"
