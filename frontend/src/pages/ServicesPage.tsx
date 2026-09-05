@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import Reveal from '../components/Reveal'
+import Faq from '../components/Faq'
 
 const services = [
   {
@@ -59,49 +61,31 @@ export default function ServicesPage() {
 
       <section className="page-section">
         <div className="container">
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '1rem',
-            }}
-          >
-            {services.map((s) => (
-              <div key={s.n} className="card-dark">
+          <div className="services-grid">
+            {services.map((s, i) => (
+              <Reveal key={s.n} className="card-dark" delay={i * 45}>
                 <div className="card-number">{s.n}</div>
                 <h4>{s.title}</h4>
                 <p>{s.desc}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section
-        className="page-section"
-        style={{
-          background: 'linear-gradient(135deg, var(--pink) 0%, #a0103e 100%)',
-          textAlign: 'center',
-        }}
-      >
-        <div className="container">
-          <h2
-            style={{
-              fontSize: 'clamp(2rem, 4vw, 3rem)',
-              color: 'white',
-              marginBottom: '1rem',
-              letterSpacing: '-0.03em',
-            }}
-          >
+      <Faq />
+
+      <section className="cta-band">
+        <div className="container text-center">
+          <h2>
             Not sure where to start?
           </h2>
-          <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '2rem' }}>
+          <p>
             Let's talk. We'll figure out exactly what your brand needs.
           </p>
           <Link
-            to="/kontakt/"
-            className="btn-primary"
-            style={{ background: 'white', color: 'var(--pink)' }}
+            to="/contact/"
+            className="btn-primary btn-invert"
           >
             Get a Free Consultation ↗
           </Link>

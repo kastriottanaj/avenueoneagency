@@ -32,7 +32,7 @@ export default function ImpressumPage() {
               <a href="tel:+19177178150" style={{ color: 'var(--white)', display: 'block', marginTop: '0.25rem' }}>
                 +1 (917) 717-8150
               </a>
-              <a href="mailto:avenueoneagency@gmail.com" style={{ color: 'var(--pink)', display: 'block', marginTop: '0.25rem' }}>
+              <a href="mailto:avenueoneagency@gmail.com" style={{ color: 'var(--pink-text)', display: 'block', marginTop: '0.25rem' }}>
                 avenueoneagency@gmail.com
               </a>
             </p>

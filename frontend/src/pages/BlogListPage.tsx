@@ -113,7 +113,7 @@ export default function BlogListPage() {
                       transform: 'translateY(-50%)',
                       background: 'none',
                       border: 'none',
-                      color: 'var(--pink)',
+                      color: 'var(--pink-text)',
                       cursor: 'pointer',
                       fontSize: '1rem',
                       padding: 0,
@@ -223,7 +223,7 @@ export default function BlogListPage() {
             </div>
             <div>
               {newsletterSuccess ? (
-                <p style={{ color: 'var(--pink)', fontWeight: 700 }}>✓ You are subscribed!</p>
+                <p style={{ color: 'var(--pink-text)', fontWeight: 700 }}>✓ You are subscribed!</p>
               ) : (
                 <form onSubmit={handleNewsletterSubmit} style={{ display: 'flex', gap: '0.75rem' }}>
                   {newsletterError && (

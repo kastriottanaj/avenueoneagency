@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom'
+import HeroCanvas from '../components/HeroCanvas'
+import Reveal from '../components/Reveal'
+import { useMagnetic } from '../lib/useMagnetic'
 
 const services = [
   { n: '01', title: 'Social Media Strategy', desc: 'Data-driven strategies that grow your audience and deepen community engagement.' },
@@ -17,13 +20,13 @@ const marqueeItems = [
 ]
 
 export default function HomePage() {
+  const ctaRef = useMagnetic<HTMLAnchorElement>()
+
   return (
     <>
       {/* ── HERO ─────────────────────────────── */}
       <section className="hero">
-        <div className="hero-bg">
-          <img src="/static/core/css/img/newyork.jpeg" alt="New York City" />
-        </div>
+        <HeroCanvas />
         <div className="hero-bg-gradient" />
         <div className="container">
           <div className="hero-content">
@@ -38,7 +41,7 @@ export default function HomePage() {
               with strategy, content &amp; creator partnerships.
             </p>
             <div className="hero-actions">
-              <Link to="/kontakt/" className="btn-primary">
+              <Link ref={ctaRef} to="/contact/" className="btn-primary">
                 Let's Work Together ↗
               </Link>
               <Link to="/services/" className="btn-outline">
@@ -65,7 +68,7 @@ export default function HomePage() {
       {/* ── STATS ────────────────────────────── */}
       <section className="page-section page-section--dark">
         <div className="container">
-          <div className="stat-grid">
+          <Reveal className="stat-grid">
             <div className="stat-item">
               <strong>1M+</strong>
               <span>Creator Audience</span>
@@ -82,14 +85,14 @@ export default function HomePage() {
               <strong>5★</strong>
               <span>Client Rating</span>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── WHO WE ARE ───────────────────────── */}
       <section className="page-section">
         <div className="container">
-          <div className="who-we-are-grid">
+          <Reveal className="who-we-are-grid">
             <div>
               <span className="section-label">Who We Are</span>
               <h2 className="section-title">
@@ -106,7 +109,7 @@ export default function HomePage() {
                 and 1M+ audience — Avenue One™ combines creative direction with real-world
                 influence across the U.S. and Europe.
               </p>
-              <Link to="/ueber-uns/" className="btn-primary" style={{ marginTop: '2rem' }}>
+              <Link to="/about/" className="btn-primary" style={{ marginTop: '2rem' }}>
                 About Us ↗
               </Link>
             </div>
@@ -118,12 +121,12 @@ export default function HomePage() {
                 { label: 'F&B & Restaurants', icon: '🍽' },
               ].map((item) => (
                 <div key={item.label} className="card-dark industry-card">
-                  <div className="industry-card__icon">{item.icon}</div>
+                  <div className="industry-card__icon" aria-hidden="true">{item.icon}</div>
                   <p className="industry-card__label">{item.label}</p>
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -138,12 +141,12 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="services-grid">
-            {services.map((s) => (
-              <div key={s.n} className="card-dark">
+            {services.map((s, i) => (
+              <Reveal key={s.n} className="card-dark" delay={i * 60}>
                 <div className="card-number">{s.n}</div>
                 <h4>{s.title}</h4>
                 <p>{s.desc}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
           <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
@@ -159,7 +162,7 @@ export default function HomePage() {
           <h2 className="section-title" style={{ marginBottom: '2.5rem' }}>
             What our clients say
           </h2>
-          <div className="testimonials-grid">
+          <Reveal className="testimonials-grid">
             <div className="testimonial-card">
               <blockquote>
                 "Through Avenue One Agency, we were able to streamline our services, increase
@@ -174,36 +177,22 @@ export default function HomePage() {
               </blockquote>
               <cite>Fregi Mathew, Chef — Chatti New York</cite>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── CTA ──────────────────────────────── */}
-      <section
-        className="page-section"
-        style={{
-          background: 'linear-gradient(135deg, var(--pink) 0%, #a0103e 100%)',
-          padding: '100px 0',
-        }}
-      >
+      <section className="cta-band">
         <div className="container text-center">
-          <h2
-            style={{
-              fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-              color: 'white',
-              marginBottom: '1rem',
-              letterSpacing: '-0.03em',
-            }}
-          >
+          <h2>
             Ready to build something iconic?
           </h2>
-          <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '2.5rem', fontSize: '1.1rem' }}>
+          <p>
             Let's talk about your brand and what we can create together.
           </p>
           <Link
-            to="/kontakt/"
-            className="btn-primary"
-            style={{ background: 'white', color: 'var(--pink)' }}
+            to="/contact/"
+            className="btn-primary btn-invert"
           >
             Start a Project ↗
           </Link>

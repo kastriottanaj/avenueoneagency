@@ -96,7 +96,7 @@ export default function AboutPage() {
           <p className="section-lead" style={{ margin: '0 auto 2rem' }}>
             Contact us and tell us about your brand.
           </p>
-          <Link to="/kontakt/" className="btn-primary">Work With Us ↗</Link>
+          <Link to="/contact/" className="btn-primary">Work With Us ↗</Link>
         </div>
       </section>
     </>

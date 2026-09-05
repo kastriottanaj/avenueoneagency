@@ -3,9 +3,9 @@ import { NavLink, Link } from 'react-router-dom'
 
 const links = [
   { to: '/', label: 'Home', end: true },
-  { to: '/ueber-uns/', label: 'About' },
+  { to: '/about/', label: 'About' },
   { to: '/services/', label: 'Services' },
-  { to: '/branchen/', label: 'Industries' },
+  { to: '/industries/', label: 'Industries' },
   { to: '/blog/', label: 'Blog' },
   { to: '/testimonials/', label: 'Testimonials' },
 ]
@@ -31,7 +31,7 @@ export default function Navbar() {
                 </li>
               ))}
               <li>
-                <NavLink to="/kontakt/" className="nav-cta">
+                <NavLink to="/contact/" className="nav-cta">
                   Work With Us
                 </NavLink>
               </li>
@@ -40,7 +40,9 @@ export default function Navbar() {
             <button
               className="nav-hamburger"
               onClick={() => setOpen((o) => !o)}
-              aria-label="Toggle menu"
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
             >
               <span />
               <span />
@@ -51,7 +53,7 @@ export default function Navbar() {
       </header>
 
       {/* Mobile menu */}
-      <div className={`nav-mobile ${open ? 'open' : ''}`}>
+      <div id="mobile-menu" className={`nav-mobile ${open ? 'open' : ''}`}>
         <ul>
           {links.map((l) => (
             <li key={l.to}>
@@ -61,7 +63,7 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <NavLink to="/kontakt/" className="active" onClick={() => setOpen(false)}>
+            <NavLink to="/contact/" className="active" onClick={() => setOpen(false)}>
               Work With Us
             </NavLink>
           </li>

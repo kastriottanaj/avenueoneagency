@@ -14,17 +14,17 @@ Creator-led, built for modern brands.
 | Path | Page |
 |---|---|
 | `/` | Home |
-| `/ueber-uns/` | About |
+| `/about/` | About |
 | `/services/` | Services |
-| `/branchen/` | Industries |
+| `/industries/` | Industries |
 | `/testimonials/` | Testimonials |
 | `/blog/` | Blog list |
 | `/blog/:slug/` | Blog detail |
-| `/kontakt/` | Contact |
-| `/impressum/` | Imprint |
-| `/datenschutz/` | Privacy Policy |
+| `/contact/` | Contact |
+| `/imprint/` | Imprint |
+| `/privacy/` | Privacy Policy |
 
-Legacy redirects: `/industries/` → `/branchen/`, `/contact/` → `/kontakt/`, `/privacy/` → `/datenschutz/`.
+Legacy redirects: `/industries/` → `/industries/`, `/contact/` → `/contact/`, `/privacy/` → `/privacy/`.
 
 ---
 
@@ -107,20 +107,20 @@ This is the website of **Avenue One Agency™** — a **NYC-born, creator-led so
 3. **Growth & Performance** — paid media, AEO (AI Engine Optimization), hospitality & lifestyle marketing
 
 Core verticals must be reflected consistently across all SEO touchpoints:
-- Meta titles & descriptions (frontend/src/components/SEO.jsx)
-- Structured data / JSON-LD schemas (LocalBusiness, Organization, Person, Service schemas in SEO.jsx)
-- llms.txt and llms-full.txt (frontend/public/)
-- Sitemap (seo/sitemaps.py)
+- Meta titles & descriptions (`core/seo.py` — `PAGE_META`, rendered server-side into the React shell)
+- Structured data / JSON-LD (ProfessionalService, WebSite, OfferCatalog, BlogPosting — all in `core/seo.py`)
+- llms.txt and llms-full.txt (served by `core/views.py`)
+- Sitemaps (`core/sitemaps.py` for static pages, `blog/sitemaps.py` for posts)
 - Page content (Home, About, Services, Industries, Testimonials pages)
 
 ## Conventions
-- Backend uses python-decouple for env vars (never hardcode secrets)
+- Backend reads env vars via `os.environ` and refuses to boot in production without them (never hardcode secrets — see `.env.example`)
 - CORS configured for frontend dev server on localhost:5173
 - REST API lives under /api/ prefix
 - Frontend fetches from /api/ endpoints
-- SEO is the #1 priority — always preserve meta tags, structured data, sitemap coverage, and the "NYC creative agency / creator-led / hospitality + lifestyle" positioning in all copy
+- SEO is the #1 priority — `core/tests.py` locks this down; always preserve meta tags, structured data, sitemap coverage, and the "NYC creative agency / creator-led / hospitality + lifestyle" positioning in all copy
 - NYC geo-targeting is active (geo.region US-NY meta tags, NY address in schemas)
-- Bilingual URL conventions: German slugs (/ueber-uns/, /kontakt/, /branchen/, /impressum/, /datenschutz/) with legacy English redirects preserved
+- Bilingual URL conventions: German slugs (/about/, /contact/, /industries/, /imprint/, /privacy/) with legacy English redirects preserved
 
 ## Copywriting & Conversion Principles (Straight Line)
 The website follows Jordan Belfort's Straight Line Persuasion principles adapted for a creative agency website. All copy, UX, and page structure must reinforce these:

@@ -41,7 +41,7 @@ export default function TestimonialsPage() {
           >
             {testimonials.map((t) => (
               <div key={t.author} className="testimonial-card">
-                <div style={{ color: 'var(--pink)', fontSize: '2rem', marginBottom: '1rem' }}>
+                <div style={{ color: 'var(--pink-text)', fontSize: '2rem', marginBottom: '1rem' }}>
                   &ldquo;
                 </div>
                 <blockquote>{t.quote}</blockquote>
@@ -65,7 +65,7 @@ export default function TestimonialsPage() {
             <p style={{ color: 'var(--gray)', marginBottom: '2rem' }}>
               We are constantly growing our client base. Want to be next?
             </p>
-            <Link to="/kontakt/" className="btn-primary">
+            <Link to="/contact/" className="btn-primary">
               Start a Project ↗
             </Link>
           </div>

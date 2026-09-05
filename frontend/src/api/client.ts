@@ -35,6 +35,8 @@ export async function submitContact(data: {
   email: string
   phone?: string
   message: string
+  /** Honeypot — sent through so the server can score it. Always empty. */
+  website?: string
 }): Promise<{ success: boolean }> {
   const res = await fetch(`${API_BASE}/contact/`, {
     method: 'POST',

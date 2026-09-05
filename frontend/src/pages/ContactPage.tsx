@@ -6,10 +6,12 @@ interface FormState {
   email: string
   phone: string
   message: string
+  /** Honeypot — must stay empty. Bots fill every field they find. */
+  website: string
 }
 
 export default function ContactPage() {
-  const [form, setForm] = useState<FormState>({ name: '', email: '', phone: '', message: '' })
+  const [form, setForm] = useState<FormState>({ name: '', email: '', phone: '', message: '', website: '' })
   const [errors, setErrors] = useState<Partial<FormState>>({})
   const [success, setSuccess] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -32,7 +34,7 @@ export default function ContactPage() {
     try {
       await submitContact(form)
       setSuccess(true)
-      setForm({ name: '', email: '', phone: '', message: '' })
+      setForm({ name: '', email: '', phone: '', message: '', website: '' })
     } catch (err) {
       setServerError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
     } finally {
@@ -80,7 +82,7 @@ export default function ContactPage() {
                   <a
                     href="mailto:avenueoneagency@gmail.com"
                     style={{ color: 'var(--white)', fontSize: '1rem', transition: 'color 0.2s' }}
-                    onMouseOver={(e) => (e.currentTarget.style.color = 'var(--pink)')}
+                    onMouseOver={(e) => (e.currentTarget.style.color = 'var(--pink-text)')}
                     onMouseOut={(e) => (e.currentTarget.style.color = 'var(--white)')}
                   >
                     avenueoneagency@gmail.com
@@ -95,7 +97,7 @@ export default function ContactPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: 'var(--white)', fontSize: '1rem', transition: 'color 0.2s' }}
-                    onMouseOver={(e) => (e.currentTarget.style.color = 'var(--pink)')}
+                    onMouseOver={(e) => (e.currentTarget.style.color = 'var(--pink-text)')}
                     onMouseOut={(e) => (e.currentTarget.style.color = 'var(--white)')}
                   >
                     @avenueone.agency
@@ -176,6 +178,19 @@ export default function ContactPage() {
                       value={form.phone}
                       onChange={handleChange}
                       placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+
+                  <div className="hp-field" aria-hidden="true">
+                    <label htmlFor="website">Leave this field empty</label>
+                    <input
+                      id="website"
+                      type="text"
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={form.website}
+                      onChange={handleChange}
                     />
                   </div>
 

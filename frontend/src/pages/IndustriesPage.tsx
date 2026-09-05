@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import Reveal from '../components/Reveal'
+import { VERTICALS } from '../data/verticals'
 
 const industries = [
   {
@@ -52,20 +54,22 @@ export default function IndustriesPage() {
 
       <section className="page-section">
         <div className="container">
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '1rem',
-            }}
-          >
-            {industries.map((ind) => (
-              <div key={ind.title} className="card-dark">
-                <div style={{ fontSize: '2.25rem', marginBottom: '1rem' }}>{ind.icon}</div>
-                <h4>{ind.title}</h4>
-                <p>{ind.desc}</p>
-              </div>
-            ))}
+          <div className="card-grid">
+            {industries.map((ind, i) => {
+              const vertical = VERTICALS[i]
+              return (
+                <Reveal key={ind.title} className="card-dark" delay={i * 55}>
+                  <div aria-hidden="true" style={{ fontSize: '2.25rem', marginBottom: '1rem' }}>{ind.icon}</div>
+                  <h4>{ind.title}</h4>
+                  <p>{ind.desc}</p>
+                  {vertical && (
+                    <Link to={`/${vertical.slug}/`} className="card-link">
+                      {vertical.navLabel} ↗
+                    </Link>
+                  )}
+                </Reveal>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -77,7 +81,7 @@ export default function IndustriesPage() {
           <p className="section-lead" style={{ margin: '0 auto 2rem' }}>
             If your brand has a story worth telling, we want to help tell it.
           </p>
-          <Link to="/kontakt/" className="btn-primary">Talk to Us ↗</Link>
+          <Link to="/contact/" className="btn-primary">Talk to Us ↗</Link>
         </div>
       </section>
     </>

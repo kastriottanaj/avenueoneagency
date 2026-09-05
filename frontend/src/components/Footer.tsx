@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { VERTICALS } from '../data/verticals'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -25,16 +26,27 @@ export default function Footer() {
           </div>
 
           <div className="footer-links">
+            <h6>Industries</h6>
+            <ul>
+              {VERTICALS.map((v) => (
+                <li key={v.slug}>
+                  <Link to={`/${v.slug}/`}>{v.navLabel}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="footer-links">
             <h6>Navigation</h6>
             <ul>
-              <li><Link to="/ueber-uns/">About Us</Link></li>
+              <li><Link to="/about/">About Us</Link></li>
               <li><Link to="/services/">Services</Link></li>
-              <li><Link to="/branchen/">Industries</Link></li>
+              <li><Link to="/industries/">Industries</Link></li>
               <li><Link to="/blog/">Blog</Link></li>
               <li><Link to="/testimonials/">Testimonials</Link></li>
-              <li><Link to="/kontakt/">Contact</Link></li>
-              <li><Link to="/impressum/">Imprint</Link></li>
-              <li><Link to="/datenschutz/">Privacy Policy</Link></li>
+              <li><Link to="/contact/">Contact</Link></li>
+              <li><Link to="/imprint/">Imprint</Link></li>
+              <li><Link to="/privacy/">Privacy Policy</Link></li>
             </ul>
           </div>
         </div>
