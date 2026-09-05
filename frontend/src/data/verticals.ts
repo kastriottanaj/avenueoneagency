@@ -15,6 +15,8 @@ export interface Vertical {
   slug: string
   eyebrow: string
   navLabel: string
+  /** Short form for the footer, where the heading already says Industries. */
+  footerLabel: string
   h1Lead: string
   h1Accent: string
   intro: string

@@ -53,7 +53,8 @@
           "How does this affect direct bookings versus OTA bookings?",
           "The goal of the paid and organic work is to move demand toward your own booking engine. Guests who discover a property through its own content are far more likely to book direct than guests who first meet it on an OTA listing."
         ]
-      ]
+      ],
+      "footerLabel": "Hotels"
     },
     {
       "slug": "restaurant-marketing-nyc",
@@ -107,7 +108,8 @@
           "How quickly does restaurant social media show results?",
           "Engagement moves within weeks; reservation impact is usually visible across a full quarter, once there is enough content in market to influence a booking decision rather than a single scroll."
         ]
-      ]
+      ],
+      "footerLabel": "Restaurants"
     },
     {
       "slug": "fashion-marketing-nyc",
@@ -157,7 +159,8 @@
           "How do you keep creator content on-brand?",
           "Casting for aesthetic fit before reach, briefing with real references rather than a brief document, and reviewing before publication. The output should be indistinguishable from work the brand produced itself."
         ]
-      ]
+      ],
+      "footerLabel": "Fashion"
     },
     {
       "slug": "beauty-marketing-nyc",
@@ -207,7 +210,8 @@
           "Can you produce UGC we can run as paid ads?",
           "Yes, with usage rights cleared up front so the content can run in paid media without a separate negotiation later."
         ]
-      ]
+      ],
+      "footerLabel": "Beauty"
     },
     {
       "slug": "lifestyle-marketing-nyc",
@@ -257,7 +261,8 @@
           "Do we need to be on every platform?",
           "No, and it is usually the wrong instinct. One platform where the brand is genuinely native outperforms four where it is present but generic."
         ]
-      ]
+      ],
+      "footerLabel": "Lifestyle"
     },
     {
       "slug": "real-estate-marketing-nyc",
@@ -307,7 +312,8 @@
           "How is this different from listing photography?",
           "Listing photography documents what exists. This work establishes what the place means, why the neighbourhood matters and who it is for — the part that makes someone choose one building over an equivalent one nearby."
         ]
-      ]
+      ],
+      "footerLabel": "Real Estate"
     }
   ]
 }

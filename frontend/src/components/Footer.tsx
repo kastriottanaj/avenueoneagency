@@ -30,7 +30,7 @@ export default function Footer() {
             <ul>
               {VERTICALS.map((v) => (
                 <li key={v.slug}>
-                  <Link to={`/${v.slug}/`}>{v.navLabel}</Link>
+                  <Link to={`/${v.slug}/`}>{v.footerLabel}</Link>
                 </li>
               ))}
             </ul>
@@ -45,19 +45,17 @@ export default function Footer() {
               <li><Link to="/blog/">Blog</Link></li>
               <li><Link to="/testimonials/">Testimonials</Link></li>
               <li><Link to="/contact/">Contact</Link></li>
-              <li><Link to="/imprint/">Imprint</Link></li>
-              <li><Link to="/privacy/">Privacy Policy</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <small>&copy; {year} Avenue One Agency™ — All rights reserved</small>
-          <small>
-            <a href="mailto:avenueoneagency@gmail.com" style={{ color: 'var(--gray)' }}>
-              avenueoneagency@gmail.com
-            </a>
-          </small>
+          <small>&copy; {year} Avenue One Agency™</small>
+          <nav className="footer-legal" aria-label="Legal">
+            <Link to="/imprint/">Imprint</Link>
+            <Link to="/privacy/">Privacy Policy</Link>
+            <a href="mailto:avenueoneagency@gmail.com">avenueoneagency@gmail.com</a>
+          </nav>
         </div>
       </div>
     </footer>
