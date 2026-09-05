@@ -420,14 +420,18 @@ a { color: inherit; text-decoration: none; }
   display: block;
   font-family: var(--ff-display);
   font-size: 1.6rem;
-  color: var(--gray-light);
+  color: var(--bone-dim);
   padding: 0.7rem 0;
   border-bottom: 1px solid var(--border-soft);
-  transition: color 0.2s var(--ease), padding-left 0.25s var(--ease);
+  /* transform, not padding-left — same reason as the services rows. */
+  transition: color 0.2s var(--ease), transform 0.3s var(--ease);
 }
 
 .nav-mobile a:hover,
-.nav-mobile a.active { color: var(--pink-text); padding-left: 8px; }
+.nav-mobile a.active {
+  color: var(--rose);
+  transform: translateX(8px);
+}
 
 /* ─── BUTTONS ──────────────────────────────────────────────── */
 
@@ -815,22 +819,68 @@ a { color: inherit; text-decoration: none; }
 }
 
 .services-grid .card-dark {
+  position: relative;
   display: grid;
   grid-template-columns: 5rem 1fr 1.15fr;
   gap: 2.5rem;
   align-items: baseline;
-  padding: 2.5rem 0;
+  /* Padding is FIXED. It used to animate on hover, which forces a layout pass
+     every frame and reflows all three columns — the row visibly jumped, and
+     sweeping down the list left several rows mid-reflow at once. The negative
+     margin lets the hover wash bleed past the text column without any
+     geometry changing. */
+  padding: 2.5rem 1.5rem;
+  margin: 0 -1.5rem;
   border: 0;
   border-bottom: 1px solid var(--border);
   border-radius: 0;
   background: transparent;
-  transition: background 0.4s var(--ease), padding 0.4s var(--ease);
 }
 
-.services-grid .card-dark:hover {
-  background: linear-gradient(90deg, rgba(232, 24, 92, 0.055), transparent 70%);
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+/* The wash is a pseudo-element faded with opacity rather than a background
+   transitioning to a gradient — `transparent` and a gradient are not
+   interpolatable, so that snapped on instantly while the padding eased. */
+.services-grid .card-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(168, 30, 69, 0.13), transparent 64%);
+  opacity: 0;
+  transition: opacity 0.32s var(--ease);
+  pointer-events: none;
+}
+
+/* The row's own divider lights in brass and draws across. */
+.services-grid .card-dark::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--brass);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+  pointer-events: none;
+}
+
+/* Everything that moves is a transform, which the compositor handles without
+   touching layout. The number and title travel slightly different distances,
+   which reads as depth rather than as the row sliding. */
+.services-grid .card-number,
+.services-grid .card-dark h4 {
+  transition: transform 0.42s var(--ease), color 0.32s var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .services-grid .card-dark:hover::before { opacity: 1; }
+  .services-grid .card-dark:hover::after { transform: scaleX(1); }
+  .services-grid .card-dark:hover .card-number {
+    transform: translateX(7px);
+    color: var(--bone);
+  }
+  .services-grid .card-dark:hover h4 { transform: translateX(12px); }
 }
 
 .services-grid .card-number {
@@ -1021,13 +1071,22 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  background: var(--black);
+  background: var(--ink);
   padding: 1.75rem;
   min-height: 44px;
-  transition: background 0.3s var(--ease), padding-left 0.3s var(--ease);
+  transition: background-color 0.3s var(--ease);
 }
 
-.vertical-link:hover { background: var(--card); padding-left: 2.25rem; }
+.vertical-link__label,
+.vertical-link__arrow {
+  transition: transform 0.36s var(--ease), color 0.3s var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vertical-link:hover { background-color: var(--card); }
+  .vertical-link:hover .vertical-link__label { transform: translateX(8px); }
+  .vertical-link:hover .vertical-link__arrow { transform: translate(4px, -4px); }
+}
 
 .vertical-link__label {
   font-family: var(--ff-display);
