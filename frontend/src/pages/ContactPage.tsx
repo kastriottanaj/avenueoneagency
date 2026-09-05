@@ -134,7 +134,6 @@ export default function ContactPage() {
                       style={{
                         background: 'rgba(255,68,68,0.1)',
                         border: '1px solid #ff4444',
-                        borderRadius: '10px',
                         padding: '1rem',
                         color: '#ff4444',
                         fontSize: '0.9rem',

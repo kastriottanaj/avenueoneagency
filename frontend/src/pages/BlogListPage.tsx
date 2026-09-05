@@ -95,7 +95,6 @@ export default function BlogListPage() {
                       width: '100%',
                       background: 'var(--black-3)',
                       border: '1px solid var(--border)',
-                      borderRadius: '10px',
                       padding: '0.75rem 3rem 0.75rem 1rem',
                       color: 'var(--white)',
                       fontSize: '0.875rem',
@@ -106,18 +105,8 @@ export default function BlogListPage() {
                   />
                   <button
                     type="submit"
-                    style={{
-                      position: 'absolute',
-                      right: '0.75rem',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'none',
-                      border: 'none',
-                      color: 'var(--pink-text)',
-                      cursor: 'pointer',
-                      fontSize: '1rem',
-                      padding: 0,
-                    }}
+                    aria-label="Search posts"
+                    className="search-submit"
                   >
                     ↗
                   </button>
@@ -153,7 +142,6 @@ export default function BlogListPage() {
                 <div style={{
                   background: 'var(--card)',
                   border: '1px solid var(--border)',
-                  borderRadius: '10px',
                   padding: '0.875rem 1.25rem',
                   fontSize: '0.875rem',
                   color: 'var(--gray-light)',
@@ -225,29 +213,17 @@ export default function BlogListPage() {
               {newsletterSuccess ? (
                 <p style={{ color: 'var(--pink-text)', fontWeight: 700 }}>✓ You are subscribed!</p>
               ) : (
-                <form onSubmit={handleNewsletterSubmit} style={{ display: 'flex', gap: '0.75rem' }}>
-                  {newsletterError && (
-                    <p style={{ color: '#ff4444', fontSize: '0.8rem', margin: '0 0 0.5rem' }}>{newsletterError}</p>
-                  )}
+                <form onSubmit={handleNewsletterSubmit} className="newsletter-form">
+                  {newsletterError && <p className="error-msg">{newsletterError}</p>}
                   <input
                     type="email"
                     required
                     placeholder="your@email.com"
+                    aria-label="Email address"
                     value={newsletterEmail}
                     onChange={(e) => setNewsletterEmail(e.target.value)}
-                    style={{
-                      flex: 1,
-                      background: 'var(--black-3)',
-                      border: '1px solid var(--border)',
-                      borderRadius: '10px',
-                      padding: '0.75rem 1rem',
-                      color: 'var(--white)',
-                      fontSize: '0.875rem',
-                      fontFamily: 'inherit',
-                      outline: 'none',
-                    }}
                   />
-                  <button type="submit" className="btn-primary" style={{ padding: '0.75rem 1.25rem', whiteSpace: 'nowrap' }}>
+                  <button type="submit" className="btn-primary">
                     Subscribe
                   </button>
                 </form>

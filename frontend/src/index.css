@@ -50,6 +50,9 @@
   /* Longer, flatter curve. Luxury motion is slow to start and slow to stop. */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --gutter: 40px;
+  /* How far the editorial rows bleed past the text column, for the hover
+     wash. Must never exceed --gutter or the rows overflow the viewport. */
+  --row-bleed: 24px;
   --shell: 1340px;
 }
 
@@ -829,8 +832,8 @@ a { color: inherit; text-decoration: none; }
      sweeping down the list left several rows mid-reflow at once. The negative
      margin lets the hover wash bleed past the text column without any
      geometry changing. */
-  padding: 2.5rem 1.5rem;
-  margin: 0 -1.5rem;
+  padding: 2.5rem var(--row-bleed);
+  margin: 0 calc(-1 * var(--row-bleed));
   border: 0;
   border-bottom: 1px solid var(--border);
   border-radius: 0;
@@ -1251,6 +1254,28 @@ a { color: inherit; text-decoration: none; }
 
 /* ─── BLOG ─────────────────────────────────────────────────── */
 
+/* The search submit was a bare 16px glyph with no accessible name — below the
+   24px target minimum and unannounced to a screen reader. */
+.search-submit {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: 0;
+  color: var(--rose);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s var(--ease);
+}
+
+.search-submit:hover { color: var(--bone); }
+
 .blog-layout { display: grid; grid-template-columns: 240px 1fr; gap: 4rem; align-items: start; }
 
 .cat-list { list-style: none; margin: 0 0 2rem; padding: 0; display: grid; gap: 0.25rem; }
@@ -1283,7 +1308,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .blog-card:hover { background: rgba(248, 246, 249, 0.02); }
-.blog-card-img { width: 100%; height: auto; border-radius: 3px; margin-bottom: 1.25rem; }
+.blog-card-img { width: 100%; height: auto; border-radius: 0; margin-bottom: 1.25rem; }
 .blog-card-body h3 { font-size: 1.5rem; margin-bottom: 0.6rem; }
 
 .blog-card-date,
@@ -1299,7 +1324,7 @@ a { color: inherit; text-decoration: none; }
 
 .blog-content { font-size: 1.05rem; line-height: 1.8; max-width: 68ch; }
 .blog-content h2, .blog-content h3 { margin-top: 2.5rem; color: var(--white); }
-.blog-content img { max-width: 100%; height: auto; border-radius: 3px; }
+.blog-content img { max-width: 100%; height: auto; border-radius: 0; }
 .blog-content a { color: var(--pink-text); text-decoration: underline; }
 
 .tag-pill {
@@ -1322,7 +1347,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   justify-content: center;
   border: 1px solid var(--border);
-  border-radius: 3px;
+  border-radius: 0;
   background: none;
   color: var(--gray-light);
   font-family: var(--ff-body);
@@ -1340,9 +1365,53 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   background: var(--card);
   border: 1px solid var(--border-soft);
-  border-radius: 4px;
+  border-radius: 0;
   padding: 3rem;
   margin-top: 4rem;
+}
+
+/* The form was a flex row of inline styles: the button could not shrink, so
+   it overflowed the viewport on a phone, and the error message was a flex
+   sibling so it sat beside the input rather than above it. */
+.newsletter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.newsletter-form .error-msg {
+  flex: 1 0 100%;
+  margin: 0;
+}
+
+.newsletter-form input {
+  flex: 1 1 12rem;
+  min-width: 0;
+  background: var(--ink-3);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 0.9rem 1.1rem;
+  color: var(--bone);
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.25s var(--ease);
+}
+
+.newsletter-form input:focus { border-color: var(--rose); }
+.newsletter-form input::placeholder { color: #5C5566; }
+
+.newsletter-form .btn-primary {
+  flex: 0 1 auto;
+  min-width: 0;
+  padding: 0.9rem 1.75rem;
+  min-height: 0;
+}
+
+/* Below this the two do not sit side by side without cramping. */
+@media (max-width: 520px) {
+  .newsletter-form input,
+  .newsletter-form .btn-primary { flex: 1 0 100%; }
 }
 
 /* ─── FORMS ────────────────────────────────────────────────── */
@@ -1367,7 +1436,7 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   background: var(--black);
   border: 1px solid var(--border);
-  border-radius: 3px;
+  border-radius: 0;
   padding: 0.95rem 1.1rem;
   color: var(--white);
   font-family: var(--ff-body);
@@ -1463,7 +1532,9 @@ a { color: inherit; text-decoration: none; }
 /* Slide — editorial list rows deal in from the left, in sequence. */
 .rv--slide {
   opacity: 0;
-  transform: translateX(-26px);
+  /* Kept small enough that the pre-reveal position never sits outside the
+     viewport on a narrow screen. */
+  transform: translateX(clamp(-26px, -3vw, -10px));
   transition: opacity 0.85s var(--ease), transform 0.95s var(--ease);
 }
 
@@ -1524,7 +1595,7 @@ input:focus-visible,
 textarea:focus-visible {
   outline: 2px solid var(--pink-text);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1603,10 +1674,40 @@ textarea:focus-visible {
   white-space: nowrap;
 }
 
+/* Grid and flex children default to `min-width: auto`, which refuses to
+   shrink below the intrinsic width of their contents. A long word, a wide
+   input or a nowrap label then pushes the track past the viewport — the most
+   common cause of an unwanted horizontal scrollbar on a phone. Every layout
+   container here opts out. */
+.newsletter-card > *,
+.blog-layout > *,
+.contact-layout > *,
+.two-col-grid > *,
+.who-we-are-grid > *,
+.quote-row > *,
+.services-grid .card-dark > *,
+.faq-item > *,
+.problem-item > *,
+.footer-grid > *,
+.nav-inner > *,
+.consent-inner > *,
+.consent-actions > *,
+.hero-actions > * {
+  min-width: 0;
+}
+
+/* Long unbroken strings — an email address, a URL — must wrap rather than
+   set the width of their column. */
+.contact-info a,
+.footer-bottom a,
+.blog-content a {
+  overflow-wrap: anywhere;
+}
+
 /* ─── RESPONSIVE ───────────────────────────────────────────── */
 
 @media (max-width: 1024px) {
-  :root { --gutter: 28px; }
+  :root { --gutter: 28px; --row-bleed: 20px; }
   .who-we-are-grid,
   .two-col-grid,
   .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
@@ -1616,7 +1717,9 @@ textarea:focus-visible {
 }
 
 @media (max-width: 768px) {
-  :root { --gutter: 22px; }
+  /* No hover on touch, so the bleed buys nothing here and only risks
+     overflowing the gutter. */
+  :root { --gutter: 22px; --row-bleed: 0px; }
 
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
@@ -1643,7 +1746,13 @@ textarea:focus-visible {
 
 @media (max-width: 620px) {
   .consent-inner { flex-direction: column; align-items: stretch; }
-  .consent-actions > * { flex: 1; }
+  .consent-actions { gap: 0.6rem; }
+  .consent-actions > * {
+    flex: 1 1 0;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    letter-spacing: 0.12em;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1652,8 +1761,11 @@ textarea:focus-visible {
   .card-dark { padding: 1.5rem; }
   .card-grid > .card-dark { padding: 1.75rem 1.5rem; }
   .industry-cards { grid-template-columns: 1fr; }
-  .services-grid .card-dark { grid-template-columns: 2.5rem 1fr; gap: 1rem; padding: 1.75rem 0; }
-  .services-grid .card-dark:hover { padding-left: 0.5rem; padding-right: 0.5rem; }
+  .services-grid .card-dark {
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    padding: 1.75rem var(--row-bleed);
+  }
   .contact-form { padding: 1.5rem; }
   .form-field input, .form-field textarea { font-size: 1rem; }
 }
