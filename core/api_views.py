@@ -1,57 +1,107 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from django.core.mail import send_mail
+import logging
+
 from django.conf import settings
+from django.core.mail import EmailMessage
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .models import ContactMessage, NewsletterSubscriber
+
+logger = logging.getLogger(__name__)
+
+MAX_NAME = 100
+MAX_EMAIL = 254
+MAX_PHONE = 30
+MAX_MESSAGE = 5000
+
+
+def _clean_email(value):
+    value = (value or '').strip()[:MAX_EMAIL]
+    try:
+        validate_email(value)
+    except ValidationError:
+        return None
+    return value
+
+
+def _is_bot(request):
+    """Hidden honeypot field. A real browser leaves it empty; bots fill everything."""
+    return bool((request.data.get('website') or '').strip())
 
 
 class ContactView(APIView):
+    throttle_scope = 'contact'
+
     def post(self, request):
-        name = request.data.get('name', '').strip()
-        email = request.data.get('email', '').strip()
-        phone = request.data.get('phone', '').strip()
-        message = request.data.get('message', '').strip()
+        if _is_bot(request):
+            # Behave exactly like success so the bot has no signal to adapt to.
+            logger.info('Contact honeypot triggered')
+            return Response({'success': True})
 
-        if not all([name, email, message]):
-            return Response({'error': 'All fields are required.'}, status=400)
+        name = (request.data.get('name') or '').strip()[:MAX_NAME]
+        phone = (request.data.get('phone') or '').strip()[:MAX_PHONE]
+        message = (request.data.get('message') or '').strip()[:MAX_MESSAGE]
+        email = _clean_email(request.data.get('email'))
 
-        ContactMessage.objects.create(name=name, email=email, phone=phone, message=message)
+        if not name or not message:
+            return Response({'error': 'Name and message are required.'}, status=400)
+        if not email:
+            return Response({'error': 'Enter a valid email address.'}, status=400)
+
+        ContactMessage.objects.create(
+            name=name, email=email, phone=phone, message=message
+        )
+
+        body = message
+        if phone:
+            body = f'Phone: {phone}\n\n{message}'
+        body = f'From: {name} <{email}>\n{body}'
 
         try:
-            email_body = message
-            if phone:
-                email_body = f"Phone: {phone}\n\n{message}"
-            send_mail(
-                subject=f"New contact request from {name}",
-                message=email_body,
-                from_email=email,
-                recipient_list=[settings.CONTACT_RECEIVER_EMAIL],
-                fail_silently=False,
-            )
+            EmailMessage(
+                subject=f'New contact request from {name}',
+                body=body,
+                # Send FROM our own authenticated address, not the visitor's.
+                # Using the visitor's address as the sender fails SPF/DMARC
+                # alignment for their domain and gets the mail spam-filtered.
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[settings.CONTACT_RECEIVER_EMAIL],
+                reply_to=[email],
+            ).send(fail_silently=False)
         except Exception:
-            pass
+            # The lead is already persisted, so the visitor is told the truth.
+            # Previously this was `except Exception: pass`, which meant a broken
+            # mailbox silently swallowed every notification with no trace.
+            logger.exception('Contact notification email failed for %s', email)
 
         return Response({'success': True})
 
 
 class NewsletterView(APIView):
+    throttle_scope = 'newsletter'
+
     def post(self, request):
-        email = request.data.get('email', '').strip()
+        if _is_bot(request):
+            logger.info('Newsletter honeypot triggered')
+            return Response({'success': True})
 
+        email = _clean_email(request.data.get('email'))
         if not email:
-            return Response({'error': 'Email is required.'}, status=400)
+            return Response({'error': 'Enter a valid email address.'}, status=400)
 
-        if not NewsletterSubscriber.objects.filter(email=email).exists():
-            NewsletterSubscriber.objects.create(email=email)
+        _, created = NewsletterSubscriber.objects.get_or_create(email=email)
+
+        if created:
             try:
-                send_mail(
-                    subject="Successfully subscribed to the newsletter",
-                    message="Thank you for subscribing to our newsletter!",
-                    from_email=settings.EMAIL_HOST_USER,
-                    recipient_list=[email],
-                    fail_silently=True,
-                )
+                EmailMessage(
+                    subject='Successfully subscribed to the newsletter',
+                    body='Thank you for subscribing to our newsletter!',
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    to=[email],
+                ).send(fail_silently=False)
             except Exception:
-                pass
+                logger.exception('Newsletter confirmation email failed for %s', email)
 
         return Response({'success': True})

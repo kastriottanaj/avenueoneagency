@@ -1,0 +1,382 @@
+{
+  "_comment": "Single source of truth for the vertical landing pages. Read by VerticalPage.tsx for rendering AND by core/seo.py for metadata, schema and sitemap entries, so the two can never drift. core/tests.py asserts every entry resolves.",
+  "verticals": [
+    {
+      "slug": "hotel-marketing-nyc",
+      "eyebrow": "Hotels & Hospitality",
+      "navLabel": "Hotel Marketing",
+      "h1Lead": "NYC hotel marketing that drives",
+      "h1Accent": "direct demand",
+      "intro": "We market boutique hotels, design properties and luxury groups in New York and across Europe — turning a property's character into demand that shows up in the booking engine, not just the follower count.",
+      "metaTitle": "Hotel Marketing Agency NYC | Social Media & Creators",
+      "metaDescription": "Social media and creator marketing for boutique hotels and luxury properties in New York City. Content, influencer partnerships and paid media that drive direct bookings.",
+      "problemTitle": "Why hotel social media usually underperforms",
+      "problems": [
+        "The feed sells the building, not the stay. Lobby shots and room tours photograph the asset; guests book a feeling, a neighbourhood and a reason to choose you over the property two blocks away.",
+        "OTAs own the demand. When Booking.com and Expedia are the only places a traveller encounters you, you are renting your own guests back at 15–25% commission.",
+        "Content is produced for the brand, not the platform. A property invests in a polished photo library, then posts it into an algorithm built to reward native, creator-led video."
+      ],
+      "approachTitle": "How we work with properties",
+      "approach": [
+        {
+          "title": "Property positioning",
+          "body": "Before any content, we define what the property actually is in the guest's mind — the design story, the neighbourhood, the reason to travel. Everything downstream inherits that."
+        },
+        {
+          "title": "Creator stays & UGC",
+          "body": "Curated creator partnerships matched to your real guest profile, briefed to produce content you can license and reuse across paid, organic and the booking site."
+        },
+        {
+          "title": "Always-on content production",
+          "body": "Native vertical video and photography shot on property, built for Instagram, TikTok and Reels rather than adapted from a print library."
+        },
+        {
+          "title": "Paid media that drives direct",
+          "body": "Meta and Google campaigns pointed at your own booking engine, so the demand we create is demand you own rather than commission you pay."
+        }
+      ],
+      "audienceTitle": "Hotel marketing shaped to the property",
+      "audiences": [
+        {
+          "title": "Independent & boutique hotels",
+          "body": "Properties where design, neighbourhood and personal service are the reason to book — and where a distinctive point of view can compete with a much larger media budget."
+        },
+        {
+          "title": "Luxury & lifestyle properties",
+          "body": "Hotels that need creator partnerships and platform-native content to extend a premium brand without flattening it into generic performance creative."
+        },
+        {
+          "title": "Openings & repositioning",
+          "body": "New and renewed properties that need to build anticipation, explain what has changed and create an interested audience before availability opens."
+        }
+      ],
+      "measurementTitle": "From discovery to the booking engine",
+      "measurements": [
+        "Qualified traffic and booking-engine activity show whether content is creating consideration beyond the platform, not only generating passive views.",
+        "Direct-booking campaigns are evaluated against the action and value they create, with organic and creator content informing the messages that deserve paid support.",
+        "Content performance is read by guest segment, property story and travel occasion so the next production cycle invests in what actually moves demand."
+      ],
+      "proof": {
+        "quote": "Through Avenue One Agency, we were able to streamline our services, increase local visibility and improve customer engagement — increasing booking rate by 25%.",
+        "author": "Edwin Kornmann Rudi",
+        "role": "Faralda Crane Hotel"
+      },
+      "faqs": [
+        [
+          "Do you work with independent hotels or only groups?",
+          "Both. Most of our hospitality work is with independent and boutique properties, where a single strong point of view moves the needle faster than it does inside a large brand system."
+        ],
+        [
+          "Can you produce content on the property?",
+          "Yes. Shoots take place on site so the content reflects the actual guest experience, and everything produced is yours to reuse across paid media, your website and the booking engine."
+        ],
+        [
+          "How does this affect direct bookings versus OTA bookings?",
+          "The goal of the paid and organic work is to move demand toward your own booking engine. Guests who discover a property through its own content are far more likely to book direct than guests who first meet it on an OTA listing."
+        ]
+      ],
+      "footerLabel": "Hotels"
+    },
+    {
+      "slug": "restaurant-marketing-nyc",
+      "eyebrow": "Restaurants & F&B",
+      "navLabel": "Restaurant Marketing",
+      "h1Lead": "Restaurant marketing that fills",
+      "h1Accent": "tables",
+      "intro": "We work with restaurants, bars and food and beverage brands in New York — building the kind of demand that turns into covers on a Tuesday, not just saves on a Sunday.",
+      "metaTitle": "Restaurant Marketing Agency NYC | Social Media & Creators",
+      "metaDescription": "Social media, content and creator marketing for New York restaurants, bars and F&B brands. Content that drives reservations, not just impressions.",
+      "problemTitle": "Where restaurant social media goes wrong",
+      "problems": [
+        "Saves are not covers. A dish can travel across the city and still leave the room half empty on a Tuesday, because nothing in the content told anyone when to come or why now.",
+        "The menu changes faster than the content. Kitchens iterate weekly; most restaurant marketing runs on a quarterly shoot and is out of date before it publishes.",
+        "Discovery has moved. Diners search TikTok, Instagram and increasingly AI assistants before they open Google or Resy — and most restaurants are invisible in all three."
+      ],
+      "approachTitle": "How we work with restaurants",
+      "approach": [
+        {
+          "title": "Menu-led content cycles",
+          "body": "Shoots timed to the kitchen's actual calendar — new dishes, seasonal changes, specials — so the content matches what a diner can order this week."
+        },
+        {
+          "title": "Local creator partnerships",
+          "body": "Collaborations with food creators whose audience actually lives in your catchment. Reach in the right five neighbourhoods beats reach in fifty."
+        },
+        {
+          "title": "Occasion-driven demand",
+          "body": "Content built around the reasons people book — date night, group dinners, the bar before the table, the slow midweek service that needs filling."
+        },
+        {
+          "title": "Local search & AI visibility",
+          "body": "Google Business Profile, review presence and structured content so you surface when someone asks a search engine or an AI assistant where to eat nearby."
+        }
+      ],
+      "audienceTitle": "Restaurant marketing built around the operation",
+      "audiences": [
+        {
+          "title": "Independent restaurants & bars",
+          "body": "Owner-led venues that need a consistent creative and channel team without losing the personality that made the concept worth visiting."
+        },
+        {
+          "title": "Restaurant groups",
+          "body": "Multi-location operators that need shared standards, coordinated campaigns and enough local flexibility for every venue to build its own community."
+        },
+        {
+          "title": "Openings & relaunches",
+          "body": "New concepts and renewed venues that need a clear launch story, a useful content library and local creator momentum before the first service."
+        }
+      ],
+      "measurementTitle": "Move from engagement to restaurant demand",
+      "measurements": [
+        "Reservation-page traffic, booking activity and event enquiries connect campaign attention to actions the restaurant team can recognise and follow.",
+        "Service-level priorities — a quiet weekday, a new menu, private dining or a launch — give each content cycle a specific commercial job rather than a generic awareness target.",
+        "Creator and campaign results are evaluated by audience relevance, content quality and attributable action, not by follower count or total impressions alone."
+      ],
+      "proof": {
+        "quote": "Social Media Marketing services provided by Avenue One Agency helped us increase our online presence and customer engagement significantly.",
+        "author": "Fregi Mathew",
+        "role": "Chef, Chatti New York"
+      },
+      "faqs": [
+        [
+          "We already post every day. What would change?",
+          "Usually the strategy rather than the volume. Most restaurants post consistently and still cannot say which post filled a table. We work backwards from covers — which service needs filling, who fills it, and what would make them book."
+        ],
+        [
+          "Do you handle content for a single location or a group?",
+          "Both. For groups we build a shared brand system with room for each location's own character, so the venues reinforce each other rather than competing for the same audience."
+        ],
+        [
+          "How quickly does restaurant social media show results?",
+          "Engagement moves within weeks; reservation impact is usually visible across a full quarter, once there is enough content in market to influence a booking decision rather than a single scroll."
+        ]
+      ],
+      "footerLabel": "Restaurants"
+    },
+    {
+      "slug": "fashion-marketing-nyc",
+      "eyebrow": "Fashion & Luxury",
+      "navLabel": "Fashion Marketing",
+      "h1Lead": "Fashion marketing with",
+      "h1Accent": "editorial standards",
+      "intro": "We build brand and content programmes for fashion and luxury labels that need to look like themselves in a feed designed to flatten everyone — editorial direction, creator casting and campaigns that hold up next to the houses you are shelved beside.",
+      "metaTitle": "Fashion Marketing NYC — Social Media for Fashion Brands | Avenue One",
+      "metaDescription": "Editorial content, creator casting and social strategy for fashion and luxury brands in New York and Europe. Brand-consistent work that still performs.",
+      "problemTitle": "The tension in fashion social media",
+      "problems": [
+        "Performance content erodes the brand. The formats that convert fastest are also the ones that make a luxury label look like everyone else, and the erosion is hard to reverse.",
+        "Casting is treated as media buying. Creators get selected on follower count rather than on whether their audience and aesthetic actually belong next to the brand.",
+        "Campaign assets do not survive contact with the platform. Work art-directed for print and lookbook gets cropped into a feed it was never built for."
+      ],
+      "approachTitle": "How we work with fashion brands",
+      "approach": [
+        {
+          "title": "Creative direction first",
+          "body": "A defined visual and tonal system — how the brand is shot, cropped, captioned and cast — so that volume never costs consistency."
+        },
+        {
+          "title": "Considered creator casting",
+          "body": "Creators chosen for aesthetic fit and audience overlap, not reach alone, and briefed properly enough that the output looks like your brand made it."
+        },
+        {
+          "title": "Campaign & seasonal production",
+          "body": "Concept through delivery for seasonal drops and campaigns, produced natively for social rather than adapted from campaign photography."
+        },
+        {
+          "title": "Editorial-grade organic",
+          "body": "A feed that reads as a publication with a point of view, so the brand is worth following between launches rather than only during them."
+        }
+      ],
+      "proof": null,
+      "faqs": [
+        [
+          "Can you work within existing brand guidelines?",
+          "Yes. Most of our fashion work sits inside an established identity — we extend it into social formats rather than replacing it, and flag where a guideline is costing performance so the decision is yours."
+        ],
+        [
+          "Do you handle production or only strategy?",
+          "Both. Concept, casting, production and delivery, or any single part of that if you already have a team covering the rest."
+        ],
+        [
+          "How do you keep creator content on-brand?",
+          "Casting for aesthetic fit before reach, briefing with real references rather than a brief document, and reviewing before publication. The output should be indistinguishable from work the brand produced itself."
+        ]
+      ],
+      "footerLabel": "Fashion"
+    },
+    {
+      "slug": "beauty-marketing-nyc",
+      "eyebrow": "Beauty & Wellness",
+      "navLabel": "Beauty Marketing",
+      "h1Lead": "Beauty marketing built on",
+      "h1Accent": "credibility",
+      "intro": "We build creator-led programmes for beauty and wellness brands where the product claim has to survive contact with a sceptical audience — real testing, real faces, and content that holds up under scrutiny.",
+      "metaTitle": "Beauty Marketing NYC — Social Media for Beauty Brands | Avenue One",
+      "metaDescription": "Creator-led social media and content marketing for beauty and wellness brands in New York. Authentic partnerships and UGC that convert.",
+      "problemTitle": "What makes beauty harder than it looks",
+      "problems": [
+        "The category runs on trust, and trust is the easiest thing to lose. One creator partnership that reads as bought undoes a year of credibility.",
+        "Results content is a claims problem. What you can show and say is constrained, and most brands either over-claim or retreat into content that says nothing.",
+        "Everything is comparison shopped. A beauty purchase involves reviews, before-and-afters and at least one creator the buyer already trusts — so a single-channel campaign rarely closes."
+      ],
+      "approachTitle": "How we work with beauty brands",
+      "approach": [
+        {
+          "title": "Creator programmes, not one-off posts",
+          "body": "Long-term relationships with a smaller set of creators who actually use the product, because repeat authentic mention outperforms one-off reach in a trust-led category."
+        },
+        {
+          "title": "UGC direction at volume",
+          "body": "Briefed, rights-cleared user content you can run as paid media — the format that consistently outperforms polished brand assets in beauty."
+        },
+        {
+          "title": "Claims-safe content systems",
+          "body": "Content built to be persuasive within the constraints of what the product can legitimately claim, so marketing and compliance are not fighting."
+        },
+        {
+          "title": "Full-funnel measurement",
+          "body": "Tracking that connects creator activity to conversion, so spend moves toward partnerships that sell rather than partnerships that trend."
+        }
+      ],
+      "proof": null,
+      "faqs": [
+        [
+          "Do you work with early-stage beauty brands?",
+          "Yes. Early-stage is often where creator-led work has the most leverage, because there is no legacy positioning to protect and a small, genuinely enthusiastic creator group can establish the category position."
+        ],
+        [
+          "How do you find creators who actually use the product?",
+          "We seed before we contract. Creators who respond to the product organically make far better long-term partners than creators who respond to a rate card."
+        ],
+        [
+          "Can you produce UGC we can run as paid ads?",
+          "Yes, with usage rights cleared up front so the content can run in paid media without a separate negotiation later."
+        ]
+      ],
+      "footerLabel": "Beauty"
+    },
+    {
+      "slug": "lifestyle-marketing-nyc",
+      "eyebrow": "Lifestyle Brands & Culture",
+      "navLabel": "Lifestyle Marketing",
+      "h1Lead": "Lifestyle brand marketing with a",
+      "h1Accent": "point of view",
+      "intro": "We help lifestyle and consumer brands earn a genuine place in culture rather than borrowing one — the difference between a brand people reference and a brand that references everyone else.",
+      "metaTitle": "Lifestyle Brand Marketing Agency NYC | Avenue One",
+      "metaDescription": "Social media, brand strategy, content and creator partnerships for lifestyle and consumer brands in New York City. Build relevance without chasing every trend.",
+      "problemTitle": "Why cultural marketing usually fails",
+      "problems": [
+        "Trend-chasing has a shelf life measured in days. A brand built on reacting to culture is permanently behind it and never becomes a reference point itself.",
+        "Borrowed relevance does not transfer. Sponsoring the right moment does not make a brand part of it, and audiences read the difference immediately.",
+        "There is no point of view. Most lifestyle brands are positioned as a product category rather than as a perspective, which leaves nothing for anyone to belong to."
+      ],
+      "approachTitle": "How we work with lifestyle brands",
+      "approach": [
+        {
+          "title": "Brand point of view",
+          "body": "Establishing what the brand actually believes and who it is for, which is the only durable basis for cultural relevance."
+        },
+        {
+          "title": "Community over audience",
+          "body": "Building a group of people with a reason to stay rather than an audience that has to be re-bought every campaign."
+        },
+        {
+          "title": "Creator and cultural partnerships",
+          "body": "Collaborations with people who already hold the cultural position the brand wants to occupy, structured as genuine relationships rather than placements."
+        },
+        {
+          "title": "Content with a recognisable voice",
+          "body": "An identifiable tone and visual language, so the brand is recognisable in a feed before anyone reads the handle."
+        }
+      ],
+      "audienceTitle": "For brands people choose as part of a life",
+      "audiences": [
+        {
+          "title": "Consumer & design-led brands",
+          "body": "Products and services where identity, taste and belonging carry as much weight as the functional offer, and generic category content makes every competitor look interchangeable."
+        },
+        {
+          "title": "Beauty, wellness & fashion",
+          "body": "Brands that need creator credibility, a recognisable visual system and enough consistency to build trust across launches rather than starting from zero each time."
+        },
+        {
+          "title": "Culture-led experiences",
+          "body": "Concepts, memberships and destinations that grow through community, partnerships and an editorial point of view instead of relying on one-off campaign reach."
+        }
+      ],
+      "measurementTitle": "Signals that relevance is compounding",
+      "measurements": [
+        "Qualified shares, saves, direct traffic and branded search reveal whether the work is creating memory and consideration rather than momentary attention.",
+        "Creator performance is judged by audience fit, response quality and reusable creative value as well as reach, so partnership learning carries into the next campaign.",
+        "Community response, repeat engagement and conversion activity show whether the brand is building an audience it can reach again instead of renting attention each launch."
+      ],
+      "proof": null,
+      "faqs": [
+        [
+          "What does cultural relevance mean in practice?",
+          "That the brand is referenced by people it did not pay. Practically it means a clear point of view, consistent voice, and relationships with people who already hold cultural weight in the space."
+        ],
+        [
+          "How long does it take to build a community?",
+          "Longer than a campaign. The first signals — saves, shares, unpaid mentions — usually appear within a quarter; a community that reliably shows up for launches takes considerably longer and is worth substantially more."
+        ],
+        [
+          "Do we need to be on every platform?",
+          "No, and it is usually the wrong instinct. One platform where the brand is genuinely native outperforms four where it is present but generic."
+        ]
+      ],
+      "footerLabel": "Lifestyle"
+    },
+    {
+      "slug": "real-estate-marketing-nyc",
+      "eyebrow": "Real Estate & Development",
+      "navLabel": "Real Estate Marketing",
+      "h1Lead": "Real estate marketing with",
+      "h1Accent": "a point of view",
+      "intro": "We market residential and commercial developments as places rather than floor plans — visual storytelling for developers, brokerages and property brands where the buyer is choosing a life, not a listing.",
+      "metaTitle": "Real Estate Marketing NYC — Property Branding & Social | Avenue One",
+      "metaDescription": "Premium visual storytelling and social media for New York residential and commercial developments, brokerages and property brands.",
+      "problemTitle": "What most property marketing misses",
+      "problems": [
+        "Renders sell the specification, not the life. Buyers make an emotional decision about a neighbourhood and a way of living, then justify it with the floor plan.",
+        "The sales cycle outlasts the campaign. Property decisions take months, and most marketing runs in bursts that leave long silences where the buyer's interest cools.",
+        "The listing is the whole strategy. Portal presence is table stakes; it does nothing to build a development into something people want before it is finished."
+      ],
+      "approachTitle": "How we work with developers and brokerages",
+      "approach": [
+        {
+          "title": "Place-led brand positioning",
+          "body": "Positioning a development around its neighbourhood, architecture and the life it makes possible, rather than its unit mix."
+        },
+        {
+          "title": "Long-cycle content",
+          "body": "Sustained storytelling from pre-launch through sell-out, so the audience built early is still warm when units are released."
+        },
+        {
+          "title": "Premium visual production",
+          "body": "Photography and film that treat the building as architecture and the neighbourhood as a character, produced for social rather than the brochure."
+        },
+        {
+          "title": "Targeted paid media",
+          "body": "Campaigns aimed at the specific buyer or tenant profile for the asset, rather than broad geographic reach that fills the pipeline with unqualified enquiries."
+        }
+      ],
+      "proof": null,
+      "faqs": [
+        [
+          "Do you work with developers or brokerages?",
+          "Both, though the work differs. Developers usually need a brand built for one asset over a long cycle; brokerages need a consistent presence that compounds across many listings."
+        ],
+        [
+          "Can you market a development before it is built?",
+          "Yes, and pre-launch is where this work has the most leverage — building an interested audience during construction means launching to demand rather than to silence."
+        ],
+        [
+          "How is this different from listing photography?",
+          "Listing photography documents what exists. This work establishes what the place means, why the neighbourhood matters and who it is for — the part that makes someone choose one building over an equivalent one nearby."
+        ]
+      ],
+      "footerLabel": "Real Estate"
+    }
+  ]
+}

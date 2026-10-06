@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import BlogPost, Category
-from taggit.models import Tag
 
 # Register your models here.
 @admin.register(BlogPost)

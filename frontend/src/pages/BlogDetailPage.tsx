@@ -92,7 +92,6 @@ export default function BlogDetailPage() {
               alt={post.title}
               style={{
                 width: '100%',
-                borderRadius: '16px',
                 marginBottom: '3rem',
                 objectFit: 'cover',
                 maxHeight: '480px',

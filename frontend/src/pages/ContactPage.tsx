@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import { submitContact } from '../api/client'
+import Reveal from '../components/Reveal'
 
 interface FormState {
   name: string
   email: string
   phone: string
   message: string
+  /** Honeypot — must stay empty. Bots fill every field they find. */
+  website: string
 }
 
 export default function ContactPage() {
-  const [form, setForm] = useState<FormState>({ name: '', email: '', phone: '', message: '' })
+  const [form, setForm] = useState<FormState>({ name: '', email: '', phone: '', message: '', website: '' })
   const [errors, setErrors] = useState<Partial<FormState>>({})
   const [success, setSuccess] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -32,7 +35,7 @@ export default function ContactPage() {
     try {
       await submitContact(form)
       setSuccess(true)
-      setForm({ name: '', email: '', phone: '', message: '' })
+      setForm({ name: '', email: '', phone: '', message: '', website: '' })
     } catch (err) {
       setServerError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
     } finally {
@@ -63,7 +66,7 @@ export default function ContactPage() {
 
       <section className="page-section">
         <div className="container">
-          <div className="contact-layout">
+          <Reveal className="contact-layout" stagger={170}>
 
             {/* Info */}
             <div className="contact-info">
@@ -80,7 +83,7 @@ export default function ContactPage() {
                   <a
                     href="mailto:avenueoneagency@gmail.com"
                     style={{ color: 'var(--white)', fontSize: '1rem', transition: 'color 0.2s' }}
-                    onMouseOver={(e) => (e.currentTarget.style.color = 'var(--pink)')}
+                    onMouseOver={(e) => (e.currentTarget.style.color = 'var(--pink-text)')}
                     onMouseOut={(e) => (e.currentTarget.style.color = 'var(--white)')}
                   >
                     avenueoneagency@gmail.com
@@ -95,7 +98,7 @@ export default function ContactPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: 'var(--white)', fontSize: '1rem', transition: 'color 0.2s' }}
-                    onMouseOver={(e) => (e.currentTarget.style.color = 'var(--pink)')}
+                    onMouseOver={(e) => (e.currentTarget.style.color = 'var(--pink-text)')}
                     onMouseOut={(e) => (e.currentTarget.style.color = 'var(--white)')}
                   >
                     @avenueone.agency
@@ -131,7 +134,6 @@ export default function ContactPage() {
                       style={{
                         background: 'rgba(255,68,68,0.1)',
                         border: '1px solid #ff4444',
-                        borderRadius: '10px',
                         padding: '1rem',
                         color: '#ff4444',
                         fontSize: '0.9rem',
@@ -179,6 +181,19 @@ export default function ContactPage() {
                     />
                   </div>
 
+                  <div className="hp-field" aria-hidden="true">
+                    <label htmlFor="website">Leave this field empty</label>
+                    <input
+                      id="website"
+                      type="text"
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={form.website}
+                      onChange={handleChange}
+                    />
+                  </div>
+
                   <div className="form-field">
                     <label>Message</label>
                     <textarea
@@ -198,7 +213,7 @@ export default function ContactPage() {
                 </form>
               )}
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

@@ -1,5 +1,7 @@
 # blog/feeds.py
 from django.contrib.syndication.views import Feed
+
+
 from .models import BlogPost
 
 
@@ -15,7 +17,13 @@ class LatestPostsFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return item.meta_description or item.content[:200]
+        return item.meta_description or item.description or item.content[:200]
+
+    def item_pubdate(self, item):
+        return item.created_at
 
     def item_link(self, item):
-        return f'/blog/{item.slug}/'
+        # Must be a path, not a full URL — Django's syndication framework makes
+        # it absolute against the current request. Returning a bare relative
+        # string here produced invalid, unresolvable links in the feed.
+        return item.get_absolute_url()
