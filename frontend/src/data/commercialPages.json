@@ -1,0 +1,189 @@
+{
+  "_comment": "Commercial SEO landing pages. React renders this file and core/seo.py reads the same metadata, FAQs and service descriptions.",
+  "pages": [
+    {
+      "slug": "hospitality-marketing-agency-nyc",
+      "eyebrow": "Hospitality Marketing",
+      "navLabel": "Hospitality Marketing",
+      "breadcrumbParent": { "label": "Industries", "path": "/industries/" },
+      "h1Lead": "Hospitality marketing that turns attention into",
+      "h1Accent": "bookings",
+      "intro": "Avenue One is a creator-led hospitality marketing agency in New York City. We connect positioning, social media, content production, creator partnerships and paid distribution for hotels, restaurants, bars and hospitality groups that need demand to show up in reservations — not only in reach reports.",
+      "metaTitle": "Hospitality Marketing Agency NYC | Avenue One",
+      "metaDescription": "NYC hospitality marketing agency for hotels, restaurants and bars. Social media, content, creators and paid campaigns built to drive bookings and reservations.",
+      "serviceType": "Hospitality marketing",
+      "problemLabel": "Why Specialist",
+      "problemTitle": "Hospitality has a different path to purchase",
+      "problems": [
+        "A guest rarely converts from one post. They move between social, search, reviews, maps, the website and a booking platform. When each channel is managed in isolation, the story changes at every step and intent leaks away.",
+        "Beautiful content can still be commercially empty. Hospitality marketing has to answer a practical question — why this property, table or experience, for this occasion, right now — and then make the next step effortless.",
+        "Generalist campaigns miss the rhythm of the business. A hotel sells dates and room types; a restaurant sells services and occasions. Marketing has to move with availability, menus, events, openings and the operational calendar."
+      ],
+      "approachLabel": "What We Do",
+      "approachTitle": "One system from discovery to booking",
+      "approach": [
+        { "title": "Positioning & demand plan", "body": "We define the audience, the occasions that create demand and the commercial priorities before deciding what to publish. The plan starts with the room nights, services, launches or venues that need attention." },
+        { "title": "Platform-native production", "body": "Photography, short-form video and copy are produced for the platforms where guests discover and compare hospitality brands, while staying recognisable as one brand across every touchpoint." },
+        { "title": "Creator partnerships", "body": "Creators are selected for audience fit, location and credibility. Briefs, deliverables and usage rights are agreed up front so strong work can live beyond a single post." },
+        { "title": "Paid distribution", "body": "Organic signals inform paid creative, and campaigns are directed toward the action that matters — a booking engine, reservation page, event enquiry or launch list." },
+        { "title": "Commercial reporting", "body": "We report on the path from attention to action: qualified traffic, booking or reservation activity, enquiries, campaign response and the content themes that influenced them." }
+      ],
+      "audienceTitle": "Built for experience-led hospitality brands",
+      "audiences": [
+        { "title": "Hotels & properties", "body": "Boutique hotels, independent properties and design-led groups that want more direct demand and a brand guests remember before they reach an OTA." },
+        { "title": "Restaurants & F&B", "body": "Restaurants, bars, cafés and groups that need consistent local discovery, sharper content and campaigns tied to real services and occasions." },
+        { "title": "Openings & hospitality groups", "body": "New concepts, multi-location operators and hospitality groups that need one strategic system with enough flexibility for each venue to feel distinct." }
+      ],
+      "faqs": [
+        ["What does a hospitality marketing agency do?", "A specialist hospitality agency connects brand positioning, content, social media, creator partnerships, paid campaigns and the booking journey. The work is planned around commercial hospitality goals such as direct bookings, reservations, event enquiries and repeat demand."],
+        ["Do you work with both hotels and restaurants?", "Yes. Avenue One works with hotels, restaurants, bars and food and beverage brands. The strategic system is shared, but the content calendar, conversion path and measurement plan are built around the operation of each business."],
+        ["Can you work with an in-house marketing team?", "Yes. We can operate as a full external team or own a defined part of the programme, such as content production, creator partnerships or social strategy, alongside an internal marketing or revenue team."],
+        ["How do you measure hospitality marketing?", "The measurement plan is agreed before production. Depending on the engagement, it can include qualified website traffic, booking-engine activity, reservations, event enquiries, campaign response, audience growth and content performance." ]
+      ],
+      "related": [
+        { "label": "Hotel Marketing", "path": "/hotel-marketing-nyc/" },
+        { "label": "Restaurant Marketing", "path": "/restaurant-marketing-nyc/" },
+        { "label": "Hospitality Content", "path": "/hospitality-content-creation-nyc/" },
+        { "label": "Social Media Management", "path": "/social-media-management-nyc/" }
+      ]
+    },
+    {
+      "slug": "social-media-management-nyc",
+      "eyebrow": "Social Media Management",
+      "navLabel": "Social Media Management",
+      "breadcrumbParent": { "label": "Services", "path": "/services/" },
+      "h1Lead": "Social media management for brands that need more than",
+      "h1Accent": "posting",
+      "intro": "We manage social media for hospitality and lifestyle brands in New York City — strategy, planning, content direction, publishing, community and reporting organised around a clear, measurable business goal rather than a posting quota.",
+      "metaTitle": "Social Media Management Agency NYC | Avenue One",
+      "metaDescription": "NYC social media management for hospitality and lifestyle brands. Strategy, content, publishing, community management and reporting from one creator-led team.",
+      "serviceType": "Social media management",
+      "problemLabel": "The Gap",
+      "problemTitle": "Consistency is not the same as direction",
+      "problems": [
+        "A full calendar can still be aimless. When every week starts with deciding what to post, content reacts to the platform instead of building a clear position in the market.",
+        "Production and publishing often live in separate worlds. The team shooting the work does not know what the community responds to, while the team managing the channel has no control over the assets it receives.",
+        "Reports stop at reach and engagement. Those numbers are useful signals, but they only become valuable when they inform the next creative decision and connect to meaningful audience actions."
+      ],
+      "approachLabel": "The Programme",
+      "approachTitle": "Strategy, production and management in one loop",
+      "approach": [
+        { "title": "Channel strategy", "body": "We define the role of each platform, the audience it serves, the content pillars it needs and the actions it should create. Being present everywhere is not the objective." },
+        { "title": "Editorial planning", "body": "Monthly plans connect brand priorities, launches, seasonal moments and recurring formats so the channel develops a recognisable rhythm without becoming repetitive." },
+        { "title": "Content direction", "body": "We direct the photography, video, copy and creator inputs the plan requires, with platform-native briefs and a clear system for approvals and asset reuse." },
+        { "title": "Publishing & community", "body": "Publishing, optimisation and community management keep the account responsive and consistent while protecting the brand's tone of voice." },
+        { "title": "Learning & reporting", "body": "Reporting identifies what attracted the right audience, what moved them to act and what the next content cycle should do differently." }
+      ],
+      "audienceTitle": "Where this service has the most leverage",
+      "audiences": [
+        { "title": "Hospitality brands", "body": "Hotels, restaurants and bars with a constant stream of real moments to capture, but no joined-up system for turning them into demand." },
+        { "title": "Lifestyle & consumer brands", "body": "Brands that need a distinct visual and verbal point of view across launches, evergreen storytelling and community conversation." },
+        { "title": "Lean internal teams", "body": "Founders and marketing leads who need an accountable external team that can own the day-to-day programme without losing strategic context." }
+      ],
+      "faqs": [
+        ["What is included in social media management?", "Scope can include channel strategy, content planning, creative direction, production coordination, copywriting, publishing, community management and monthly reporting. The exact mix is set around the channels and outcomes that matter to the brand."],
+        ["Which platforms do you manage?", "Avenue One works across Instagram, TikTok, Facebook and other relevant channels. We recommend a focused channel mix rather than automatically duplicating the same content everywhere."],
+        ["Do you create the content too?", "Yes. Content production can be included, or we can direct and manage existing internal creators and production partners. The important part is that production and channel strategy work from the same plan."],
+        ["How much does social media management cost?", "Investment depends on the number of channels, production requirements, publishing frequency, community scope and paid support. After a discovery call, we recommend a scope tied to the actual operating needs of the brand." ]
+      ],
+      "related": [
+        { "label": "Hospitality Marketing", "path": "/hospitality-marketing-agency-nyc/" },
+        { "label": "Influencer Marketing", "path": "/influencer-marketing-agency-nyc/" },
+        { "label": "Hospitality Content", "path": "/hospitality-content-creation-nyc/" },
+        { "label": "Our Services", "path": "/services/" }
+      ]
+    },
+    {
+      "slug": "influencer-marketing-agency-nyc",
+      "eyebrow": "Influencer & Creator Marketing",
+      "navLabel": "Influencer Marketing",
+      "breadcrumbParent": { "label": "Services", "path": "/services/" },
+      "h1Lead": "Influencer marketing built for fit, not just",
+      "h1Accent": "reach",
+      "intro": "Avenue One plans and manages creator partnerships for hospitality and lifestyle brands in New York City. We connect casting, briefing, negotiation, production and usage rights so creator work feels credible to the audience and useful to the brand. Every partnership begins with a defined audience, role and commercial objective.",
+      "metaTitle": "Influencer Marketing Agency NYC | Avenue One",
+      "metaDescription": "NYC influencer and creator marketing agency for hospitality and lifestyle brands. Strategy, casting, briefs, usage rights, activations and reporting.",
+      "serviceType": "Influencer and creator marketing",
+      "problemLabel": "The Risk",
+      "problemTitle": "A large audience cannot rescue the wrong partnership",
+      "problems": [
+        "Follower count hides the questions that matter: where the audience lives, why they trust the creator, whether the format suits the brand and whether the partnership can influence a real decision.",
+        "Loose briefs create generic work. When the creator receives a list of claims instead of a useful creative direction, the result sounds like an advertisement and looks unlike both the creator and the brand.",
+        "Usage rights are treated as an afterthought. Strong creator work then cannot be edited, amplified or reused when the brand discovers it performs better than its campaign assets."
+      ],
+      "approachLabel": "Our Process",
+      "approachTitle": "Creator relationships with a job to do",
+      "approach": [
+        { "title": "Campaign role", "body": "We define what creators need to accomplish — discovery, local relevance, launch momentum, content production or conversion support — before building a list." },
+        { "title": "Considered casting", "body": "Selection weighs audience location, relevance, creative quality, brand fit and prior partnership behaviour alongside reach and engagement signals." },
+        { "title": "Briefing & negotiation", "body": "Creators receive a clear idea, useful boundaries and the freedom to communicate in the voice their audience trusts. Deliverables, timing, approvals and rights are agreed before production." },
+        { "title": "Activation management", "body": "We coordinate the practical work: outreach, schedules, visits or stays, content review, publication and the communication needed to keep the relationship strong." },
+        { "title": "Reuse & learning", "body": "Where rights allow, the strongest creator assets can support paid and owned channels. Results feed the next round of casting rather than disappearing into a campaign recap." }
+      ],
+      "audienceTitle": "Partnerships designed around the brand",
+      "audiences": [
+        { "title": "Restaurants & launches", "body": "Local creators and occasion-led storytelling that introduce a venue to the people who can actually visit, book and return." },
+        { "title": "Hotels & travel", "body": "Creator stays and property storytelling with clear deliverables, realistic schedules and content rights agreed before arrival." },
+        { "title": "Lifestyle brands", "body": "Product seeding, longer-term ambassadors and campaign creators chosen for real aesthetic and audience alignment." }
+      ],
+      "faqs": [
+        ["How do you choose influencers for a campaign?", "We start with the campaign role and audience, then assess location, relevance, creative quality, brand fit, engagement signals and previous partnerships. Follower count is one input, not the decision."],
+        ["Do you work with micro-influencers?", "Yes. A smaller creator with a trusted, concentrated audience can be more valuable than broad reach, particularly for local hospitality and considered lifestyle purchases."],
+        ["Can the brand reuse influencer content?", "Yes when usage rights are included in the agreement. We define the channels, duration, edit permissions and paid usage before production so there is no ambiguity later."],
+        ["Do you manage creator events and hotel stays?", "Yes. We can manage invitations, schedules, briefing, deliverables and follow-up for restaurant activations, property stays and other creator experiences." ]
+      ],
+      "related": [
+        { "label": "Restaurant Marketing", "path": "/restaurant-marketing-nyc/" },
+        { "label": "Hotel Marketing", "path": "/hotel-marketing-nyc/" },
+        { "label": "Social Media Management", "path": "/social-media-management-nyc/" },
+        { "label": "Lifestyle Marketing", "path": "/lifestyle-marketing-nyc/" }
+      ]
+    },
+    {
+      "slug": "hospitality-content-creation-nyc",
+      "eyebrow": "Hospitality Content Creation",
+      "navLabel": "Hospitality Content",
+      "breadcrumbParent": { "label": "Services", "path": "/services/" },
+      "h1Lead": "Hospitality content that makes people want to",
+      "h1Accent": "be there",
+      "intro": "We create social-first photography and video for New York hotels, restaurants and bars. Every shoot is planned around the experience a guest is choosing, the platforms where discovery happens and the commercial calendar the content needs to support. Each production is mapped to a practical publishing and reuse plan.",
+      "metaTitle": "Hospitality Content Creation NYC | Avenue One",
+      "metaDescription": "Social-first photo and video content for NYC hotels, restaurants and bars. Creative direction and production designed around bookings, reservations and launches.",
+      "serviceType": "Hospitality content creation",
+      "problemLabel": "The Difference",
+      "problemTitle": "Documenting the space is not enough",
+      "problems": [
+        "A room, dining room or plate can be photographed perfectly and still communicate no reason to choose it. Hospitality content has to show the feeling, pace and occasion around the physical product.",
+        "One large shoot often tries to serve every channel for a year. The result becomes stale as menus, teams, seasons, offers and platform formats change around it.",
+        "Assets are delivered without a distribution plan. Teams receive a folder of beautiful files but no hierarchy, hooks, edits or calendar for turning them into consistent demand."
+      ],
+      "approachLabel": "Production",
+      "approachTitle": "A content system, not an asset drop",
+      "approach": [
+        { "title": "Commercial brief", "body": "The shoot starts with what the business needs to sell: a stay, an occasion, a menu, an opening, an event space or a seasonal reason to return." },
+        { "title": "Creative direction", "body": "We build the visual story, shot priorities, talent requirements and platform formats around the brand's real character rather than a generic hospitality aesthetic." },
+        { "title": "On-location production", "body": "Photo and vertical video are captured on property or in venue, with a schedule designed to show the experience accurately while respecting operations." },
+        { "title": "Platform-ready delivery", "body": "Assets are organised for their intended jobs, including short-form edits, cut-downs and clear recommendations for organic, paid, website and creator use." },
+        { "title": "Ongoing content cycles", "body": "For brands that need an always-current presence, recurring shoots follow menus, seasons, events and performance insights rather than repeating the same library." }
+      ],
+      "audienceTitle": "Content shaped to the experience",
+      "audiences": [
+        { "title": "Boutique hotels", "body": "Property, neighbourhood and guest-experience storytelling that helps a potential guest imagine the stay before comparing room types." },
+        { "title": "Restaurants & bars", "body": "Menu, people, service and occasion-led content timed to what guests can order, book and experience now." },
+        { "title": "Hospitality launches", "body": "A launch library and rollout plan that introduces the concept clearly and gives paid, organic and creator channels enough material to build momentum." }
+      ],
+      "faqs": [
+        ["What is included in a hospitality content shoot?", "The scope can include creative direction, shot planning, on-location photography, vertical video, editing and platform-ready delivery. Talent, styling and additional production needs are defined in the brief."],
+        ["Do you create both photos and short-form video?", "Yes. Most hospitality programmes need a combination of still photography and native vertical video so the same commercial moment can work across social, paid media and owned channels."],
+        ["Can you work while a hotel or restaurant is operating?", "Yes. Production is scheduled around the operation, available spaces, service windows and guest considerations. The plan is agreed with the team before the shoot day."],
+        ["How often should a hospitality brand produce content?", "The right frequency depends on how often the guest experience changes. Restaurants with seasonal menus may need regular cycles; a hotel may combine larger seasonal shoots with focused updates for offers, events and new experiences." ]
+      ],
+      "related": [
+        { "label": "Hospitality Marketing", "path": "/hospitality-marketing-agency-nyc/" },
+        { "label": "Hotel Marketing", "path": "/hotel-marketing-nyc/" },
+        { "label": "Restaurant Marketing", "path": "/restaurant-marketing-nyc/" },
+        { "label": "Influencer Marketing", "path": "/influencer-marketing-agency-nyc/" }
+      ]
+    }
+  ]
+}

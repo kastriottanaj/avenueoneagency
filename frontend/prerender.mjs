@@ -11,6 +11,9 @@ const { render } = await import(resolve(here, 'dist-server/entry-server.js'))
 const { verticals } = JSON.parse(
   readFileSync(resolve(here, 'src/data/verticals.json'), 'utf8'),
 )
+const { pages: commercialPages } = JSON.parse(
+  readFileSync(resolve(here, 'src/data/commercialPages.json'), 'utf8'),
+)
 
 // Every route Django serves the app for. Blog posts are excluded: they come
 // from the database, so Django renders those per request.
@@ -26,6 +29,7 @@ const ROUTES = [
   '/privacy/',
   '/404/',
   ...verticals.map((v) => `/${v.slug}/`),
+  ...commercialPages.map((page) => `/${page.slug}/`),
 ]
 
 const template = readFileSync(join(dist, 'index.html'), 'utf8')

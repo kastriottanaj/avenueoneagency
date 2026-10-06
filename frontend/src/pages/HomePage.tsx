@@ -7,9 +7,9 @@ import { useMagnetic } from '../lib/useMagnetic'
 import Icon, { type IconName } from '../components/Icon'
 
 const services = [
-  { n: '01', title: 'Social Media Strategy', desc: 'Data-driven strategies that grow your audience and deepen community engagement.' },
-  { n: '02', title: 'Content Creation', desc: 'Scroll-stopping content tailored for your brand voice and platform algorithm.' },
-  { n: '03', title: 'Influencer Partnerships', desc: 'Curated creator collaborations that put your brand in front of the right audiences.' },
+  { n: '01', title: 'Social Media Strategy', desc: 'Data-driven strategies that grow your audience and deepen community engagement.', to: '/social-media-management-nyc/' },
+  { n: '02', title: 'Content Creation', desc: 'Scroll-stopping content tailored for your brand voice and platform algorithm.', to: '/hospitality-content-creation-nyc/' },
+  { n: '03', title: 'Influencer Partnerships', desc: 'Curated creator collaborations that put your brand in front of the right audiences.', to: '/influencer-marketing-agency-nyc/' },
   { n: '04', title: 'Brand Identity', desc: 'Creative direction that builds iconic, recognizable brand aesthetics.' },
   { n: '05', title: 'Campaign Production', desc: 'End-to-end campaign storytelling — from concept to publish.' },
   { n: '06', title: 'AEO Optimization', desc: 'Optimized for AI engines like ChatGPT, Perplexity & Google AI Overview.' },
@@ -33,15 +33,15 @@ export default function HomePage() {
         <div className="hero-bg-gradient" />
         <div className="container">
           <div className="hero-content">
-            <span className="hero-label">NYC-Born Creative Agency</span>
+            <span className="hero-label">NYC Hospitality &amp; Lifestyle Agency</span>
             <h1>
-              Building <span className="highlight">iconic</span><br />
-              brands through<br />
-              strategy &amp; influence
+              NYC social media<br />
+              for <span className="highlight">hospitality</span><br />
+              &amp; lifestyle brands
             </h1>
             <p className="hero-sub">
-              Full-service social media &amp; marketing agency helping brands grow
-              with strategy, content &amp; creator partnerships.
+              Creator-led strategy, content and influencer partnerships for restaurants,
+              boutique hotels and lifestyle brands built to be chosen.
             </p>
             <div className="hero-actions">
               <Link ref={ctaRef} to="/contact/" className="btn-primary">
@@ -102,9 +102,9 @@ export default function HomePage() {
                 title={<>Strategy. Content.<br /><span className="highlight">Influence.</span></>}
               />
               <p className="section-lead" style={{ marginBottom: '2rem' }}>
-                Avenue One™ is a NYC-born creative agency blending strategy, content,
-                influence, and culture. We help brands stand out with storytelling that
-                resonates and campaigns that convert.
+                Avenue One™ is a NYC hospitality and lifestyle marketing agency blending
+                strategy, content, influence and culture. We turn distinctive experiences
+                into demand, from first discovery to booking or purchase.
               </p>
               <p style={{ color: 'var(--gray)', fontSize: '0.95rem' }}>
                 Founded by Linda Kafexholli — global digital creator, marketing strategist,
@@ -117,15 +117,15 @@ export default function HomePage() {
             </div>
             <Reveal className="industry-cards" stagger={90}>
               {([
-                { label: 'Hospitality & Hotels', icon: 'hotel' },
-                { label: 'Fashion & Luxury', icon: 'fashion' },
-                { label: 'Beauty & Wellness', icon: 'beauty' },
-                { label: 'F&B & Restaurants', icon: 'restaurant' },
-              ] as { label: string; icon: IconName }[]).map((item) => (
-                <div key={item.label} className="card-dark industry-card">
+                { label: 'Hospitality & Hotels', icon: 'hotel', to: '/hospitality-marketing-agency-nyc/' },
+                { label: 'Fashion & Luxury', icon: 'fashion', to: '/fashion-marketing-nyc/' },
+                { label: 'Beauty & Wellness', icon: 'beauty', to: '/beauty-marketing-nyc/' },
+                { label: 'F&B & Restaurants', icon: 'restaurant', to: '/restaurant-marketing-nyc/' },
+              ] as { label: string; icon: IconName; to: string }[]).map((item) => (
+                <Link key={item.label} to={item.to} className="card-dark industry-card">
                   <div className="industry-card__icon"><Icon name={item.icon} /></div>
                   <p className="industry-card__label">{item.label}</p>
-                </div>
+                </Link>
               ))}
             </Reveal>
           </Reveal>
@@ -141,11 +141,11 @@ export default function HomePage() {
           />
           <Reveal className="services-grid" variant="slide" stagger={85}>
             {services.map((s) => (
-              <div key={s.n} className="card-dark">
+              <Link key={s.n} to={s.to ?? '/services/'} className="card-dark">
                 <div className="card-number">{s.n}</div>
                 <h4>{s.title}</h4>
                 <p>{s.desc}</p>
-              </div>
+              </Link>
             ))}
           </Reveal>
           <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>

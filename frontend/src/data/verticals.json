@@ -5,10 +5,10 @@
       "slug": "hotel-marketing-nyc",
       "eyebrow": "Hotels & Hospitality",
       "navLabel": "Hotel Marketing",
-      "h1Lead": "Social media for hotels that",
-      "h1Accent": "fills rooms",
+      "h1Lead": "NYC hotel marketing that drives",
+      "h1Accent": "direct demand",
       "intro": "We market boutique hotels, design properties and luxury groups in New York and across Europe — turning a property's character into demand that shows up in the booking engine, not just the follower count.",
-      "metaTitle": "Hotel Marketing NYC — Social Media for Hotels | Avenue One",
+      "metaTitle": "Hotel Marketing Agency NYC | Social Media & Creators",
       "metaDescription": "Social media and creator marketing for boutique hotels and luxury properties in New York City. Content, influencer partnerships and paid media that drive direct bookings.",
       "problemTitle": "Why hotel social media usually underperforms",
       "problems": [
@@ -34,6 +34,27 @@
           "title": "Paid media that drives direct",
           "body": "Meta and Google campaigns pointed at your own booking engine, so the demand we create is demand you own rather than commission you pay."
         }
+      ],
+      "audienceTitle": "Hotel marketing shaped to the property",
+      "audiences": [
+        {
+          "title": "Independent & boutique hotels",
+          "body": "Properties where design, neighbourhood and personal service are the reason to book — and where a distinctive point of view can compete with a much larger media budget."
+        },
+        {
+          "title": "Luxury & lifestyle properties",
+          "body": "Hotels that need creator partnerships and platform-native content to extend a premium brand without flattening it into generic performance creative."
+        },
+        {
+          "title": "Openings & repositioning",
+          "body": "New and renewed properties that need to build anticipation, explain what has changed and create an interested audience before availability opens."
+        }
+      ],
+      "measurementTitle": "From discovery to the booking engine",
+      "measurements": [
+        "Qualified traffic and booking-engine activity show whether content is creating consideration beyond the platform, not only generating passive views.",
+        "Direct-booking campaigns are evaluated against the action and value they create, with organic and creator content informing the messages that deserve paid support.",
+        "Content performance is read by guest segment, property story and travel occasion so the next production cycle invests in what actually moves demand."
       ],
       "proof": {
         "quote": "Through Avenue One Agency, we were able to streamline our services, increase local visibility and improve customer engagement — increasing booking rate by 25%.",
@@ -63,7 +84,7 @@
       "h1Lead": "Restaurant marketing that fills",
       "h1Accent": "tables",
       "intro": "We work with restaurants, bars and food and beverage brands in New York — building the kind of demand that turns into covers on a Tuesday, not just saves on a Sunday.",
-      "metaTitle": "Restaurant Marketing NYC — Social Media for Restaurants | Avenue One",
+      "metaTitle": "Restaurant Marketing Agency NYC | Social Media & Creators",
       "metaDescription": "Social media, content and creator marketing for New York restaurants, bars and F&B brands. Content that drives reservations, not just impressions.",
       "problemTitle": "Where restaurant social media goes wrong",
       "problems": [
@@ -89,6 +110,27 @@
           "title": "Local search & AI visibility",
           "body": "Google Business Profile, review presence and structured content so you surface when someone asks a search engine or an AI assistant where to eat nearby."
         }
+      ],
+      "audienceTitle": "Restaurant marketing built around the operation",
+      "audiences": [
+        {
+          "title": "Independent restaurants & bars",
+          "body": "Owner-led venues that need a consistent creative and channel team without losing the personality that made the concept worth visiting."
+        },
+        {
+          "title": "Restaurant groups",
+          "body": "Multi-location operators that need shared standards, coordinated campaigns and enough local flexibility for every venue to build its own community."
+        },
+        {
+          "title": "Openings & relaunches",
+          "body": "New concepts and renewed venues that need a clear launch story, a useful content library and local creator momentum before the first service."
+        }
+      ],
+      "measurementTitle": "Move from engagement to restaurant demand",
+      "measurements": [
+        "Reservation-page traffic, booking activity and event enquiries connect campaign attention to actions the restaurant team can recognise and follow.",
+        "Service-level priorities — a quiet weekday, a new menu, private dining or a launch — give each content cycle a specific commercial job rather than a generic awareness target.",
+        "Creator and campaign results are evaluated by audience relevance, content quality and attributable action, not by follower count or total impressions alone."
       ],
       "proof": {
         "quote": "Social Media Marketing services provided by Avenue One Agency helped us increase our online presence and customer engagement significantly.",
@@ -215,13 +257,13 @@
     },
     {
       "slug": "lifestyle-marketing-nyc",
-      "eyebrow": "Lifestyle & Culture",
+      "eyebrow": "Lifestyle Brands & Culture",
       "navLabel": "Lifestyle Marketing",
-      "h1Lead": "Lifestyle brands that are",
-      "h1Accent": "part of the culture",
+      "h1Lead": "Lifestyle brand marketing with a",
+      "h1Accent": "point of view",
       "intro": "We help lifestyle and consumer brands earn a genuine place in culture rather than borrowing one — the difference between a brand people reference and a brand that references everyone else.",
-      "metaTitle": "Lifestyle Marketing NYC — Social Media & Brand Strategy | Avenue One",
-      "metaDescription": "Brand strategy, content and creator partnerships for lifestyle and consumer brands in New York. Cultural relevance that lasts longer than a trend cycle.",
+      "metaTitle": "Lifestyle Brand Marketing Agency NYC | Avenue One",
+      "metaDescription": "Social media, brand strategy, content and creator partnerships for lifestyle and consumer brands in New York City. Build relevance without chasing every trend.",
       "problemTitle": "Why cultural marketing usually fails",
       "problems": [
         "Trend-chasing has a shelf life measured in days. A brand built on reacting to culture is permanently behind it and never becomes a reference point itself.",
@@ -246,6 +288,27 @@
           "title": "Content with a recognisable voice",
           "body": "An identifiable tone and visual language, so the brand is recognisable in a feed before anyone reads the handle."
         }
+      ],
+      "audienceTitle": "For brands people choose as part of a life",
+      "audiences": [
+        {
+          "title": "Consumer & design-led brands",
+          "body": "Products and services where identity, taste and belonging carry as much weight as the functional offer, and generic category content makes every competitor look interchangeable."
+        },
+        {
+          "title": "Beauty, wellness & fashion",
+          "body": "Brands that need creator credibility, a recognisable visual system and enough consistency to build trust across launches rather than starting from zero each time."
+        },
+        {
+          "title": "Culture-led experiences",
+          "body": "Concepts, memberships and destinations that grow through community, partnerships and an editorial point of view instead of relying on one-off campaign reach."
+        }
+      ],
+      "measurementTitle": "Signals that relevance is compounding",
+      "measurements": [
+        "Qualified shares, saves, direct traffic and branded search reveal whether the work is creating memory and consideration rather than momentary attention.",
+        "Creator performance is judged by audience fit, response quality and reusable creative value as well as reach, so partnership learning carries into the next campaign.",
+        "Community response, repeat engagement and conversion activity show whether the brand is building an audience it can reach again instead of renting attention each launch."
       ],
       "proof": null,
       "faqs": [

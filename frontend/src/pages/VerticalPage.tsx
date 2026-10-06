@@ -73,6 +73,38 @@ export default function VerticalPage() {
         </div>
       </section>
 
+      {v.audiences && v.audienceTitle && (
+        <section className="page-section">
+          <div className="container">
+            <SectionHead label="Best Fit" title={v.audienceTitle} />
+            <Reveal className="card-grid" stagger={90}>
+              {v.audiences.map((audience) => (
+                <div className="card-dark" key={audience.title}>
+                  <h4>{audience.title}</h4>
+                  <p>{audience.body}</p>
+                </div>
+              ))}
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {v.measurements && v.measurementTitle && (
+        <section className="page-section page-section--dark">
+          <div className="container">
+            <SectionHead label="Measurement" title={v.measurementTitle} />
+            <Reveal className="problem-list" variant="slide" stagger={90}>
+              {v.measurements.map((measurement, index) => (
+                <div className="problem-item" key={measurement}>
+                  <span className="problem-num">{String(index + 1).padStart(2, '0')}</span>
+                  <p>{measurement}</p>
+                </div>
+              ))}
+            </Reveal>
+          </div>
+        </section>
+      )}
+
       {/* ── Proof, where we genuinely have it ─ */}
       {v.proof && (
         <section className="page-section">
@@ -115,8 +147,28 @@ export default function VerticalPage() {
         </div>
       </section>
 
-      {/* ── Sibling verticals: real internal linking ─ */}
       <section className="page-section">
+        <div className="container">
+          <SectionHead label="Relevant Services" title="Build the complete programme" />
+          <Reveal className="vertical-links" stagger={70}>
+            <Link to="/social-media-management-nyc/" className="vertical-link">
+              <span className="vertical-link__label">Social Media Management</span>
+              <span className="vertical-link__arrow" aria-hidden="true">↗</span>
+            </Link>
+            <Link to="/influencer-marketing-agency-nyc/" className="vertical-link">
+              <span className="vertical-link__label">Influencer Marketing</span>
+              <span className="vertical-link__arrow" aria-hidden="true">↗</span>
+            </Link>
+            <Link to="/hospitality-content-creation-nyc/" className="vertical-link">
+              <span className="vertical-link__label">Hospitality Content Creation</span>
+              <span className="vertical-link__arrow" aria-hidden="true">↗</span>
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Sibling verticals: real internal linking ─ */}
+      <section className="page-section page-section--dark">
         <div className="container">
           <SectionHead label="Other Industries" title="We also work with" />
           <Reveal className="vertical-links" stagger={70}>

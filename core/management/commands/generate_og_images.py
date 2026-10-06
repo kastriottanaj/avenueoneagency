@@ -17,7 +17,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from PIL import Image, ImageDraw, ImageFont
 
-from core.seo import VERTICALS
+from core.seo import COMMERCIAL_PAGES, VERTICALS
 
 W, H = 1200, 630
 BG = (10, 9, 12)
@@ -34,9 +34,9 @@ OUT_DIR = os.path.join(
 # is written for a search results page rather than a 1200x630 card.
 STATIC_CARDS = {
     'default': ('NYC-Born Creative Agency', 'Building iconic brands through strategy & influence'),
-    'index': ('NYC-Born Creative Agency', 'Building iconic brands through strategy & influence'),
+    'index': ('NYC Social Media Agency', 'Hospitality and lifestyle brands, built to be chosen'),
     'about': ('About', 'NYC-born. Creator-led. Built for modern brands.'),
-    'services': ('Services', 'Everything your brand needs to dominate'),
+    'services': ('Services', 'Social media, content and creator marketing'),
     'industries': ('Industries', 'We know your industry inside out'),
     'testimonials': ('Testimonials', 'What our clients say about us'),
     'blog': ('Blog', 'Insights, trends & brand stories'),
@@ -142,6 +142,11 @@ class Command(BaseCommand):
             cards[v['slug']] = (
                 v['eyebrow'],
                 f"{v['h1Lead']} {v['h1Accent']}",
+            )
+        for page in COMMERCIAL_PAGES:
+            cards[page['slug']] = (
+                page['eyebrow'],
+                f"{page['h1Lead']} {page['h1Accent']}",
             )
 
         total = 0

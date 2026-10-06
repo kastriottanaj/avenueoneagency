@@ -3,7 +3,7 @@
 NYC-born creative agency. Strategy. Content. Influence. Growth.
 Creator-led, built for modern brands.
 
-- **Email:** info@avenueoneagency.com
+- **Email:** avenueoneagency@gmail.com
 - **Instagram:** [@avenueone.agency](https://www.instagram.com/avenueone.agency/)
 - **Location:** New York City, USA
 
@@ -17,6 +17,10 @@ Creator-led, built for modern brands.
 | `/about/` | About |
 | `/services/` | Services |
 | `/industries/` | Industries |
+| `/hospitality-marketing-agency-nyc/` | Hospitality marketing hub |
+| `/social-media-management-nyc/` | Social media management |
+| `/influencer-marketing-agency-nyc/` | Influencer and creator marketing |
+| `/hospitality-content-creation-nyc/` | Hospitality content creation |
 | `/testimonials/` | Testimonials |
 | `/blog/` | Blog list |
 | `/blog/:slug/` | Blog detail |
@@ -30,7 +34,7 @@ Legacy redirects: `/industries/` → `/industries/`, `/contact/` → `/contact/`
 
 ## Home
 
-**Tagline:** Building iconic brands through strategy & influence.
+**Positioning:** NYC social media for hospitality and lifestyle brands.
 
 Full-service social media & marketing agency helping brands grow with strategy, content & creator partnerships.
 
@@ -94,7 +98,7 @@ Global digital creator, marketing strategist, and 1M+ audience builder. Combines
 
 Tell us about your brand and what you want to achieve. Replies within 24 hours.
 
-- **Email:** info@avenueoneagency.com
+- **Email:** avenueoneagency@gmail.com
 - **Instagram:** @avenueone.agency
 - **Location:** New York City, USA
 

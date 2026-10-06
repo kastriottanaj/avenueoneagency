@@ -26,6 +26,10 @@ export interface Vertical {
   problems: string[]
   approachTitle: string
   approach: Approach[]
+  audienceTitle?: string
+  audiences?: Approach[]
+  measurementTitle?: string
+  measurements?: string[]
   proof: Proof | null
   faqs: [string, string][]
 }

@@ -2,7 +2,7 @@ from django.urls import path
 from django.views.generic.base import RedirectView
 
 from . import views
-from .seo import LEGACY_REDIRECTS, VERTICALS
+from .seo import COMMERCIAL_PAGES, LEGACY_REDIRECTS, VERTICALS
 
 urlpatterns = [
     path('', views.react_app, name='home'),
@@ -36,4 +36,13 @@ urlpatterns += [
 urlpatterns += [
     path(f"{v['slug']}/", views.react_app, name=f"vertical_{v['slug'].replace('-', '_')}")
     for v in VERTICALS
+]
+
+urlpatterns += [
+    path(
+        f"{page['slug']}/",
+        views.react_app,
+        name=f"commercial_{page['slug'].replace('-', '_')}",
+    )
+    for page in COMMERCIAL_PAGES
 ]

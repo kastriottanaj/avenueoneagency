@@ -16,6 +16,8 @@ import ImpressumPage from './pages/ImpressumPage'
 import NotFoundPage from './pages/NotFoundPage'
 import VerticalPage from './pages/VerticalPage'
 import { VERTICALS } from './data/verticals'
+import CommercialPage from './pages/CommercialPage'
+import { COMMERCIAL_PAGES } from './data/commercialPages'
 
 /**
  * Everything below the router. The router itself is supplied by the caller so
@@ -53,6 +55,9 @@ export default function App() {
                 keyword slugs, each with its own copy. */}
             {VERTICALS.map((v) => (
               <Route key={v.slug} path={`/${v.slug}/`} element={<VerticalPage />} />
+            ))}
+            {COMMERCIAL_PAGES.map((page) => (
+              <Route key={page.slug} path={`/${page.slug}/`} element={<CommercialPage />} />
             ))}
             {/* Was <HomePage />, which rendered the home page at every unknown
                 URL. The server now returns a real 404 status for these. */}

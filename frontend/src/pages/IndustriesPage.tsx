@@ -1,44 +1,56 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import { VERTICALS } from '../data/verticals'
 import Icon, { type IconName } from '../components/Icon'
 
-const industries: { icon: IconName; slug: string; title: string; desc: string }[] = [
+const industries: { icon: IconName; path: string; title: string; desc: string; linkLabel: string }[] = [
   {
     icon: 'hotel',
-    slug: 'hotel-marketing-nyc',
-    title: 'Hospitality & Hotels',
+    path: '/hospitality-marketing-agency-nyc/',
+    title: 'Hospitality Marketing',
+    desc: 'The specialist overview for hotels, restaurants, bars and groups that need attention to become bookings and reservations.',
+    linkLabel: 'Hospitality Marketing',
+  },
+  {
+    icon: 'hotel',
+    path: '/hotel-marketing-nyc/',
+    title: 'Hotels & Properties',
     desc: 'From boutique hotels to luxury chains — we craft storytelling that fills rooms and builds brand loyalty.',
+    linkLabel: 'Hotel Marketing',
   },
   {
     icon: 'restaurant',
-    slug: 'restaurant-marketing-nyc',
+    path: '/restaurant-marketing-nyc/',
     title: 'Restaurants & F&B',
     desc: 'We turn dining experiences into viral moments, growing your reservation list and community simultaneously.',
+    linkLabel: 'Restaurant Marketing',
   },
   {
     icon: 'fashion',
-    slug: 'fashion-marketing-nyc',
+    path: '/fashion-marketing-nyc/',
     title: 'Fashion & Luxury',
     desc: 'Editorial content and influencer strategy for fashion brands ready to stand out in a crowded market.',
+    linkLabel: 'Fashion Marketing',
   },
   {
     icon: 'beauty',
-    slug: 'beauty-marketing-nyc',
+    path: '/beauty-marketing-nyc/',
     title: 'Beauty & Wellness',
     desc: 'Authentic content creation and creator partnerships that build trust and drive conversions.',
+    linkLabel: 'Beauty Marketing',
   },
   {
     icon: 'lifestyle',
-    slug: 'lifestyle-marketing-nyc',
+    path: '/lifestyle-marketing-nyc/',
     title: 'Lifestyle & Culture',
     desc: 'We understand culture. We help lifestyle brands plug into it authentically and grow their community.',
+    linkLabel: 'Lifestyle Marketing',
   },
   {
     icon: 'realEstate',
-    slug: 'real-estate-marketing-nyc',
+    path: '/real-estate-marketing-nyc/',
     title: 'Real Estate & Development',
     desc: 'Premium visual storytelling and digital campaigns for residential and commercial real estate brands.',
+    linkLabel: 'Real Estate Marketing',
   },
 ]
 
@@ -63,17 +75,12 @@ export default function IndustriesPage() {
         <div className="container">
           <Reveal className="card-grid" stagger={80}>
             {industries.map((ind) => {
-              const vertical = VERTICALS.find((v) => v.slug === ind.slug)
               return (
                 <div key={ind.title} className="card-dark">
                   <div className="card-icon"><Icon name={ind.icon} size={34} /></div>
                   <h4>{ind.title}</h4>
                   <p>{ind.desc}</p>
-                  {vertical && (
-                    <Link to={`/${vertical.slug}/`} className="card-link">
-                      {vertical.navLabel} ↗
-                    </Link>
-                  )}
+                  <Link to={ind.path} className="card-link">{ind.linkLabel} ↗</Link>
                 </div>
               )
             })}

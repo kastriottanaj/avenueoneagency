@@ -173,6 +173,7 @@ a { color: inherit; text-decoration: none; }
 .section-title {
   font-size: clamp(2.5rem, 5.8vw, 5.25rem);
   margin-bottom: 1.75rem;
+  text-wrap: balance;
 }
 
 .section-lead {
@@ -180,6 +181,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--gray-light);
   max-width: 58ch;
   line-height: 1.72;
+  text-wrap: pretty;
 }
 
 /* ─── LAYOUT ───────────────────────────────────────────────── */
@@ -636,6 +638,7 @@ a { color: inherit; text-decoration: none; }
   line-height: 0.9;
   letter-spacing: -0.035em;
   margin-bottom: 2rem;
+  text-wrap: balance;
 }
 
 .hero-sub {
@@ -643,6 +646,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--gray-light);
   max-width: 46ch;
   margin-bottom: 2.75rem;
+  text-wrap: pretty;
 }
 
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -711,12 +715,14 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
   max-width: 16ch;
+  text-wrap: balance;
 }
 
 .page-hero p {
   font-size: 1.075rem;
   color: var(--gray-light);
   max-width: 52ch;
+  text-wrap: pretty;
 }
 
 /* ─── MARQUEE ──────────────────────────────────────────────── */
@@ -1458,12 +1464,11 @@ a { color: inherit; text-decoration: none; }
 /* ─── FOOTER ───────────────────────────────────────────────── */
 
 .site-footer { border-top: 1px solid var(--border); padding: 5rem 0 2.5rem; background: var(--black); }
-/* Three children — brand, industries, navigation. This was a two-column
-   grid, so navigation wrapped underneath the brand block. */
+/* Brand plus three link groups. */
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.7fr 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1.7fr repeat(3, 1fr);
+  gap: 3rem;
 }
 .footer-logo { height: 46px; width: auto; margin-bottom: 1.5rem; }
 .footer-brand p { max-width: 40ch; font-size: 0.925rem; }

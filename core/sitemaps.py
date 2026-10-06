@@ -1,7 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
-from .seo import VERTICALS
+from .seo import COMMERCIAL_PAGES, VERTICALS
 
 
 class StaticViewSitemap(Sitemap):
@@ -43,12 +43,15 @@ class StaticViewSitemap(Sitemap):
     VERTICAL_NAMES = [
         f"vertical_{v['slug'].replace('-', '_')}" for v in VERTICALS
     ]
+    COMMERCIAL_NAMES = [
+        f"commercial_{page['slug'].replace('-', '_')}" for page in COMMERCIAL_PAGES
+    ]
 
     def items(self):
-        return list(self.PRIORITIES.keys()) + self.VERTICAL_NAMES
+        return list(self.PRIORITIES.keys()) + self.VERTICAL_NAMES + self.COMMERCIAL_NAMES
 
     def _is_vertical(self, item):
-        return item in self.VERTICAL_NAMES
+        return item in self.VERTICAL_NAMES or item in self.COMMERCIAL_NAMES
 
     def location(self, item):
         return reverse(item)

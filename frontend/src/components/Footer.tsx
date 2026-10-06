@@ -11,8 +11,8 @@ export default function Footer() {
           <div className="footer-brand">
             <img src="/static/core/css/img/avenueone.png" alt="Avenue One Agency" className="footer-logo" />
             <p>
-              NYC-born creative agency. Strategy. Content. Influence. Growth.
-              Creator-led. Built for modern brands.
+              Creator-led social media and marketing for hospitality and lifestyle
+              brands in New York City and beyond.
             </p>
             <a
               href="https://www.instagram.com/avenueone.agency/"
@@ -28,11 +28,22 @@ export default function Footer() {
           <div className="footer-links">
             <h6>Industries</h6>
             <ul>
+              <li><Link to="/hospitality-marketing-agency-nyc/">Hospitality</Link></li>
               {VERTICALS.map((v) => (
                 <li key={v.slug}>
                   <Link to={`/${v.slug}/`}>{v.footerLabel}</Link>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          <div className="footer-links">
+            <h6>Services</h6>
+            <ul>
+              <li><Link to="/social-media-management-nyc/">Social Media</Link></li>
+              <li><Link to="/influencer-marketing-agency-nyc/">Influencer Marketing</Link></li>
+              <li><Link to="/hospitality-content-creation-nyc/">Content Creation</Link></li>
+              <li><Link to="/services/">All Services</Link></li>
             </ul>
           </div>
 

@@ -5,13 +5,21 @@ one fails loudly instead of silently shipping.
 """
 
 import re
+from html import escape
 
 from django.core import mail
 from django.core.cache import cache
 from django.test import TestCase, override_settings
 
 from core.models import ContactMessage, NewsletterSubscriber
-from core.seo import FAQS, LEGACY_REDIRECTS, PAGE_META, VERTICALS, og_image_for
+from core.seo import (
+    COMMERCIAL_PAGES,
+    FAQS,
+    LEGACY_REDIRECTS,
+    PAGE_META,
+    VERTICALS,
+    og_image_for,
+)
 from core.views import AI_CRAWLERS
 
 
@@ -279,8 +287,8 @@ class PrerenderTests(TestCase):
     def test_home_ships_rendered_content_not_an_empty_root(self):
         html = self.client.get('/').content.decode()
         self.assertNotIn('<div id="root"></div>', html)
-        self.assertIn('Building', html)
-        self.assertIn('brands through', html)
+        self.assertIn('NYC social media', html)
+        self.assertIn('hospitality', html)
 
     def test_every_static_route_ships_rendered_content(self):
         for path in PAGE_META:
@@ -312,10 +320,9 @@ class StructuredDataTests(TestCase):
         self.assertIn('Linda Kafexholli', html)
         self.assertIn('linkedin.com/in/linda-kafexholli', html)
 
-    def test_faq_schema_on_home_and_services(self):
-        for path in ('/', '/services/'):
-            with self.subTest(path=path):
-                self.assertIn('"@type":"FAQPage"', self.client.get(path).content.decode())
+    def test_faq_schema_only_where_the_general_faq_is_visible(self):
+        self.assertIn('"@type":"FAQPage"', self.client.get('/services/').content.decode())
+        self.assertNotIn('"@type":"FAQPage"', self.client.get('/').content.decode())
 
     def test_inner_pages_carry_breadcrumbs(self):
         html = self.client.get('/services/').content.decode()
@@ -497,6 +504,68 @@ class VerticalLandingPageTests(TestCase):
             self.assertIn(v['slug'], body)
 
 
+class CommercialLandingPageTests(TestCase):
+    """High-intent hospitality and service pages share content with SEO metadata."""
+
+    def paths(self):
+        return [f"/{page['slug']}/" for page in COMMERCIAL_PAGES]
+
+    def test_all_commercial_pages_resolve(self):
+        self.assertEqual(len(COMMERCIAL_PAGES), 4)
+        for path in self.paths():
+            with self.subTest(path=path):
+                self.assertEqual(self.client.get(path).status_code, 200)
+
+    def test_copy_is_substantial_and_server_rendered(self):
+        for page in COMMERCIAL_PAGES:
+            prose = ' '.join([
+                page['intro'],
+                *page['problems'],
+                *(item['body'] for item in page['approach']),
+                *(item['body'] for item in page['audiences']),
+            ])
+            self.assertGreater(len(prose.split()), 300, page['slug'])
+            html = self.client.get(f"/{page['slug']}/").content.decode()
+            self.assertIn(page['h1Accent'], html)
+            self.assertIn(escape(page['approach'][0]['title']), html)
+
+    def test_each_has_service_faq_and_breadcrumb_schema(self):
+        for page in COMMERCIAL_PAGES:
+            html = self.client.get(f"/{page['slug']}/").content.decode()
+            with self.subTest(slug=page['slug']):
+                self.assertIn('"@type":"Service"', html)
+                self.assertIn('"@type":"FAQPage"', html)
+                self.assertIn('"@type":"BreadcrumbList"', html)
+
+    def test_faq_schema_matches_visible_questions(self):
+        for page in COMMERCIAL_PAGES:
+            html = self.client.get(f"/{page['slug']}/").content.decode()
+            for question, _ in page['faqs']:
+                with self.subTest(slug=page['slug'], question=question):
+                    self.assertIn(question, html)
+
+    def test_all_commercial_pages_appear_in_sitemap_and_llms(self):
+        sitemap = self.client.get('/sitemap.xml').content.decode()
+        llms = self.client.get('/llms.txt').content.decode()
+        for page in COMMERCIAL_PAGES:
+            with self.subTest(slug=page['slug']):
+                self.assertIn(f"/{page['slug']}/", sitemap)
+                self.assertIn(page['slug'], llms)
+
+    def test_home_links_to_hospitality_hub(self):
+        html = self.client.get('/').content.decode()
+        self.assertIn('/hospitality-marketing-agency-nyc/', html)
+
+    def test_service_pages_are_linked_from_services_overview(self):
+        html = self.client.get('/services/').content.decode()
+        for slug in (
+            'social-media-management-nyc',
+            'influencer-marketing-agency-nyc',
+            'hospitality-content-creation-nyc',
+        ):
+            self.assertIn(f'/{slug}/', html)
+
+
 class OpenGraphImageTests(TestCase):
     def test_every_page_gets_its_own_card(self):
         images = {}
@@ -506,7 +575,7 @@ class OpenGraphImageTests(TestCase):
             self.assertIsNotNone(match, f'no og:image on {path}')
             images[path] = match.group(1)
 
-        # 15 pages, 15 distinct cards — previously all shared one photograph.
+        # Every indexed/static page gets a distinct card; they once shared one photograph.
         self.assertEqual(
             len(set(images.values())), len(images),
             f'duplicate og:image across pages: {images}',

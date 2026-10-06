@@ -39,11 +39,19 @@ LEGACY_REDIRECTS = {
 _VERTICALS_PATH = os.path.join(
     settings.BASE_DIR, 'frontend', 'src', 'data', 'verticals.json'
 )
+_COMMERCIAL_PAGES_PATH = os.path.join(
+    settings.BASE_DIR, 'frontend', 'src', 'data', 'commercialPages.json'
+)
 
 with open(_VERTICALS_PATH, encoding='utf-8') as _f:
     VERTICALS = json.load(_f)['verticals']
 
 VERTICAL_BY_SLUG = {v['slug']: v for v in VERTICALS}
+
+with open(_COMMERCIAL_PAGES_PATH, encoding='utf-8') as _f:
+    COMMERCIAL_PAGES = json.load(_f)['pages']
+
+COMMERCIAL_PAGE_BY_SLUG = {page['slug']: page for page in COMMERCIAL_PAGES}
 OG_DIR = '/static/core/css/img/og'
 OG_W, OG_H = 1200, 630
 DEFAULT_IMAGE = f'{OG_DIR}/default.png'
@@ -69,11 +77,11 @@ LOCALE = 'en_US'
 # path -> metadata. Keys must match the URLconf exactly, trailing slash included.
 PAGE_META = {
     '/': {
-        'title': 'Avenue One Agency — NYC Social Media & Creator Marketing',
+        'title': 'NYC Social Media Agency for Hospitality | Avenue One',
         'description': (
-            'NYC-born creative agency building iconic brands through social media '
-            'strategy, content and creator partnerships. Hospitality, fashion, '
-            'beauty and lifestyle brands across the U.S. and Europe.'
+            'Creator-led NYC social media agency for hospitality and lifestyle brands. '
+            'Strategy, content and influencer partnerships for hotels, restaurants '
+            'and consumer brands.'
         ),
     },
     '/about/': {
@@ -85,11 +93,11 @@ PAGE_META = {
         ),
     },
     '/services/': {
-        'title': 'Services — Social Strategy, Content, Paid Media & AEO',
+        'title': 'Social Media & Creator Marketing Services NYC | Avenue One',
         'description': (
             'Social media strategy, content creation, influencer partnerships, '
-            'brand identity, campaign production, paid media and AI Engine '
-            'Optimization for modern brands.'
+            'brand identity, campaign production and paid media for hospitality '
+            'and lifestyle brands in New York City.'
         ),
     },
     '/industries/': {
@@ -143,6 +151,12 @@ for _v in VERTICALS:
         'description': _v['metaDescription'],
     }
 
+for _page in COMMERCIAL_PAGES:
+    PAGE_META[f"/{_page['slug']}/"] = {
+        'title': _page['metaTitle'],
+        'description': _page['metaDescription'],
+    }
+
 
 FALLBACK_META = {
     'title': f'{SITE_NAME} — NYC Social Media & Creator Marketing',
@@ -188,6 +202,9 @@ def _organization(base_url):
             'Paid media',
             'AI Engine Optimization',
             'Hospitality marketing',
+            'Restaurant marketing',
+            'Hotel marketing',
+            'Hospitality content creation',
         ],
     }
 
@@ -354,6 +371,21 @@ def _breadcrumbs(path, base_url):
             ],
         }
 
+    commercial_page = COMMERCIAL_PAGE_BY_SLUG.get(path.strip('/'))
+    if commercial_page:
+        parent = commercial_page['breadcrumbParent']
+        return {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+                {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': f'{base_url}/'},
+                {'@type': 'ListItem', 'position': 2, 'name': parent['label'],
+                 'item': f"{base_url}{parent['path']}"},
+                {'@type': 'ListItem', 'position': 3, 'name': commercial_page['eyebrow'],
+                 'item': f'{base_url}{path}'},
+            ],
+        }
+
     if not label:
         return None
     return {
@@ -407,6 +439,41 @@ def _vertical_faq(vertical, base_url):
     }
 
 
+def _commercial_service(page, base_url):
+    url = f"{base_url}/{page['slug']}/"
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        '@id': f'{url}#service',
+        'name': page['metaTitle'].split('|')[0].strip(),
+        'serviceType': page['serviceType'],
+        'description': page['metaDescription'],
+        'url': url,
+        'provider': {'@id': f'{base_url}/#organization'},
+        'areaServed': [
+            {'@type': 'City', 'name': 'New York City'},
+            {'@type': 'Place', 'name': 'United States'},
+        ],
+    }
+
+
+def _commercial_faq(page, base_url):
+    url = f"{base_url}/{page['slug']}/"
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        '@id': f'{url}#faq',
+        'mainEntity': [
+            {
+                '@type': 'Question',
+                'name': question,
+                'acceptedAnswer': {'@type': 'Answer', 'text': answer},
+            }
+            for question, answer in page['faqs']
+        ],
+    }
+
+
 def _json_ld_for(path, base_url, post=None):
     blocks = [_organization(base_url), _website(base_url), _founder(base_url)]
 
@@ -416,13 +483,18 @@ def _json_ld_for(path, base_url, post=None):
 
     # The FAQ answers the questions people actually ask an answer engine about
     # this business, on the two pages where they are on-topic.
-    if path in ('/', '/services/'):
+    if path == '/services/':
         blocks.append(_faq(base_url))
 
     vertical = VERTICAL_BY_SLUG.get(path.strip('/'))
     if vertical:
         blocks.append(_vertical_service(vertical, base_url))
         blocks.append(_vertical_faq(vertical, base_url))
+
+    commercial_page = COMMERCIAL_PAGE_BY_SLUG.get(path.strip('/'))
+    if commercial_page:
+        blocks.append(_commercial_service(commercial_page, base_url))
+        blocks.append(_commercial_faq(commercial_page, base_url))
 
     if path == '/services/':
         blocks.append(_services_catalog(base_url))

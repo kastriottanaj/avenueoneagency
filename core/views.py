@@ -204,14 +204,18 @@ def robots_txt(request):
 def llms_txt(request):
     content = """# Avenue One Agency
 
-> NYC-born, creator-led social media & marketing agency founded by Linda Kafexholli. Full-service strategy, content, influencer partnerships, and brand building for hospitality, fashion, beauty, lifestyle, and F&B brands across the U.S. and Europe.
+> Creator-led NYC social media and marketing agency founded by Linda Kafexholli. Strategy, content and influencer partnerships for hospitality and lifestyle brands across the U.S. and Europe.
 
 ## Pages
 
-- [Home](https://avenueoneagency.com/): Building iconic brands through strategy & influence. Social media & marketing agency overview, key stats, and core offerings.
+- [Home](https://avenueoneagency.com/): NYC social media agency for hospitality and lifestyle brands. Agency overview, proof and core offerings.
 - [About](https://avenueoneagency.com/about/): NYC-born, creator-led story. Founder Linda Kafexholli's background as a global digital creator with a 1M+ audience and cross-continental marketing expertise.
 - [Services](https://avenueoneagency.com/services/): Social media strategy, content creation, influencer partnerships, brand identity, campaign production, hospitality marketing, paid media, and AI Engine Optimization (AEO).
 - [Industries](https://avenueoneagency.com/industries/): Hospitality & hotels, restaurants & F&B, fashion & luxury, beauty & wellness, lifestyle & culture, real estate & development.
+- [Hospitality Marketing Agency NYC](https://avenueoneagency.com/hospitality-marketing-agency-nyc/): Strategy, social media, content, creators and paid distribution for hotels, restaurants, bars and hospitality groups.
+- [Social Media Management NYC](https://avenueoneagency.com/social-media-management-nyc/): Channel strategy, planning, publishing, community management and reporting for hospitality and lifestyle brands.
+- [Influencer Marketing Agency NYC](https://avenueoneagency.com/influencer-marketing-agency-nyc/): Creator strategy, casting, briefing, usage rights, activations and reporting.
+- [Hospitality Content Creation NYC](https://avenueoneagency.com/hospitality-content-creation-nyc/): Social-first photography and video for New York hotels, restaurants and bars.
 - [Hotel Marketing NYC](https://avenueoneagency.com/hotel-marketing-nyc/): Social media, creator partnerships and paid media for boutique hotels and luxury properties, focused on direct bookings.
 - [Restaurant Marketing NYC](https://avenueoneagency.com/restaurant-marketing-nyc/): Content, local creator partnerships and search visibility for restaurants, bars and F&B brands.
 - [Fashion Marketing NYC](https://avenueoneagency.com/fashion-marketing-nyc/): Creative direction, creator casting and campaign production for fashion and luxury labels.
@@ -226,7 +230,7 @@ def llms_txt(request):
 
 ## Contact
 
-- Email: info@avenueoneagency.com
+- Email: avenueoneagency@gmail.com
 - Instagram: https://www.instagram.com/avenueone.agency/
 - Location: New York City, USA
 """
@@ -236,9 +240,9 @@ def llms_txt(request):
 def llms_full_txt(request):
     content = """# Avenue One Agency
 
-> NYC-born, creator-led social media & marketing agency founded by Linda Kafexholli. Full-service strategy, content, influencer partnerships, and brand building for hospitality, fashion, beauty, lifestyle, and F&B brands across the U.S. and Europe.
+> Creator-led NYC social media and marketing agency founded by Linda Kafexholli. Strategy, content and influencer partnerships for hospitality and lifestyle brands across the U.S. and Europe.
 
-- Email: info@avenueoneagency.com
+- Email: avenueoneagency@gmail.com
 - Instagram: https://www.instagram.com/avenueone.agency/
 - Location: New York City, USA
 - Founded: 2020
@@ -248,9 +252,9 @@ def llms_full_txt(request):
 
 ## Home — https://avenueoneagency.com/
 
-**Tagline:** Building iconic brands through strategy & influence.
+**Positioning:** NYC social media for hospitality and lifestyle brands.
 
-Full-service social media & marketing agency helping brands grow with strategy, content & creator partnerships.
+Creator-led strategy, content and influencer partnerships for restaurants, boutique hotels and lifestyle brands built to be chosen.
 
 **Key stats**
 - 1M+ creator audience
@@ -282,10 +286,16 @@ Global digital creator, marketing strategist, and 1M+ audience builder. Combines
 7. **Advertising & Paid Media** — AI-driven targeting across Meta, TikTok, Google, and beyond.
 8. **AEO — AI Engine Optimization** — Optimization for ChatGPT, Perplexity, and Google AI Overview.
 
+Dedicated service pages:
+- [Social Media Management NYC](https://avenueoneagency.com/social-media-management-nyc/)
+- [Influencer Marketing Agency NYC](https://avenueoneagency.com/influencer-marketing-agency-nyc/)
+- [Hospitality Content Creation NYC](https://avenueoneagency.com/hospitality-content-creation-nyc/)
+
 ---
 
 ## Industries — https://avenueoneagency.com/industries/
 
+- **Hospitality Marketing** — An integrated strategy for hotels, restaurants, bars and groups.
 - **Hospitality & Hotels** — Boutique hotels to luxury chains.
 - **Restaurants & F&B** — Dining experiences turned into viral moments.
 - **Fashion & Luxury** — Editorial content and influencer strategy.
@@ -315,7 +325,7 @@ Insights on social media marketing, creator economy, brand strategy, and hospita
 
 Tell us about your brand and what you want to achieve. Replies within 24 hours.
 
-- Email: info@avenueoneagency.com
+- Email: avenueoneagency@gmail.com
 - Instagram: @avenueone.agency
 - Location: New York City, USA
 
