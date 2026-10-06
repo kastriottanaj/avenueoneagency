@@ -1,35 +1,56 @@
 import { Link } from 'react-router-dom'
+import Reveal from '../components/Reveal'
+import Icon, { type IconName } from '../components/Icon'
 
-const industries = [
+const industries: { icon: IconName; path: string; title: string; desc: string; linkLabel: string }[] = [
   {
-    icon: '🏨',
-    title: 'Hospitality & Hotels',
-    desc: 'From boutique hotels to luxury chains — we craft storytelling that fills rooms and builds brand loyalty.',
+    icon: 'hotel',
+    path: '/hospitality-marketing-agency-nyc/',
+    title: 'Hospitality Marketing',
+    desc: 'The specialist overview for hotels, restaurants, bars and groups that need attention to become bookings and reservations.',
+    linkLabel: 'Hospitality Marketing',
   },
   {
-    icon: '🍽',
+    icon: 'hotel',
+    path: '/hotel-marketing-nyc/',
+    title: 'Hotels & Properties',
+    desc: 'From boutique hotels to luxury chains — we craft storytelling that fills rooms and builds brand loyalty.',
+    linkLabel: 'Hotel Marketing',
+  },
+  {
+    icon: 'restaurant',
+    path: '/restaurant-marketing-nyc/',
     title: 'Restaurants & F&B',
     desc: 'We turn dining experiences into viral moments, growing your reservation list and community simultaneously.',
+    linkLabel: 'Restaurant Marketing',
   },
   {
-    icon: '👗',
+    icon: 'fashion',
+    path: '/fashion-marketing-nyc/',
     title: 'Fashion & Luxury',
     desc: 'Editorial content and influencer strategy for fashion brands ready to stand out in a crowded market.',
+    linkLabel: 'Fashion Marketing',
   },
   {
-    icon: '✨',
+    icon: 'beauty',
+    path: '/beauty-marketing-nyc/',
     title: 'Beauty & Wellness',
     desc: 'Authentic content creation and creator partnerships that build trust and drive conversions.',
+    linkLabel: 'Beauty Marketing',
   },
   {
-    icon: '🌆',
+    icon: 'lifestyle',
+    path: '/lifestyle-marketing-nyc/',
     title: 'Lifestyle & Culture',
     desc: 'We understand culture. We help lifestyle brands plug into it authentically and grow their community.',
+    linkLabel: 'Lifestyle Marketing',
   },
   {
-    icon: '🏢',
+    icon: 'realEstate',
+    path: '/real-estate-marketing-nyc/',
     title: 'Real Estate & Development',
     desc: 'Premium visual storytelling and digital campaigns for residential and commercial real estate brands.',
+    linkLabel: 'Real Estate Marketing',
   },
 ]
 
@@ -52,21 +73,18 @@ export default function IndustriesPage() {
 
       <section className="page-section">
         <div className="container">
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '1rem',
-            }}
-          >
-            {industries.map((ind) => (
-              <div key={ind.title} className="card-dark">
-                <div style={{ fontSize: '2.25rem', marginBottom: '1rem' }}>{ind.icon}</div>
-                <h4>{ind.title}</h4>
-                <p>{ind.desc}</p>
-              </div>
-            ))}
-          </div>
+          <Reveal className="card-grid" stagger={80}>
+            {industries.map((ind) => {
+              return (
+                <div key={ind.title} className="card-dark">
+                  <div className="card-icon"><Icon name={ind.icon} size={34} /></div>
+                  <h4>{ind.title}</h4>
+                  <p>{ind.desc}</p>
+                  <Link to={ind.path} className="card-link">{ind.linkLabel} ↗</Link>
+                </div>
+              )
+            })}
+          </Reveal>
         </div>
       </section>
 
@@ -77,7 +95,7 @@ export default function IndustriesPage() {
           <p className="section-lead" style={{ margin: '0 auto 2rem' }}>
             If your brand has a story worth telling, we want to help tell it.
           </p>
-          <Link to="/kontakt/" className="btn-primary">Talk to Us ↗</Link>
+          <Link to="/contact/" className="btn-primary">Talk to Us ↗</Link>
         </div>
       </section>
     </>

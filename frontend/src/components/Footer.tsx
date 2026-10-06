@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { VERTICALS } from '../data/verticals'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -10,8 +11,8 @@ export default function Footer() {
           <div className="footer-brand">
             <img src="/static/core/css/img/avenueone.png" alt="Avenue One Agency" className="footer-logo" />
             <p>
-              NYC-born creative agency. Strategy. Content. Influence. Growth.
-              Creator-led. Built for modern brands.
+              Creator-led social media and marketing for hospitality and lifestyle
+              brands in New York City and beyond.
             </p>
             <a
               href="https://www.instagram.com/avenueone.agency/"
@@ -25,27 +26,47 @@ export default function Footer() {
           </div>
 
           <div className="footer-links">
+            <h6>Industries</h6>
+            <ul>
+              <li><Link to="/hospitality-marketing-agency-nyc/">Hospitality</Link></li>
+              {VERTICALS.map((v) => (
+                <li key={v.slug}>
+                  <Link to={`/${v.slug}/`}>{v.footerLabel}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="footer-links">
+            <h6>Services</h6>
+            <ul>
+              <li><Link to="/social-media-management-nyc/">Social Media</Link></li>
+              <li><Link to="/influencer-marketing-agency-nyc/">Influencer Marketing</Link></li>
+              <li><Link to="/hospitality-content-creation-nyc/">Content Creation</Link></li>
+              <li><Link to="/services/">All Services</Link></li>
+            </ul>
+          </div>
+
+          <div className="footer-links">
             <h6>Navigation</h6>
             <ul>
-              <li><Link to="/ueber-uns/">About Us</Link></li>
+              <li><Link to="/about/">About Us</Link></li>
               <li><Link to="/services/">Services</Link></li>
-              <li><Link to="/branchen/">Industries</Link></li>
+              <li><Link to="/industries/">Industries</Link></li>
               <li><Link to="/blog/">Blog</Link></li>
               <li><Link to="/testimonials/">Testimonials</Link></li>
-              <li><Link to="/kontakt/">Contact</Link></li>
-              <li><Link to="/impressum/">Imprint</Link></li>
-              <li><Link to="/datenschutz/">Privacy Policy</Link></li>
+              <li><Link to="/contact/">Contact</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <small>&copy; {year} Avenue One Agency™ — All rights reserved</small>
-          <small>
-            <a href="mailto:avenueoneagency@gmail.com" style={{ color: 'var(--gray)' }}>
-              avenueoneagency@gmail.com
-            </a>
-          </small>
+          <small>&copy; {year} Avenue One Agency™</small>
+          <nav className="footer-legal" aria-label="Legal">
+            <Link to="/imprint/">Imprint</Link>
+            <Link to="/privacy/">Privacy Policy</Link>
+            <a href="mailto:avenueoneagency@gmail.com">avenueoneagency@gmail.com</a>
+          </nav>
         </div>
       </div>
     </footer>
