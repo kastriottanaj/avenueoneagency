@@ -5,6 +5,7 @@ from . import views
 from .seo import COMMERCIAL_PAGES, LEGACY_REDIRECTS, VERTICALS
 
 urlpatterns = [
+    path('healthz', views.healthz, name='healthz'),
     path('', views.react_app, name='home'),
     path('about/', views.react_app, name='about'),
     path('services/', views.react_app, name='services'),

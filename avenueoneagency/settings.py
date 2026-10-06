@@ -154,42 +154,6 @@ LOGGING = {
     },
 }
 
-# Log to stdout, which gunicorn hands to journald (`journalctl -u gunicorn`).
-# Django's built-in config only forwards production errors to ADMINS by email,
-# so without this an unhandled 500 would leave no trace on the server at all.
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'standard': {
-            'format': '[{asctime}] {levelname} {name}: {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'standard',
-        },
-    },
-    'root': {
-        'handlers': ['console'],
-        'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
-    },
-    'loggers': {
-        # Unhandled exceptions (ERROR) and rejected requests (WARNING).
-        'django.request': {
-            'handlers': ['console'],
-            'level': 'WARNING',
-            'propagate': False,
-        },
-        # Keep a DEBUG root level from turning into SQL-statement spam.
-        'django.db.backends': {
-            'level': 'WARNING',
-        },
-    },
-}
-
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
