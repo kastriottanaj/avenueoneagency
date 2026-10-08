@@ -12,4 +12,4 @@ class BlogPostSitemap(Sitemap):
         return BlogPost.objects.filter(published=True).order_by('-created_at')
 
     def lastmod(self, obj):
-        return obj.created_at
+        return obj.updated_at

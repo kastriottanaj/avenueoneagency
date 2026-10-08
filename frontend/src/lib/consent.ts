@@ -120,3 +120,31 @@ export function trackPageView(path: string) {
   window.gtag?.('event', 'page_view', { page_path: path })
   window.fbq?.('track', 'PageView')
 }
+
+type AnalyticsValue = string | number | boolean
+
+/**
+ * Record a privacy-safe interaction. Callers must pass only event context,
+ * never names, email addresses, message text or other visitor input.
+ */
+export function trackEvent(
+  name: string,
+  parameters: Record<string, AnalyticsValue> = {},
+  metaStandardEvent?: string,
+) {
+  if (!loaded) return
+  window.gtag?.('event', name, parameters)
+  if (metaStandardEvent) {
+    window.fbq?.('track', metaStandardEvent, parameters)
+  } else {
+    window.fbq?.('trackCustom', name, parameters)
+  }
+}
+
+export function trackContactLead() {
+  trackEvent('generate_lead', { form_name: 'contact', lead_type: 'agency_enquiry' }, 'Lead')
+}
+
+export function trackNewsletterSignup() {
+  trackEvent('sign_up', { method: 'newsletter' }, 'Subscribe')
+}

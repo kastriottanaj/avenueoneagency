@@ -7,7 +7,7 @@ const links = [
   { to: '/services/', label: 'Services' },
   { to: '/industries/', label: 'Industries' },
   { to: '/blog/', label: 'Blog' },
-  { to: '/testimonials/', label: 'Testimonials' },
+  { to: '/case-studies/', label: 'Results' },
 ]
 
 export default function Navbar() {

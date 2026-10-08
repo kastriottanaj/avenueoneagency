@@ -19,16 +19,14 @@ class BlogPostListSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'title', 'slug', 'category', 'description',
             'featured_image_url', 'image_width', 'image_height',
-            'created_at', 'meta_title', 'meta_description', 'author_name', 'tags',
+            'created_at', 'updated_at', 'meta_title', 'meta_description', 'author_name', 'tags',
         ]
 
     def get_tags(self, obj):
         return [{'name': tag.name, 'slug': tag.slug} for tag in obj.tags.all()]
 
     def get_author_name(self, obj):
-        if obj.author:
-            return obj.author.get_full_name() or obj.author.username
-        return None
+        return obj.display_author
 
     def get_featured_image_url(self, obj):
         request = self.context.get('request')

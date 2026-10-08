@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { getBlogPosts, getCategories, subscribeNewsletter } from '../api/client'
 import type { BlogPost, Category, PaginatedResponse } from '../types'
+import { trackNewsletterSignup } from '../lib/consent'
 
 export default function BlogListPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -55,6 +56,7 @@ export default function BlogListPage() {
     setNewsletterError('')
     try {
       await subscribeNewsletter({ email: newsletterEmail })
+      trackNewsletterSignup()
       setNewsletterSuccess(true)
       setNewsletterEmail('')
     } catch (err) {
@@ -211,7 +213,7 @@ export default function BlogListPage() {
             </div>
             <div>
               {newsletterSuccess ? (
-                <p style={{ color: 'var(--pink-text)', fontWeight: 700 }}>✓ You are subscribed!</p>
+                <p style={{ color: 'var(--pink-text)', fontWeight: 700 }} role="status" aria-live="polite">✓ You are subscribed!</p>
               ) : (
                 <form onSubmit={handleNewsletterSubmit} className="newsletter-form">
                   {newsletterError && <p className="error-msg">{newsletterError}</p>}
@@ -252,6 +254,7 @@ function BlogCard({ post, onTagClick }: { post: BlogPost; onTagClick: (slug: str
           {new Date(post.created_at).toLocaleDateString('en-US', {
             year: 'numeric', month: 'long', day: 'numeric',
           })}
+          {post.author_name && <span> · By {post.author_name}</span>}
         </p>
         {post.category && (
           <span className="tag-pill" style={{ marginBottom: '0.5rem' }}>

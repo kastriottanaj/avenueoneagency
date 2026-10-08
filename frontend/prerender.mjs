@@ -14,6 +14,9 @@ const { verticals } = JSON.parse(
 const { pages: commercialPages } = JSON.parse(
   readFileSync(resolve(here, 'src/data/commercialPages.json'), 'utf8'),
 )
+const { caseStudies } = JSON.parse(
+  readFileSync(resolve(here, 'src/data/caseStudies.json'), 'utf8'),
+)
 
 // Every route Django serves the app for. Blog posts are excluded: they come
 // from the database, so Django renders those per request.
@@ -23,6 +26,7 @@ const ROUTES = [
   '/services/',
   '/industries/',
   '/testimonials/',
+  '/case-studies/',
   '/contact/',
   '/blog/',
   '/imprint/',
@@ -30,6 +34,7 @@ const ROUTES = [
   '/404/',
   ...verticals.map((v) => `/${v.slug}/`),
   ...commercialPages.map((page) => `/${page.slug}/`),
+  ...caseStudies.map((study) => `/case-studies/${study.slug}/`),
 ]
 
 const template = readFileSync(join(dist, 'index.html'), 'utf8')
