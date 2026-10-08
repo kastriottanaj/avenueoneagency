@@ -1,7 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
-from .seo import COMMERCIAL_PAGES, VERTICALS
+from .seo import CASE_STUDIES, COMMERCIAL_PAGES, VERTICALS
 
 
 class StaticViewSitemap(Sitemap):
@@ -21,6 +21,7 @@ class StaticViewSitemap(Sitemap):
         'industries': 0.8,
         'about': 0.8,
         'testimonials': 0.7,
+        'case_studies': 0.8,
         'blog': 0.7,
         'imprint': 0.2,
         'privacy': 0.2,
@@ -33,6 +34,7 @@ class StaticViewSitemap(Sitemap):
         'industries': 'monthly',
         'about': 'monthly',
         'testimonials': 'monthly',
+        'case_studies': 'monthly',
         'contact': 'yearly',
         'imprint': 'yearly',
         'privacy': 'yearly',
@@ -46,12 +48,24 @@ class StaticViewSitemap(Sitemap):
     COMMERCIAL_NAMES = [
         f"commercial_{page['slug'].replace('-', '_')}" for page in COMMERCIAL_PAGES
     ]
+    CASE_STUDY_NAMES = [
+        f"case_study_{study['slug'].replace('-', '_')}" for study in CASE_STUDIES
+    ]
 
     def items(self):
-        return list(self.PRIORITIES.keys()) + self.VERTICAL_NAMES + self.COMMERCIAL_NAMES
+        return (
+            list(self.PRIORITIES.keys())
+            + self.VERTICAL_NAMES
+            + self.COMMERCIAL_NAMES
+            + self.CASE_STUDY_NAMES
+        )
 
     def _is_vertical(self, item):
-        return item in self.VERTICAL_NAMES or item in self.COMMERCIAL_NAMES
+        return (
+            item in self.VERTICAL_NAMES
+            or item in self.COMMERCIAL_NAMES
+            or item in self.CASE_STUDY_NAMES
+        )
 
     def location(self, item):
         return reverse(item)

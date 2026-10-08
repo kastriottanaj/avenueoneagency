@@ -21,6 +21,7 @@ export interface BlogPost {
   image_height: number | null
   published: boolean
   created_at: string
+  updated_at: string
   meta_title: string
   meta_description: string
   author_name: string | null

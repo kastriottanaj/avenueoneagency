@@ -123,6 +123,60 @@ def blog_detail_app(request, slug):
     )
 
 
+def blog_index_app(request):
+    """Render published post links into the initial blog response.
+
+    The React list is populated through an API after load. Search and answer
+    engines should not have to execute that request to discover the articles,
+    so the default view receives a compact server-rendered index first.
+    """
+    from blog.models import BlogPost
+
+    posts = BlogPost.objects.filter(published=True).select_related(
+        'category', 'author'
+    ).order_by('-created_at')[:20]
+    return _render_shell(
+        request,
+        '/blog/',
+        meta_for_path('/blog/'),
+        document='dynamic-blog-index',
+        body_html=_blog_index_html(posts),
+    )
+
+
+def _blog_index_html(posts):
+    cards = []
+    for post in posts:
+        published = post.created_at.strftime('%B %-d, %Y')
+        category = (
+            f'<span class="tag-pill">{escape(post.category.name)}</span>'
+            if post.category else ''
+        )
+        cards.append(
+            '<article class="blog-card"><div class="blog-card-body">'
+            f'<p class="blog-card-date">{escape(published)} · By '
+            f'{escape(post.display_author)}</p>{category}'
+            f'<h2><a href="{escape(post.get_absolute_url())}">{escape(post.title)}</a></h2>'
+            f'<p>{escape(post.description)}</p>'
+            f'<a class="card-link" href="{escape(post.get_absolute_url())}">Read article ↗</a>'
+            '</div></article>'
+        )
+
+    content = ''.join(cards) or (
+        '<p>Hospitality and lifestyle marketing articles are coming soon.</p>'
+    )
+    return (
+        '<div class="d-flex flex-column min-vh-100"><main id="main">'
+        '<section class="page-hero"><div class="container">'
+        '<span class="section-label">Blog</span>'
+        '<h1>Hospitality marketing insights and practical guides</h1>'
+        '<p>Strategy, social media, creator partnerships and content systems for '
+        'hotels, restaurants and lifestyle brands.</p>'
+        '</div></section><section class="page-section"><div class="container">'
+        f'{content}</div></section></main></div>'
+    )
+
+
 def _post_article_html(post):
     """Server-render a post as semantic HTML.
 
@@ -132,10 +186,7 @@ def _post_article_html(post):
     JavaScript, which is most of them and all of the AI engines.
     """
     published = post.created_at.strftime('%B %-d, %Y')
-    author = ''
-    if post.author:
-        name = post.author.get_full_name() or post.author.username
-        author = f'<p class="blog-card-date">By {escape(name)}</p>'
+    author = f'<p class="blog-card-date">By {escape(post.display_author)}</p>'
 
     image = ''
     if post.featured_image:
@@ -223,7 +274,14 @@ def llms_txt(request):
 - [Lifestyle Marketing NYC](https://avenueoneagency.com/lifestyle-marketing-nyc/): Brand point of view, community building and cultural partnerships for lifestyle brands.
 - [Real Estate Marketing NYC](https://avenueoneagency.com/real-estate-marketing-nyc/): Place-led positioning and long-cycle visual storytelling for developments and brokerages.
 - [Testimonials](https://avenueoneagency.com/testimonials/): Client results and reviews, including Faralda Crane Hotel and Chatti New York.
+- [Client Results](https://avenueoneagency.com/case-studies/): Verified client-reported outcomes, including Faralda Crane Hotel and Chatti New York.
+- [Faralda Crane Hotel Result](https://avenueoneagency.com/case-studies/faralda-crane-hotel-booking-growth/): Client-reported local visibility and engagement improvements alongside a 25% increase in booking rate.
+- [Chatti New York Result](https://avenueoneagency.com/case-studies/chatti-new-york-social-media-growth/): Client-reported growth in online presence and customer engagement.
 - [Blog](https://avenueoneagency.com/blog/): Insights on social media marketing, creator economy, brand strategy, and hospitality/lifestyle marketing.
+- [Hotel Social Media Strategy](https://avenueoneagency.com/blog/hotel-social-media-strategy-direct-bookings/): Connect hotel content, creators, landing pages and measurement to direct-booking demand.
+- [Restaurant Opening Marketing Plan](https://avenueoneagency.com/blog/restaurant-opening-marketing-plan-nyc/): A phased launch plan for New York restaurants.
+- [UGC and Creator Usage Rights](https://avenueoneagency.com/blog/ugc-creator-usage-rights-hospitality-brands/): Practical licensing guidance for hospitality brands.
+- [Hospitality Content Calendar](https://avenueoneagency.com/blog/hospitality-content-calendar-guide/): A planning framework built around guest decisions and commercial priorities.
 - [Contact](https://avenueoneagency.com/contact/): Get in touch for a free brand audit or discovery call. Replies within 24 hours.
 - [Imprint](https://avenueoneagency.com/imprint/): Legal and company information.
 - [Privacy Policy](https://avenueoneagency.com/privacy/): Data protection and privacy policy.
@@ -313,11 +371,20 @@ Dedicated service pages:
 > "Social Media Marketing services provided by Avenue One Agency helped us increase our online presence and customer engagement significantly."
 > — Fregi Mathew, Chef, Chatti New York
 
+Verified client-result pages:
+- [Faralda Crane Hotel](https://avenueoneagency.com/case-studies/faralda-crane-hotel-booking-growth/)
+- [Chatti New York](https://avenueoneagency.com/case-studies/chatti-new-york-social-media-growth/)
+
 ---
 
 ## Blog — https://avenueoneagency.com/blog/
 
 Insights on social media marketing, creator economy, brand strategy, and hospitality/lifestyle marketing.
+
+- [Hotel Social Media Strategy That Supports Direct Bookings](https://avenueoneagency.com/blog/hotel-social-media-strategy-direct-bookings/)
+- [A Restaurant Opening Marketing Plan for New York City](https://avenueoneagency.com/blog/restaurant-opening-marketing-plan-nyc/)
+- [UGC and Creator Usage Rights for Hospitality Brands](https://avenueoneagency.com/blog/ugc-creator-usage-rights-hospitality-brands/)
+- [How to Build a Hospitality Content Calendar](https://avenueoneagency.com/blog/hospitality-content-calendar-guide/)
 
 ---
 
