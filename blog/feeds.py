@@ -22,6 +22,9 @@ class LatestPostsFeed(Feed):
     def item_pubdate(self, item):
         return item.created_at
 
+    def item_updateddate(self, item):
+        return item.updated_at
+
     def item_link(self, item):
         # Must be a path, not a full URL — Django's syndication framework makes
         # it absolute against the current request. Returning a bare relative

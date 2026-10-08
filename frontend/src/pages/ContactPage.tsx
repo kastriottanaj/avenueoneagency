@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { submitContact } from '../api/client'
 import Reveal from '../components/Reveal'
+import { trackContactLead } from '../lib/consent'
 
 interface FormState {
   name: string
@@ -34,6 +35,7 @@ export default function ContactPage() {
     setServerError('')
     try {
       await submitContact(form)
+      trackContactLead()
       setSuccess(true)
       setForm({ name: '', email: '', phone: '', message: '', website: '' })
     } catch (err) {
@@ -116,7 +118,7 @@ export default function ContactPage() {
             {/* Form */}
             <div className="contact-form card-dark">
               {success ? (
-                <div style={{ textAlign: 'center', padding: '2rem 0' }}>
+                <div style={{ textAlign: 'center', padding: '2rem 0' }} role="status" aria-live="polite">
                   <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
                   <h3 style={{ color: 'var(--white)', marginBottom: '0.75rem' }}>Message sent!</h3>
                   <p style={{ color: 'var(--gray)' }}>

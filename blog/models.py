@@ -32,7 +32,19 @@ class BlogPost(models.Model):
     meta_title = models.CharField(max_length=70, help_text="Meta title for SEO", blank=True)
     meta_description = models.TextField(max_length=160, help_text="Meta description for SEO", blank=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    byline = models.CharField(
+        max_length=120,
+        blank=True,
+        help_text="Public author name when the author does not have a Django account",
+    )
+    updated_at = models.DateTimeField(auto_now=True)
     tags = TaggableManager(blank=True)
+
+    @property
+    def display_author(self):
+        if self.author:
+            return self.author.get_full_name() or self.author.username
+        return self.byline or "Avenue One Agency"
 
     def save(self, *args, **kwargs):
         if not self.slug:

@@ -13,6 +13,7 @@ from django.test import TestCase, override_settings
 
 from core.models import ContactMessage, NewsletterSubscriber
 from core.seo import (
+    CASE_STUDIES,
     COMMERCIAL_PAGES,
     FAQS,
     LEGACY_REDIRECTS,
@@ -387,6 +388,20 @@ class BlogRenderTests(TestCase):
     def test_post_carries_blogposting_schema(self):
         html = self.client.get('/blog/boutique-hotels-instagram/').content.decode()
         self.assertIn('"@type":"BlogPosting"', html)
+        self.assertIn('"dateModified":', html)
+        self.assertIn('"datePublished":', html)
+
+    def test_post_uses_public_byline_in_page_and_schema(self):
+        self.post.byline = 'Linda Kafexholli'
+        self.post.save()
+        html = self.client.get('/blog/boutique-hotels-instagram/').content.decode()
+        self.assertIn('By Linda Kafexholli', html)
+        self.assertIn('"@id":"http://testserver/#founder"', html)
+
+    def test_blog_index_server_renders_published_article_links(self):
+        html = self.client.get('/blog/').content.decode()
+        self.assertIn('How Boutique Hotels Win on Instagram', html)
+        self.assertIn('/blog/boutique-hotels-instagram/', html)
 
     def test_post_appears_in_the_sitemap_with_lastmod(self):
         xml = self.client.get('/sitemap.xml').content.decode()
@@ -423,6 +438,7 @@ class VerticalLandingPageTests(TestCase):
         for v in VERTICALS:
             with self.subTest(slug=v['slug']):
                 self.assertRegex(v['slug'], r'^[a-z]+(-[a-z]+)*-nyc$')
+
 
     def test_body_copy_is_server_rendered(self):
         for v in VERTICALS:
@@ -502,6 +518,55 @@ class VerticalLandingPageTests(TestCase):
         body = self.client.get('/llms.txt').content.decode()
         for v in VERTICALS:
             self.assertIn(v['slug'], body)
+
+
+class CaseStudyPageTests(TestCase):
+    def test_index_and_every_verified_result_resolve(self):
+        self.assertEqual(self.client.get('/case-studies/').status_code, 200)
+        for study in CASE_STUDIES:
+            with self.subTest(study=study['slug']):
+                path = f"/case-studies/{study['slug']}/"
+                html = self.client.get(path).content.decode()
+                self.assertEqual(self.client.get(path).status_code, 200)
+                self.assertIn(study['client'], html)
+                self.assertIn(study['quote'], html)
+
+    def test_result_pages_carry_article_and_breadcrumb_schema(self):
+        path = f"/case-studies/{CASE_STUDIES[0]['slug']}/"
+        html = self.client.get(path).content.decode()
+        self.assertIn('"@type":"Article"', html)
+        self.assertIn('"@type":"BreadcrumbList"', html)
+        self.assertIn('"dateModified":', html)
+
+    def test_case_study_index_carries_collection_schema(self):
+        html = self.client.get('/case-studies/').content.decode()
+        self.assertIn('"@type":"CollectionPage"', html)
+        self.assertIn('"@type":"ItemList"', html)
+
+
+class PerformanceAndMeasurementTests(TestCase):
+    def test_browser_fonts_are_local_and_google_fonts_is_removed(self):
+        from django.conf import settings as dj
+
+        source = (dj.BASE_DIR / 'frontend' / 'index.html').read_text()
+        css = (dj.BASE_DIR / 'frontend' / 'src' / 'index.css').read_text()
+        self.assertNotIn('fonts.googleapis.com', source)
+        self.assertIn('/static/core/fonts/archivo-latin.woff2', css)
+        self.assertIn('/static/core/fonts/bodoni-moda-italic-latin.woff2', css)
+        for filename in (
+            'archivo-latin.woff2',
+            'bodoni-moda-latin.woff2',
+            'bodoni-moda-italic-latin.woff2',
+        ):
+            self.assertTrue((dj.BASE_DIR / 'core' / 'static' / 'core' / 'fonts' / filename).exists())
+
+    def test_conversion_events_remain_consent_gated(self):
+        from django.conf import settings as dj
+
+        consent = (dj.BASE_DIR / 'frontend' / 'src' / 'lib' / 'consent.ts').read_text()
+        self.assertIn("trackEvent('generate_lead'", consent)
+        self.assertIn("trackEvent('sign_up'", consent)
+        self.assertRegex(consent, r'function trackEvent[\s\S]+if \(!loaded\) return')
 
 
 class CommercialLandingPageTests(TestCase):

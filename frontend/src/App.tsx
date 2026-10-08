@@ -18,6 +18,9 @@ import VerticalPage from './pages/VerticalPage'
 import { VERTICALS } from './data/verticals'
 import CommercialPage from './pages/CommercialPage'
 import { COMMERCIAL_PAGES } from './data/commercialPages'
+import CaseStudiesPage from './pages/CaseStudiesPage'
+import CaseStudyPage from './pages/CaseStudyPage'
+import InteractionTracking from './components/InteractionTracking'
 
 /**
  * Everything below the router. The router itself is supplied by the caller so
@@ -27,6 +30,7 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+      <InteractionTracking />
       <div className="scroll-progress" aria-hidden="true" />
       <div className="grain" aria-hidden="true" />
       <a className="skip-link" href="#main">Skip to content</a>
@@ -39,6 +43,8 @@ export default function App() {
             <Route path="/services/" element={<ServicesPage />} />
             <Route path="/industries/" element={<IndustriesPage />} />
             <Route path="/testimonials/" element={<TestimonialsPage />} />
+            <Route path="/case-studies/" element={<CaseStudiesPage />} />
+            <Route path="/case-studies/:slug/" element={<CaseStudyPage />} />
             <Route path="/contact/" element={<ContactPage />} />
             <Route path="/blog/" element={<BlogListPage />} />
             <Route path="/blog/:slug/" element={<BlogDetailPage />} />

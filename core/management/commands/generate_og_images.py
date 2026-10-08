@@ -17,7 +17,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from PIL import Image, ImageDraw, ImageFont
 
-from core.seo import COMMERCIAL_PAGES, VERTICALS
+from core.seo import CASE_STUDIES, COMMERCIAL_PAGES, VERTICALS
 
 W, H = 1200, 630
 BG = (10, 9, 12)
@@ -39,6 +39,7 @@ STATIC_CARDS = {
     'services': ('Services', 'Social media, content and creator marketing'),
     'industries': ('Industries', 'We know your industry inside out'),
     'testimonials': ('Testimonials', 'What our clients say about us'),
+    'case-studies': ('Client Results', 'Evidence over empty promises'),
     'blog': ('Blog', 'Insights, trends & brand stories'),
     'contact': ('Contact', "Let's build something iconic"),
     'imprint': ('Imprint', 'Avenue One Agency'),
@@ -147,6 +148,11 @@ class Command(BaseCommand):
             cards[page['slug']] = (
                 page['eyebrow'],
                 f"{page['h1Lead']} {page['h1Accent']}",
+            )
+        for study in CASE_STUDIES:
+            cards[f"case-studies__{study['slug']}"] = (
+                study['client'],
+                study['headline'],
             )
 
         total = 0

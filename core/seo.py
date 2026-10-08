@@ -42,6 +42,9 @@ _VERTICALS_PATH = os.path.join(
 _COMMERCIAL_PAGES_PATH = os.path.join(
     settings.BASE_DIR, 'frontend', 'src', 'data', 'commercialPages.json'
 )
+_CASE_STUDIES_PATH = os.path.join(
+    settings.BASE_DIR, 'frontend', 'src', 'data', 'caseStudies.json'
+)
 
 with open(_VERTICALS_PATH, encoding='utf-8') as _f:
     VERTICALS = json.load(_f)['verticals']
@@ -52,6 +55,11 @@ with open(_COMMERCIAL_PAGES_PATH, encoding='utf-8') as _f:
     COMMERCIAL_PAGES = json.load(_f)['pages']
 
 COMMERCIAL_PAGE_BY_SLUG = {page['slug']: page for page in COMMERCIAL_PAGES}
+
+with open(_CASE_STUDIES_PATH, encoding='utf-8') as _f:
+    CASE_STUDIES = json.load(_f)['caseStudies']
+
+CASE_STUDY_BY_SLUG = {study['slug']: study for study in CASE_STUDIES}
 OG_DIR = '/static/core/css/img/og'
 OG_W, OG_H = 1200, 630
 DEFAULT_IMAGE = f'{OG_DIR}/default.png'
@@ -115,6 +123,13 @@ PAGE_META = {
             'for Faralda Crane Hotel and engagement growth for Chatti New York.'
         ),
     },
+    '/case-studies/': {
+        'title': 'Hospitality Marketing Client Results | Avenue One',
+        'description': (
+            'Verified client-reported outcomes from Avenue One hospitality and '
+            'restaurant marketing work, presented without invented attribution.'
+        ),
+    },
     '/blog/': {
         'title': 'Blog — Social Media, Creator Economy & Brand Strategy',
         'description': (
@@ -155,6 +170,16 @@ for _page in COMMERCIAL_PAGES:
     PAGE_META[f"/{_page['slug']}/"] = {
         'title': _page['metaTitle'],
         'description': _page['metaDescription'],
+    }
+
+for _study in CASE_STUDIES:
+    PAGE_META[f"/case-studies/{_study['slug']}/"] = {
+        'title': _study['metaTitle'],
+        'description': _study['metaDescription'],
+        'og_type': 'article',
+        'published_time': _study['publishedAt'],
+        'modified_time': _study['updatedAt'],
+        'author_name': SITE_NAME,
     }
 
 
@@ -350,6 +375,7 @@ def _breadcrumbs(path, base_url):
         '/services/': 'Services',
         '/industries/': 'Industries',
         '/testimonials/': 'Testimonials',
+        '/case-studies/': 'Client Results',
         '/blog/': 'Blog',
         '/contact/': 'Contact',
         '/imprint/': 'Imprint',
@@ -382,6 +408,21 @@ def _breadcrumbs(path, base_url):
                 {'@type': 'ListItem', 'position': 2, 'name': parent['label'],
                  'item': f"{base_url}{parent['path']}"},
                 {'@type': 'ListItem', 'position': 3, 'name': commercial_page['eyebrow'],
+                 'item': f'{base_url}{path}'},
+            ],
+        }
+
+    case_slug = path.removeprefix('/case-studies/').strip('/')
+    case_study = CASE_STUDY_BY_SLUG.get(case_slug)
+    if case_study:
+        return {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+                {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': f'{base_url}/'},
+                {'@type': 'ListItem', 'position': 2, 'name': 'Client Results',
+                 'item': f'{base_url}/case-studies/'},
+                {'@type': 'ListItem', 'position': 3, 'name': case_study['client'],
                  'item': f'{base_url}{path}'},
             ],
         }
@@ -474,6 +515,51 @@ def _commercial_faq(page, base_url):
     }
 
 
+def _case_studies_collection(base_url):
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        '@id': f'{base_url}/case-studies/#collection',
+        'name': 'Avenue One Agency Client Results',
+        'url': f'{base_url}/case-studies/',
+        'publisher': {'@id': f'{base_url}/#organization'},
+        'mainEntity': {
+            '@type': 'ItemList',
+            'itemListElement': [
+                {
+                    '@type': 'ListItem',
+                    'position': position,
+                    'name': study['client'],
+                    'url': f"{base_url}/case-studies/{study['slug']}/",
+                }
+                for position, study in enumerate(CASE_STUDIES, start=1)
+            ],
+        },
+    }
+
+
+def _case_study_article(study, base_url):
+    url = f"{base_url}/case-studies/{study['slug']}/"
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        '@id': f'{url}#article',
+        'headline': f"{study['client']}: {study['headline']}",
+        'description': study['metaDescription'],
+        'datePublished': study['publishedAt'],
+        'dateModified': study['updatedAt'],
+        'url': url,
+        'mainEntityOfPage': url,
+        'about': {
+            '@type': 'Organization',
+            'name': study['client'],
+            'location': study['location'],
+        },
+        'author': {'@id': f'{base_url}/#organization'},
+        'publisher': {'@id': f'{base_url}/#organization'},
+    }
+
+
 def _json_ld_for(path, base_url, post=None):
     blocks = [_organization(base_url), _website(base_url), _founder(base_url)]
 
@@ -499,23 +585,39 @@ def _json_ld_for(path, base_url, post=None):
     if path == '/services/':
         blocks.append(_services_catalog(base_url))
 
+    if path == '/case-studies/':
+        blocks.append(_case_studies_collection(base_url))
+
+    case_slug = path.removeprefix('/case-studies/').strip('/')
+    case_study = CASE_STUDY_BY_SLUG.get(case_slug)
+    if case_study:
+        blocks.append(_case_study_article(case_study, base_url))
+
     if post is not None:
+        post_image = (
+            post.featured_image.url
+            if post.featured_image
+            else og_image_for('/blog/')
+        )
+        if post_image.startswith('/'):
+            post_image = f'{base_url}{post_image}'
         blocks.append({
             '@context': 'https://schema.org',
             '@type': 'BlogPosting',
             'headline': post.title,
             'description': post.meta_description or post.description,
             'datePublished': post.created_at.isoformat(),
+            'dateModified': post.updated_at.isoformat(),
+            'image': post_image,
             'url': f'{base_url}/blog/{post.slug}/',
             'mainEntityOfPage': f'{base_url}/blog/{post.slug}/',
-            'author': {
-                '@type': 'Person',
-                'name': (
-                    post.author.get_full_name() or post.author.username
-                    if post.author else 'Avenue One Agency'
-                ),
-            },
+            'author': (
+                {'@id': f'{base_url}/#founder'}
+                if post.display_author == 'Linda Kafexholli'
+                else {'@type': 'Person', 'name': post.display_author}
+            ),
             'publisher': {'@id': f'{base_url}/#organization'},
+            'articleSection': post.category.name if post.category else 'Marketing',
         })
 
     return blocks
@@ -534,6 +636,9 @@ def meta_for_path(path, post=None):
                 if post.featured_image
                 else og_image_for('/blog/')
             ),
+            'published_time': post.created_at.isoformat(),
+            'modified_time': post.updated_at.isoformat(),
+            'author_name': post.display_author,
         }
 
     meta = dict(PAGE_META.get(path, FALLBACK_META))
@@ -577,6 +682,22 @@ def render_head(path, base_url, meta):
         '<meta name="geo.region" content="US-NY" />',
         '<meta name="geo.placename" content="New York City" />',
     ]
+
+    if og_type == 'article':
+        if meta.get('published_time'):
+            tags.append(
+                f'<meta property="article:published_time" '
+                f'content="{escape(meta["published_time"])}" />'
+            )
+        if meta.get('modified_time'):
+            tags.append(
+                f'<meta property="article:modified_time" '
+                f'content="{escape(meta["modified_time"])}" />'
+            )
+        if meta.get('author_name'):
+            tags.append(
+                f'<meta property="article:author" content="{escape(meta["author_name"])}" />'
+            )
 
     return '\n    '.join(tags)
 

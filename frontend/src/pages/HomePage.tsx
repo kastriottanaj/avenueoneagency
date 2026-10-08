@@ -159,6 +159,9 @@ export default function HomePage() {
         <div className="container">
           <SectionHead label="Testimonials" title="What our clients say" />
           <Testimonials />
+          <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
+            <Link to="/case-studies/" className="btn-outline">View Client Results</Link>
+          </div>
         </div>
       </section>
 

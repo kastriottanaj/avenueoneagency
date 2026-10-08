@@ -23,16 +23,16 @@ export default function TestimonialsPage() {
 
           <Reveal
             className="card-dark"
-            style={{ textAlign: 'center', padding: '3rem', borderStyle: 'dashed' }}
+            style={{ textAlign: 'center', padding: '3rem', marginTop: '3rem' }}
           >
             <h3 style={{ color: 'var(--white)', marginBottom: '0.75rem' }}>
-              More testimonials coming soon
+              Read the verified client results
             </h3>
             <p style={{ color: 'var(--gray)', marginBottom: '2rem' }}>
-              We are constantly growing our client base. Want to be next?
+              See the claims we can substantiate and the expertise connected to each engagement.
             </p>
-            <Link to="/contact/" className="btn-primary">
-              Start a Project ↗
+            <Link to="/case-studies/" className="btn-primary">
+              View Client Results ↗
             </Link>
           </Reveal>
         </div>
