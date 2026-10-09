@@ -143,7 +143,7 @@ export default function HomePage() {
             {services.map((s) => (
               <Link key={s.n} to={s.to ?? '/services/'} className="card-dark">
                 <div className="card-number">{s.n}</div>
-                <h4>{s.title}</h4>
+                <h3 className="service-card-title">{s.title}</h3>
                 <p>{s.desc}</p>
               </Link>
             ))}

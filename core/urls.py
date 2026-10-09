@@ -15,6 +15,29 @@ urlpatterns = [
     path('imprint/', views.react_app, name='imprint'),
     path('privacy/', views.react_app, name='privacy'),
 
+    # Conventional root-level brand asset URLs. Browsers and crawlers still
+    # probe these paths even when the document declares an explicit icon.
+    path(
+        'favicon.ico',
+        RedirectView.as_view(url='/static/core/brand/favicon.ico', permanent=True),
+        name='favicon_ico',
+    ),
+    path(
+        'favicon.svg',
+        RedirectView.as_view(url='/static/core/brand/favicon.svg', permanent=True),
+        name='favicon_svg',
+    ),
+    path(
+        'apple-touch-icon.png',
+        RedirectView.as_view(url='/static/core/brand/apple-touch-icon.png', permanent=True),
+        name='apple_touch_icon',
+    ),
+    path(
+        'site.webmanifest',
+        RedirectView.as_view(url='/static/core/brand/site.webmanifest', permanent=True),
+        name='site_webmanifest',
+    ),
+
     path('robots.txt', views.robots_txt, name='robots'),
     path('llms.txt', views.llms_txt, name='llms'),
     path('llms-full.txt', views.llms_full_txt, name='llms_full'),

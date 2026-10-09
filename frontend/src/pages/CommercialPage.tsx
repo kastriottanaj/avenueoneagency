@@ -62,7 +62,7 @@ export default function CommercialPage() {
             {page.approach.map((item, index) => (
               <div className="card-dark" key={item.title}>
                 <div className="card-number">{String(index + 1).padStart(2, '0')}</div>
-                <h4>{item.title}</h4>
+                <h3 className="service-card-title">{item.title}</h3>
                 <p>{item.body}</p>
               </div>
             ))}
@@ -76,7 +76,7 @@ export default function CommercialPage() {
           <Reveal className="card-grid" stagger={90}>
             {page.audiences.map((audience) => (
               <div className="card-dark" key={audience.title}>
-                <h4>{audience.title}</h4>
+                <h3 className="card-title">{audience.title}</h3>
                 <p>{audience.body}</p>
               </div>
             ))}

@@ -26,7 +26,7 @@ export default function Footer() {
           </div>
 
           <div className="footer-links">
-            <h6>Industries</h6>
+            <h2 className="footer-heading">Industries</h2>
             <ul>
               <li><Link to="/hospitality-marketing-agency-nyc/">Hospitality</Link></li>
               {VERTICALS.map((v) => (
@@ -38,7 +38,7 @@ export default function Footer() {
           </div>
 
           <div className="footer-links">
-            <h6>Services</h6>
+            <h2 className="footer-heading">Services</h2>
             <ul>
               <li><Link to="/social-media-management-nyc/">Social Media</Link></li>
               <li><Link to="/influencer-marketing-agency-nyc/">Influencer Marketing</Link></li>
@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
 
           <div className="footer-links">
-            <h6>Navigation</h6>
+            <h2 className="footer-heading">Navigation</h2>
             <ul>
               <li><Link to="/about/">About Us</Link></li>
               <li><Link to="/services/">Services</Link></li>

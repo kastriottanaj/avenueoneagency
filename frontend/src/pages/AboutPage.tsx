@@ -41,9 +41,9 @@ export default function AboutPage() {
             </div>
             <div>
               <span className="section-label">Our Founder</span>
-              <h3 style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--white)', marginBottom: '1rem' }}>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--white)', marginBottom: '1rem' }}>
                 Linda Kafexholli
-              </h3>
+              </h2>
               <p style={{ color: 'var(--gray-light)' }}>
                 Global digital creator, marketing strategist, and 1M+ audience builder.
                 Linda combines creative direction with real-world influence and deep industry

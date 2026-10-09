@@ -65,7 +65,7 @@ export default function VerticalPage() {
             {v.approach.map((a, i) => (
               <div key={a.title} className="card-dark">
                 <div className="card-number">{String(i + 1).padStart(2, '0')}</div>
-                <h4>{a.title}</h4>
+                <h3 className="service-card-title">{a.title}</h3>
                 <p>{a.body}</p>
               </div>
             ))}
@@ -80,7 +80,7 @@ export default function VerticalPage() {
             <Reveal className="card-grid" stagger={90}>
               {v.audiences.map((audience) => (
                 <div className="card-dark" key={audience.title}>
-                  <h4>{audience.title}</h4>
+                  <h3 className="card-title">{audience.title}</h3>
                   <p>{audience.body}</p>
                 </div>
               ))}

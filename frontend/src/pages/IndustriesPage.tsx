@@ -78,7 +78,7 @@ export default function IndustriesPage() {
               return (
                 <div key={ind.title} className="card-dark">
                   <div className="card-icon"><Icon name={ind.icon} size={62} /></div>
-                  <h4>{ind.title}</h4>
+                  <h2 className="card-title">{ind.title}</h2>
                   <p>{ind.desc}</p>
                   <Link to={ind.path} className="card-link">{ind.linkLabel} ↗</Link>
                 </div>

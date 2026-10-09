@@ -87,25 +87,22 @@ PAGE_META = {
     '/': {
         'title': 'NYC Social Media Agency for Hospitality | Avenue One',
         'description': (
-            'Creator-led NYC social media agency for hospitality and lifestyle brands. '
-            'Strategy, content and influencer partnerships for hotels, restaurants '
-            'and consumer brands.'
+            'Creator-led NYC social media agency for hotels, restaurants and lifestyle '
+            'brands. Strategy, content and influencer partnerships built to drive growth.'
         ),
     },
     '/about/': {
         'title': 'About Avenue One — NYC-Born, Creator-Led Agency',
         'description': (
-            'Founded by Linda Kafexholli, global digital creator and marketing '
-            'strategist with a 1M+ audience. Avenue One builds brand identities '
-            'that resonate with culture and convert in the market.'
+            'Meet Avenue One founder Linda Kafexholli, a global creator and marketing '
+            'strategist building hospitality and lifestyle brands across the U.S. and Europe.'
         ),
     },
     '/services/': {
         'title': 'Social Media & Creator Marketing Services NYC | Avenue One',
         'description': (
-            'Social media strategy, content creation, influencer partnerships, '
-            'brand identity, campaign production and paid media for hospitality '
-            'and lifestyle brands in New York City.'
+            'Social media strategy, content, influencer marketing, brand direction and '
+            'paid media for hospitality and lifestyle brands in New York City.'
         ),
     },
     '/industries/': {
@@ -204,7 +201,7 @@ def _organization(base_url):
         'alternateName': 'Avenue One',
         'url': f'{base_url}/',
         'image': f'{base_url}{DEFAULT_IMAGE}',
-        'logo': f'{base_url}/static/core/css/img/avenueone.png',
+        'logo': f'{base_url}/static/core/brand/icon-512.png',
         'description': PAGE_META['/']['description'],
         'foundingDate': '2020',
         'founder': {'@id': f'{base_url}/#founder'},
@@ -218,7 +215,10 @@ def _organization(base_url):
             {'@type': 'Place', 'name': 'United States'},
             {'@type': 'Place', 'name': 'Europe'},
         ],
-        'sameAs': ['https://www.instagram.com/avenueone.agency/'],
+        'sameAs': [
+            'https://www.instagram.com/avenueone.agency/',
+            'https://www.linkedin.com/company/avenue-one-agency',
+        ],
         'knowsAbout': [
             'Social media strategy',
             'Content creation',

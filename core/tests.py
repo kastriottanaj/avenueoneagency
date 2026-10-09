@@ -63,6 +63,35 @@ class SeoHeadTests(TestCase):
         self.assertIn('application/ld+json', html)
         self.assertIn('"@type":"ProfessionalService"', html)
 
+    def test_homepage_declares_complete_icon_package(self):
+        html = self.client.get('/').content.decode()
+        self.assertIn('/static/core/brand/favicon.svg', html)
+        self.assertIn('/favicon.ico', html)
+        self.assertIn('/apple-touch-icon.png', html)
+        self.assertIn('/site.webmanifest', html)
+
+    def test_standard_brand_asset_urls_redirect_permanently(self):
+        expected = {
+            '/favicon.ico': '/static/core/brand/favicon.ico',
+            '/favicon.svg': '/static/core/brand/favicon.svg',
+            '/apple-touch-icon.png': '/static/core/brand/apple-touch-icon.png',
+            '/site.webmanifest': '/static/core/brand/site.webmanifest',
+        }
+        for path, destination in expected.items():
+            with self.subTest(path=path):
+                response = self.client.get(path)
+                self.assertEqual(response.status_code, 301)
+                self.assertEqual(response['Location'], destination)
+
+    def test_organization_links_official_social_profiles(self):
+        html = self.client.get('/').content.decode()
+        self.assertIn('https://www.instagram.com/avenueone.agency/', html)
+        self.assertIn('https://www.linkedin.com/company/avenue-one-agency', html)
+
+    def test_service_catalog_has_no_duplicate_service_names(self):
+        html = self.client.get('/services/').content.decode()
+        self.assertEqual(html.count('"name":"Influencer Partnerships"'), 1)
+
     def test_services_page_lists_its_services_as_structured_data(self):
         html = self.client.get('/services/').content.decode()
         self.assertIn('"@type":"OfferCatalog"', html)

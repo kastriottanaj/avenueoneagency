@@ -158,9 +158,9 @@ export default function BlogDetailPage() {
                         year: 'numeric', month: 'long', day: 'numeric',
                       })}
                     </p>
-                    <h4>
+                    <h3>
                       <Link to={`/blog/${related.slug}/`}>{related.title}</Link>
-                    </h4>
+                    </h3>
                     <Link to={`/blog/${related.slug}/`} className="btn-primary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.8rem' }}>
                       Read ↗
                     </Link>
