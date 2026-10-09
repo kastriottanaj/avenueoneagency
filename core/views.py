@@ -20,6 +20,11 @@ _doc_cache = {}
 _DIST = os.path.join(settings.BASE_DIR, 'frontend', 'dist')
 _PRERENDERED = os.path.join(_DIST, 'prerendered')
 
+GOOGLE_SITE_VERIFICATION_FILE = 'googled8b7008e482dc66b.html'
+GOOGLE_SITE_VERIFICATION_BODY = (
+    'google-site-verification: googled8b7008e482dc66b.html'
+)
+
 
 def _base_url(request):
     scheme = 'https' if request.is_secure() else 'http'
@@ -99,6 +104,19 @@ def react_app(request, **kwargs):
     if not path.endswith('/'):
         path += '/'
     return _render_shell(request, path, meta_for_path(path))
+
+
+def google_site_verification(request):
+    """Serve Search Console's ownership token at the site root.
+
+    Google requires the downloaded filename and response body to remain exact.
+    Keeping the endpoint in Django ensures it survives frontend rebuilds and
+    future static-asset cleanups.
+    """
+    return HttpResponse(
+        GOOGLE_SITE_VERIFICATION_BODY,
+        content_type='text/html; charset=utf-8',
+    )
 
 
 def blog_detail_app(request, slug):
