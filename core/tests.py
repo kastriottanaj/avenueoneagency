@@ -83,6 +83,14 @@ class SeoHeadTests(TestCase):
                 self.assertEqual(response.status_code, 301)
                 self.assertEqual(response['Location'], destination)
 
+    def test_google_search_console_verification_file_is_served_at_root(self):
+        response = self.client.get('/googled8b7008e482dc66b.html')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.content.decode(),
+            'google-site-verification: googled8b7008e482dc66b.html',
+        )
+
     def test_organization_links_official_social_profiles(self):
         html = self.client.get('/').content.decode()
         self.assertIn('https://www.instagram.com/avenueone.agency/', html)

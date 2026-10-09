@@ -5,6 +5,11 @@ from . import views
 from .seo import CASE_STUDIES, COMMERCIAL_PAGES, LEGACY_REDIRECTS, VERTICALS
 
 urlpatterns = [
+    path(
+        views.GOOGLE_SITE_VERIFICATION_FILE,
+        views.google_site_verification,
+        name='google_site_verification',
+    ),
     path('', views.react_app, name='home'),
     path('about/', views.react_app, name='about'),
     path('services/', views.react_app, name='services'),
