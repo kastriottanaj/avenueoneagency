@@ -36,6 +36,7 @@ STATIC_CARDS = {
     'default': ('NYC-Born Creative Agency', 'Building iconic brands through strategy & influence'),
     'index': ('NYC Social Media Agency', 'Hospitality and lifestyle brands, built to be chosen'),
     'about': ('About', 'NYC-born. Creator-led. Built for modern brands.'),
+    'linda-kafexholli': ('Founder Profile', 'Linda Kafexholli'),
     'services': ('Services', 'Social media, content and creator marketing'),
     'industries': ('Industries', 'We know your industry inside out'),
     'testimonials': ('Testimonials', 'What our clients say about us'),

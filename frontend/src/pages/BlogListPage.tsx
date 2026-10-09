@@ -254,7 +254,11 @@ function BlogCard({ post, onTagClick }: { post: BlogPost; onTagClick: (slug: str
           {new Date(post.created_at).toLocaleDateString('en-US', {
             year: 'numeric', month: 'long', day: 'numeric',
           })}
-          {post.author_name && <span> · By {post.author_name}</span>}
+          {post.author_name && (
+            <span> · By {post.author_name === 'Linda Kafexholli' ? (
+              <Link className="author-link" to="/linda-kafexholli/">{post.author_name}</Link>
+            ) : post.author_name}</span>
+          )}
         </p>
         {post.category && (
           <span className="tag-pill" style={{ marginBottom: '0.5rem' }}>

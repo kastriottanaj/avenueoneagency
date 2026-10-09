@@ -14,6 +14,9 @@ export default function Footer() {
               Creator-led social media and marketing for hospitality and lifestyle
               brands in New York City and beyond.
             </p>
+            <p className="footer-founder">
+              Founded by <Link to="/linda-kafexholli/">Linda Kafexholli</Link>.
+            </p>
             <a
               href="https://www.instagram.com/avenueone.agency/"
               target="_blank"
@@ -51,6 +54,7 @@ export default function Footer() {
             <h2 className="footer-heading">Navigation</h2>
             <ul>
               <li><Link to="/about/">About Us</Link></li>
+              <li><Link to="/linda-kafexholli/">Founder</Link></li>
               <li><Link to="/services/">Services</Link></li>
               <li><Link to="/industries/">Industries</Link></li>
               <li><Link to="/blog/">Blog</Link></li>

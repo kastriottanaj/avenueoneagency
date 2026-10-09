@@ -42,7 +42,7 @@ export default function AboutPage() {
             <div>
               <span className="section-label">Our Founder</span>
               <h2 style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--white)', marginBottom: '1rem' }}>
-                Linda Kafexholli
+                <Link className="text-link" to="/linda-kafexholli/">Linda Kafexholli</Link>
               </h2>
               <p style={{ color: 'var(--gray-light)' }}>
                 Global digital creator, marketing strategist, and 1M+ audience builder.
@@ -53,15 +53,17 @@ export default function AboutPage() {
                 Her unique position as both agency founder and working creator gives Avenue One™
                 an edge that traditional agencies simply can't replicate.
               </p>
-              <a
-                href="https://www.instagram.com/avenueone.agency/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-                style={{ marginTop: '1.5rem' }}
-              >
-                Follow on Instagram ↗
-              </a>
+              <div className="founder-actions" style={{ marginTop: '1.5rem' }}>
+                <Link to="/linda-kafexholli/" className="btn-primary">Founder Profile</Link>
+                <a
+                  href="https://www.instagram.com/linda_kafexholli/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline"
+                >
+                  Instagram ↗
+                </a>
+              </div>
             </div>
           </Reveal>
         </div>

@@ -78,7 +78,11 @@ export default function BlogDetailPage() {
               year: 'numeric', month: 'long', day: 'numeric',
             })}
             {post.author_name && (
-              <span> &nbsp;·&nbsp; by <strong style={{ color: 'var(--gray-light)' }}>{post.author_name}</strong></span>
+              <span> &nbsp;·&nbsp; by {post.author_name === 'Linda Kafexholli' ? (
+                <Link className="author-link" to="/linda-kafexholli/">{post.author_name}</Link>
+              ) : (
+                <strong style={{ color: 'var(--gray-light)' }}>{post.author_name}</strong>
+              )}</span>
             )}
             {new Date(post.updated_at).getTime() - new Date(post.created_at).getTime() > 86_400_000 && (
               <span> &nbsp;·&nbsp; Updated {new Date(post.updated_at).toLocaleDateString('en-US', {

@@ -107,13 +107,15 @@ export default function HomePage() {
                 into demand, from first discovery to booking or purchase.
               </p>
               <p style={{ color: 'var(--gray)', fontSize: '0.95rem' }}>
-                Founded by Linda Kafexholli — global digital creator, marketing strategist,
-                and 1M+ audience — Avenue One™ combines creative direction with real-world
-                influence across the U.S. and Europe.
+                Founded by <Link className="text-link" to="/linda-kafexholli/">Linda Kafexholli</Link> —
+                global digital creator, marketing strategist, and 1M+ audience builder —
+                Avenue One™ combines creative direction with real-world influence across
+                the U.S. and Europe.
               </p>
-              <Link to="/about/" className="btn-primary" style={{ marginTop: '2rem' }}>
-                About Us ↗
-              </Link>
+              <div className="founder-actions" style={{ marginTop: '2rem' }}>
+                <Link to="/about/" className="btn-primary">About Us ↗</Link>
+                <Link to="/linda-kafexholli/" className="btn-outline">Meet the Founder</Link>
+              </div>
             </div>
             <Reveal className="industry-cards" stagger={90}>
               {([

@@ -4,7 +4,7 @@ import re
 from html import escape
 
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from .seo import (
     NOT_FOUND_META,
@@ -118,6 +118,82 @@ def google_site_verification(request):
     )
 
 
+def founder_public_data(request):
+    """Dated, source-linked founder facts for crawlers and answer engines.
+
+    This deliberately contains only information visible on public profiles and
+    captions. It is not a live Instagram feed and does not treat a tag as proof
+    of a paid relationship.
+    """
+    payload = {
+        'name': 'Linda Kafexholli',
+        'url': 'https://avenueoneagency.com/linda-kafexholli/',
+        'roles': ['Founder', 'Chief Creative Officer'],
+        'worksFor': 'Avenue One Agency',
+        'sameAs': [
+            'https://www.instagram.com/linda_kafexholli/',
+            'https://www.linkedin.com/in/linda-kafexholli-a50438153',
+        ],
+        'publicProfile': {
+            'platform': 'Instagram',
+            'audienceDisplay': '1.1M+',
+            'postsDisplay': '1,437',
+            'observedAt': '2026-10-10',
+        },
+        'audit': {
+            'reviewedPublicPosts': 72,
+            'reels': 25,
+            'postsAndCarousels': 47,
+            'scope': 'Recent public posts exposed by Instagram during the audit',
+            'limitation': (
+                'This is a dated public sample, not a complete historical export. '
+                'A tag alone is not classified as a paid partnership.'
+            ),
+        },
+        'publicEvidence': [
+            {
+                'brand': 'Revolve',
+                'classification': 'Explicit advertising disclosure',
+                'evidence': '#Ad',
+                'source': 'https://www.instagram.com/linda_kafexholli/p/DZk4-ujG3bz/',
+            },
+            {
+                'brand': 'Pandora',
+                'classification': 'Explicit partner disclosure',
+                'evidence': '#PandoraPartner',
+                'source': 'https://www.instagram.com/linda_kafexholli/reel/Ddj_1O8qKr0/',
+            },
+            {
+                'brand': 'RingConn',
+                'classification': 'Avenue One production credit',
+                'evidence': 'From concept to result with @avenueone.agency',
+                'source': 'https://www.instagram.com/linda_kafexholli/reel/DdHJVUZunY1/',
+            },
+            {
+                'brand': 'Revolve',
+                'classification': 'Avenue One edit credit',
+                'evidence': '@avenueone.agency credited in caption',
+                'source': 'https://www.instagram.com/linda_kafexholli/reel/Dd4mQzsKeCX/',
+            },
+            {
+                'brand': 'Sisu Clinic',
+                'classification': 'Public offer-code signal',
+                'evidence': 'LINDA75',
+                'source': 'https://www.instagram.com/linda_kafexholli/reel/DaLDM7TuCG1/',
+            },
+            {
+                'brand': 'Brooklyn Mazzat',
+                'classification': 'Public offer-code signal',
+                'evidence': 'LINDA10',
+                'source': 'https://www.instagram.com/linda_kafexholli/reel/DXcbBZxkTF0/',
+            },
+        ],
+    }
+    response = JsonResponse(payload, json_dumps_params={'indent': 2})
+    response['Cache-Control'] = 'public, max-age=86400'
+    return response
+
+
 def blog_detail_app(request, slug):
     """Serve the React shell for a blog post, with that post's real metadata.
 
@@ -170,10 +246,16 @@ def _blog_index_html(posts):
             f'<span class="tag-pill">{escape(post.category.name)}</span>'
             if post.category else ''
         )
+        author = escape(post.display_author)
+        author_html = (
+            '<a href="/linda-kafexholli/">Linda Kafexholli</a>'
+            if post.display_author == 'Linda Kafexholli'
+            else author
+        )
         cards.append(
             '<article class="blog-card"><div class="blog-card-body">'
             f'<p class="blog-card-date">{escape(published)} · By '
-            f'{escape(post.display_author)}</p>{category}'
+            f'{author_html}</p>{category}'
             f'<h2><a href="{escape(post.get_absolute_url())}">{escape(post.title)}</a></h2>'
             f'<p>{escape(post.description)}</p>'
             f'<a class="card-link" href="{escape(post.get_absolute_url())}">Read article ↗</a>'
@@ -204,7 +286,13 @@ def _post_article_html(post):
     JavaScript, which is most of them and all of the AI engines.
     """
     published = post.created_at.strftime('%B %-d, %Y')
-    author = f'<p class="blog-card-date">By {escape(post.display_author)}</p>'
+    author_name = escape(post.display_author)
+    author_value = (
+        '<a href="/linda-kafexholli/">Linda Kafexholli</a>'
+        if post.display_author == 'Linda Kafexholli'
+        else author_name
+    )
+    author = f'<p class="blog-card-date">By {author_value}</p>'
 
     image = ''
     if post.featured_image:
@@ -279,6 +367,7 @@ def llms_txt(request):
 
 - [Home](https://avenueoneagency.com/): NYC social media agency for hospitality and lifestyle brands. Agency overview, proof and core offerings.
 - [About](https://avenueoneagency.com/about/): NYC-born, creator-led story. Founder Linda Kafexholli's background as a global digital creator with a 1M+ audience and cross-continental marketing expertise.
+- [Linda Kafexholli](https://avenueoneagency.com/linda-kafexholli/): Founder and Chief Creative Officer profile with public creator-partnership evidence, content territories and links to corroborating social posts.
 - [Services](https://avenueoneagency.com/services/): Social media strategy, content creation, influencer partnerships, brand identity, campaign production, hospitality marketing, paid media, and AI Engine Optimization (AEO).
 - [Industries](https://avenueoneagency.com/industries/): Hospitality & hotels, restaurants & F&B, fashion & luxury, beauty & wellness, lifestyle & culture, real estate & development.
 - [Hospitality Marketing Agency NYC](https://avenueoneagency.com/hospitality-marketing-agency-nyc/): Strategy, social media, content, creators and paid distribution for hotels, restaurants, bars and hospitality groups.
@@ -348,6 +437,18 @@ Avenue One was founded with one mission: to help brands build iconic identities 
 
 **Founder — Linda Kafexholli**
 Global digital creator, marketing strategist, and 1M+ audience builder. Combines creative direction with real-world influence and deep industry expertise across the U.S. and Europe.
+
+Full founder profile: https://avenueoneagency.com/linda-kafexholli/
+
+---
+
+## Linda Kafexholli — https://avenueoneagency.com/linda-kafexholli/
+
+Founder and Chief Creative Officer of Avenue One. New York-based digital creator and marketing strategist with a public Instagram audience of more than 1.1 million. Her public work spans hospitality discovery, fashion, beauty, wellness, creator partnerships and founder-led campaign direction.
+
+Selected public evidence on the profile is labelled by what the source caption supports: explicit advertising disclosures, partner disclosures, Avenue One production credits or public offer codes. Ordinary brand tags are not represented as paid partnerships.
+
+Machine-readable public evidence: https://avenueoneagency.com/data/linda-kafexholli.json
 
 ---
 
