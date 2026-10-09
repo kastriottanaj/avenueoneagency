@@ -1,0 +1,21 @@
+{
+  "name": "Avenue One Agency",
+  "short_name": "Avenue One",
+  "description": "Creator-led social media and marketing for hospitality and lifestyle brands.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#080808",
+  "icons": [
+    {
+      "src": "/static/core/brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/core/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

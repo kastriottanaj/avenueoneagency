@@ -69,7 +69,7 @@ export default function ServicesPage() {
             {services.map((s) => (
               <div key={s.n} className="card-dark">
                 <div className="card-number">{s.n}</div>
-                <h4>{s.title}</h4>
+                <h2 className="service-card-title">{s.title}</h2>
                 <div>
                   <p>{s.desc}</p>
                   {s.to && <Link to={s.to} className="card-link">Explore this service ↗</Link>}

@@ -903,7 +903,7 @@ a { color: inherit; text-decoration: none; }
    touching layout. The number and title travel slightly different distances,
    which reads as depth rather than as the row sliding. */
 .services-grid .card-number,
-.services-grid .card-dark h4 {
+.services-grid .service-card-title {
   transition: transform 0.42s var(--ease), color 0.32s var(--ease);
 }
 
@@ -914,7 +914,7 @@ a { color: inherit; text-decoration: none; }
     transform: translateX(7px);
     color: var(--bone);
   }
-  .services-grid .card-dark:hover h4 { transform: translateX(12px); }
+  .services-grid .card-dark:hover .service-card-title { transform: translateX(12px); }
 }
 
 .services-grid .card-number {
@@ -925,7 +925,7 @@ a { color: inherit; text-decoration: none; }
   margin: 0;
 }
 
-.services-grid .card-dark h4 {
+.services-grid .service-card-title {
   font-family: var(--ff-display);
   font-weight: 400;
   font-size: clamp(1.4rem, 2.4vw, 2rem);
@@ -959,7 +959,14 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 1.25rem;
 }
 
-.card-dark h4 { color: var(--white); font-size: 1.075rem; }
+.card-dark .card-title {
+  color: var(--white);
+  font-family: var(--ff-body);
+  font-size: 1.075rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0 0 0.75rem;
+}
 .card-dark p { font-size: 0.925rem; margin-bottom: 0; }
 
 .industry-cards {
@@ -1521,7 +1528,13 @@ a { color: inherit; text-decoration: none; }
 
 .blog-card:hover { background: rgba(248, 246, 249, 0.02); }
 .blog-card-img { width: 100%; height: auto; border-radius: 0; margin-bottom: 1.25rem; }
-.blog-card-body h3 { font-size: 1.5rem; margin-bottom: 0.6rem; }
+.blog-card-body :is(h2, h3) {
+  font-family: var(--ff-body);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 0.6rem;
+}
 
 .blog-card-date,
 .breadcrumb {
@@ -1685,9 +1698,11 @@ a { color: inherit; text-decoration: none; }
 .footer-logo { height: 46px; width: auto; margin-bottom: 1.5rem; }
 .footer-brand p { max-width: 40ch; font-size: 0.925rem; }
 
-.footer-links h6 {
+.footer-heading {
+  font-family: var(--ff-body);
   font-size: 0.688rem;
   font-weight: 600;
+  line-height: 1.25;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gray);

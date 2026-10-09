@@ -261,9 +261,9 @@ function BlogCard({ post, onTagClick }: { post: BlogPost; onTagClick: (slug: str
             {post.category.name}
           </span>
         )}
-        <h4>
+        <h2>
           <Link to={`/blog/${post.slug}/`}>{post.title}</Link>
-        </h4>
+        </h2>
         <p style={{ color: 'var(--gray)', fontSize: '0.875rem', marginBottom: '1rem', flex: 1 }}>
           {post.description}
         </p>

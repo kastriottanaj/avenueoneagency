@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Avenue One Agency</title>
+  <rect width="64" height="64" rx="14" fill="#080808"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#2b2529" stroke-width="2"/>
+  <path d="M15 49 31 14" fill="none" stroke="#f8f6f2" stroke-linecap="round" stroke-width="7"/>
+  <path d="M31 14h10v35" fill="none" stroke="#e8185c" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"/>
+  <path d="M22 36h19" fill="none" stroke="#f8f6f2" stroke-linecap="round" stroke-width="6"/>
+</svg>
