@@ -98,6 +98,13 @@ PAGE_META = {
             'strategist building hospitality and lifestyle brands across the U.S. and Europe.'
         ),
     },
+    '/linda-kafexholli/': {
+        'title': 'Linda Kafexholli — Founder of Avenue One Agency',
+        'description': (
+            'Meet Linda Kafexholli, Avenue One founder and Chief Creative Officer: '
+            'a New York creator and strategist with a 1.1M+ public Instagram audience.'
+        ),
+    },
     '/services/': {
         'title': 'Social Media & Creator Marketing Services NYC | Avenue One',
         'description': (
@@ -204,7 +211,7 @@ def _organization(base_url):
         'logo': f'{base_url}/static/core/brand/icon-512.png',
         'description': PAGE_META['/']['description'],
         'foundingDate': '2020',
-        'founder': {'@id': f'{base_url}/#founder'},
+        'founder': {'@id': f'{base_url}/linda-kafexholli/#person'},
         'address': {
             '@type': 'PostalAddress',
             'addressLocality': 'New York',
@@ -244,11 +251,11 @@ def _founder(base_url):
     return {
         '@context': 'https://schema.org',
         '@type': 'Person',
-        '@id': f'{base_url}/#founder',
+        '@id': f'{base_url}/linda-kafexholli/#person',
         'name': 'Linda Kafexholli',
-        'jobTitle': 'Founder & Creative Director',
+        'jobTitle': 'Founder & Chief Creative Officer',
         'worksFor': {'@id': f'{base_url}/#organization'},
-        'url': f'{base_url}/about/',
+        'url': f'{base_url}/linda-kafexholli/',
         'description': (
             'Global digital creator, marketing strategist and founder of Avenue One '
             'Agency. Builds brand and creator-led marketing programmes for hospitality, '
@@ -372,6 +379,7 @@ def _breadcrumbs(path, base_url):
     """BreadcrumbList for any page below the root."""
     label = {
         '/about/': 'About',
+        '/linda-kafexholli/': 'Linda Kafexholli',
         '/services/': 'Services',
         '/industries/': 'Industries',
         '/testimonials/': 'Testimonials',
@@ -585,6 +593,17 @@ def _json_ld_for(path, base_url, post=None):
     if path == '/services/':
         blocks.append(_services_catalog(base_url))
 
+    if path == '/linda-kafexholli/':
+        blocks.append({
+            '@context': 'https://schema.org',
+            '@type': 'ProfilePage',
+            '@id': f'{base_url}/linda-kafexholli/#profile',
+            'url': f'{base_url}/linda-kafexholli/',
+            'name': 'Linda Kafexholli — Founder of Avenue One Agency',
+            'mainEntity': {'@id': f'{base_url}/linda-kafexholli/#person'},
+            'isPartOf': {'@id': f'{base_url}/#website'},
+        })
+
     if path == '/case-studies/':
         blocks.append(_case_studies_collection(base_url))
 
@@ -612,7 +631,7 @@ def _json_ld_for(path, base_url, post=None):
             'url': f'{base_url}/blog/{post.slug}/',
             'mainEntityOfPage': f'{base_url}/blog/{post.slug}/',
             'author': (
-                {'@id': f'{base_url}/#founder'}
+                {'@id': f'{base_url}/linda-kafexholli/#person'}
                 if post.display_author == 'Linda Kafexholli'
                 else {'@type': 'Person', 'name': post.display_author}
             ),
@@ -682,6 +701,13 @@ def render_head(path, base_url, meta):
         '<meta name="geo.region" content="US-NY" />',
         '<meta name="geo.placename" content="New York City" />',
     ]
+
+    if path == '/linda-kafexholli/':
+        tags.append(
+            f'<link rel="alternate" type="application/json" '
+            f'title="Linda Kafexholli public evidence" '
+            f'href="{base_url}/data/linda-kafexholli.json" />'
+        )
 
     if og_type == 'article':
         if meta.get('published_time'):

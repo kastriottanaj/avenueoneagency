@@ -156,6 +156,17 @@ p {
 
 a { color: inherit; text-decoration: none; }
 
+.text-link,
+.author-link {
+  color: var(--rose);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.text-link:hover,
+.author-link:hover { color: var(--bone); }
+
 /* Pink accents inside display type read as italic — the didone's italic is
    the most characterful thing in the family, so the emphasis is doing two
    jobs at once. */
@@ -843,6 +854,179 @@ a { color: inherit; text-decoration: none; }
   gap: 5rem;
   align-items: start;
 }
+
+/* ─── FOUNDER PROFILE ─────────────────────────────────────── */
+
+.founder-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.55fr);
+  gap: clamp(3rem, 8vw, 8rem);
+  align-items: end;
+}
+
+.founder-hero h1 { max-width: 11ch; }
+
+.founder-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.founder-hero .founder-actions { margin-top: 2rem; }
+
+.founder-signature {
+  border-top: 1px solid var(--brass);
+  padding-top: 2rem;
+}
+
+.founder-signature__monogram {
+  display: block;
+  font-family: var(--ff-display);
+  font-size: clamp(5rem, 11vw, 9rem);
+  font-style: italic;
+  line-height: 0.85;
+  letter-spacing: -0.08em;
+  color: var(--bone);
+}
+
+.founder-signature__rule {
+  width: 48px;
+  height: 1px;
+  margin: 2.25rem 0;
+  background: var(--claret);
+}
+
+.founder-signature dl { margin: 0; }
+
+.founder-signature dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.founder-signature dt,
+.founder-signature small,
+.founder-proof__evidence {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.founder-signature dd {
+  margin: 0;
+  text-align: right;
+  color: var(--bone);
+}
+
+.founder-signature small {
+  display: block;
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+.founder-story,
+.founder-close {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.75fr);
+  gap: clamp(3rem, 8vw, 8rem);
+  align-items: start;
+}
+
+.founder-story__copy {
+  border-top: 1px solid var(--brass);
+  padding-top: 2rem;
+}
+
+.founder-pillars,
+.founder-proof {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--brass);
+}
+
+.founder-pillar {
+  padding: 3rem 3rem 3rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.founder-pillar:nth-child(even) {
+  padding-left: 3rem;
+  padding-right: 0;
+  border-left: 1px solid var(--border);
+}
+
+.founder-pillar > span {
+  display: block;
+  margin-bottom: 2rem;
+  font-family: var(--ff-display);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--rose);
+}
+
+.founder-pillar h2,
+.founder-proof__item h2 {
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  margin-bottom: 0.8rem;
+}
+
+.founder-pillar p,
+.founder-proof__item p { max-width: 48ch; }
+
+.founder-proof-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.55fr);
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 4rem;
+}
+
+.founder-proof__item {
+  display: block;
+  min-height: 270px;
+  padding: 2.5rem 2.5rem 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+
+.founder-proof__item:nth-child(even) {
+  padding-left: 2.5rem;
+  padding-right: 0;
+  border-left: 1px solid var(--border);
+}
+
+.founder-proof__item:hover h2 { color: var(--rose); }
+
+.founder-proof__evidence {
+  display: block;
+  margin-bottom: 2rem;
+  color: var(--rose);
+}
+
+.founder-proof__link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 0.688rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone);
+}
+
+.founder-proof-note {
+  max-width: 72ch;
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+.footer-founder { margin-top: 0.75rem; }
+.footer-founder a { color: var(--rose); text-decoration: underline; text-underline-offset: 0.2em; }
 
 /* Services and industries read as an editorial index, not a box grid: a
    hairline-ruled list where the number carries the hierarchy. */
@@ -1951,6 +2135,10 @@ textarea:focus-visible {
 .faq-item > *,
 .problem-item > *,
 .footer-grid > *,
+.founder-hero__grid > *,
+.founder-story > *,
+.founder-close > *,
+.founder-proof-head > *,
 .nav-inner > *,
 .consent-inner > *,
 .consent-actions > *,
@@ -1972,6 +2160,10 @@ textarea:focus-visible {
   :root { --gutter: 28px; --row-bleed: 20px; }
   .who-we-are-grid,
   .two-col-grid,
+  .founder-hero__grid,
+  .founder-story,
+  .founder-close,
+  .founder-proof-head,
   .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
   .blog-layout { grid-template-columns: 200px 1fr; gap: 2.5rem; }
   .services-grid .card-dark { grid-template-columns: 3.5rem 1fr; row-gap: 0.75rem; }
@@ -2000,6 +2192,15 @@ textarea:focus-visible {
   .footer-bottom { margin-top: 2.5rem; padding-top: 1.5rem; }
 
   .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .founder-pillars,
+  .founder-proof { grid-template-columns: 1fr; }
+  .founder-pillar,
+  .founder-pillar:nth-child(even),
+  .founder-proof__item,
+  .founder-proof__item:nth-child(even) {
+    padding: 2rem 0;
+    border-left: 0;
+  }
   .stat-item { padding: 2rem 1rem 2rem 0; }
   .stat-item:nth-child(2) { border-right: 0; }
   .stat-item:nth-child(3), .stat-item:nth-child(4) { border-top: 1px solid var(--border); }

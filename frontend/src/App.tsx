@@ -5,6 +5,7 @@ import ScrollToTop from './components/ScrollToTop'
 import CookieConsent from './components/CookieConsent'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
+import FounderPage from './pages/FounderPage'
 import ServicesPage from './pages/ServicesPage'
 import IndustriesPage from './pages/IndustriesPage'
 import TestimonialsPage from './pages/TestimonialsPage'
@@ -40,6 +41,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about/" element={<AboutPage />} />
+            <Route path="/linda-kafexholli/" element={<FounderPage />} />
             <Route path="/services/" element={<ServicesPage />} />
             <Route path="/industries/" element={<IndustriesPage />} />
             <Route path="/testimonials/" element={<TestimonialsPage />} />

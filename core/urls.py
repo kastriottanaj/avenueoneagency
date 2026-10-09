@@ -13,6 +13,8 @@ urlpatterns = [
     ),
     path('', views.react_app, name='home'),
     path('about/', views.react_app, name='about'),
+    path('linda-kafexholli/', views.react_app, name='founder'),
+    path('data/linda-kafexholli.json', views.founder_public_data, name='founder_public_data'),
     path('services/', views.react_app, name='services'),
     path('industries/', views.react_app, name='industries'),
     path('testimonials/', views.react_app, name='testimonials'),

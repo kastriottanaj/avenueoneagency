@@ -23,6 +23,7 @@ const { caseStudies } = JSON.parse(
 const ROUTES = [
   '/',
   '/about/',
+  '/linda-kafexholli/',
   '/services/',
   '/industries/',
   '/testimonials/',

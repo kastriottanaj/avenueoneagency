@@ -357,6 +357,23 @@ class StructuredDataTests(TestCase):
         self.assertIn('"@type":"Person"', html)
         self.assertIn('Linda Kafexholli', html)
         self.assertIn('linkedin.com/in/linda-kafexholli', html)
+        self.assertIn('http://testserver/linda-kafexholli/#person', html)
+
+    def test_founder_page_has_profile_schema_and_public_evidence(self):
+        html = self.client.get('/linda-kafexholli/').content.decode()
+        self.assertIn('"@type":"ProfilePage"', html)
+        self.assertIn('Explicit disclosure: #Ad', html)
+        self.assertIn('Avenue One credited in caption', html)
+        self.assertIn('/data/linda-kafexholli.json', html)
+
+    def test_founder_public_data_is_dated_and_source_linked(self):
+        response = self.client.get('/data/linda-kafexholli.json')
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(data['publicProfile']['observedAt'], '2026-10-10')
+        self.assertEqual(data['audit']['reviewedPublicPosts'], 72)
+        self.assertTrue(all(item['source'].startswith('https://www.instagram.com/')
+                            for item in data['publicEvidence']))
 
     def test_faq_schema_only_where_the_general_faq_is_visible(self):
         self.assertIn('"@type":"FAQPage"', self.client.get('/services/').content.decode())
@@ -432,8 +449,14 @@ class BlogRenderTests(TestCase):
         self.post.byline = 'Linda Kafexholli'
         self.post.save()
         html = self.client.get('/blog/boutique-hotels-instagram/').content.decode()
-        self.assertIn('By Linda Kafexholli', html)
-        self.assertIn('"@id":"http://testserver/#founder"', html)
+        self.assertIn('By <a href="/linda-kafexholli/">Linda Kafexholli</a>', html)
+        self.assertIn('"@id":"http://testserver/linda-kafexholli/#person"', html)
+
+    def test_linda_byline_links_to_founder_profile(self):
+        self.post.byline = 'Linda Kafexholli'
+        self.post.save()
+        html = self.client.get('/blog/boutique-hotels-instagram/').content.decode()
+        self.assertIn('<a href="/linda-kafexholli/">Linda Kafexholli</a>', html)
 
     def test_blog_index_server_renders_published_article_links(self):
         html = self.client.get('/blog/').content.decode()
