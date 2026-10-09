@@ -4,7 +4,7 @@ import Icon, { type IconName } from '../components/Icon'
 
 const industries: { icon: IconName; path: string; title: string; desc: string; linkLabel: string }[] = [
   {
-    icon: 'hotel',
+    icon: 'hospitality',
     path: '/hospitality-marketing-agency-nyc/',
     title: 'Hospitality Marketing',
     desc: 'The specialist overview for hotels, restaurants, bars and groups that need attention to become bookings and reservations.',
@@ -77,7 +77,7 @@ export default function IndustriesPage() {
             {industries.map((ind) => {
               return (
                 <div key={ind.title} className="card-dark">
-                  <div className="card-icon"><Icon name={ind.icon} size={34} /></div>
+                  <div className="card-icon"><Icon name={ind.icon} size={62} /></div>
                   <h4>{ind.title}</h4>
                   <p>{ind.desc}</p>
                   <Link to={ind.path} className="card-link">{ind.linkLabel} ↗</Link>

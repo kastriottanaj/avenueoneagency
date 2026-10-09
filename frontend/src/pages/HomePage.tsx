@@ -117,7 +117,7 @@ export default function HomePage() {
             </div>
             <Reveal className="industry-cards" stagger={90}>
               {([
-                { label: 'Hospitality & Hotels', icon: 'hotel', to: '/hospitality-marketing-agency-nyc/' },
+                { label: 'Hospitality & Hotels', icon: 'hospitality', to: '/hospitality-marketing-agency-nyc/' },
                 { label: 'Fashion & Luxury', icon: 'fashion', to: '/fashion-marketing-nyc/' },
                 { label: 'Beauty & Wellness', icon: 'beauty', to: '/beauty-marketing-nyc/' },
                 { label: 'F&B & Restaurants', icon: 'restaurant', to: '/restaurant-marketing-nyc/' },
