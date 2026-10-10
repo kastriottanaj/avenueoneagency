@@ -24,8 +24,6 @@ class StaticViewSitemap(Sitemap):
         'testimonials': 0.7,
         'case_studies': 0.8,
         'blog': 0.7,
-        'imprint': 0.2,
-        'privacy': 0.2,
     }
 
     CHANGEFREQ = {
@@ -38,8 +36,6 @@ class StaticViewSitemap(Sitemap):
         'testimonials': 'monthly',
         'case_studies': 'monthly',
         'contact': 'yearly',
-        'imprint': 'yearly',
-        'privacy': 'yearly',
     }
 
     # The vertical landing pages are the primary commercial search targets,
