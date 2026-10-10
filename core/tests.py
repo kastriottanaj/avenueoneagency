@@ -158,13 +158,17 @@ class SitemapAndRobotsTests(TestCase):
     def test_sitemap_lists_every_static_page(self):
         # The host comes from the request, so assert on the path and scheme.
         xml = self.client.get('/sitemap.xml').content.decode()
-        for path in PAGE_META:
+        noindex_paths = {'/imprint/', '/privacy/'}
+        for path in set(PAGE_META) - noindex_paths:
             self.assertIn(f'<loc>https://testserver{path}</loc>', xml)
+
+        for path in noindex_paths:
+            self.assertNotIn(f'<loc>https://testserver{path}</loc>', xml)
 
     def test_sitemap_priorities_are_differentiated(self):
         xml = self.client.get('/sitemap.xml').content.decode()
         self.assertIn('<priority>1.0</priority>', xml)
-        self.assertIn('<priority>0.2</priority>', xml)
+        self.assertIn('<priority>0.7</priority>', xml)
 
     def test_robots_disallows_admin_and_api(self):
         body = self.client.get('/robots.txt').content.decode()
@@ -787,9 +791,14 @@ class LegacyUrlRedirectTests(TestCase):
 
     def test_sitemap_lists_the_english_urls(self):
         xml = self.client.get('/sitemap.xml').content.decode()
-        for new in LEGACY_REDIRECTS.values():
+        noindex_paths = {'/imprint/', '/privacy/'}
+        for new in set(LEGACY_REDIRECTS.values()) - noindex_paths:
             with self.subTest(new=new):
                 self.assertIn(f'<loc>https://testserver{new}</loc>', xml)
+
+        for new in noindex_paths:
+            with self.subTest(new=new):
+                self.assertNotIn(f'<loc>https://testserver{new}</loc>', xml)
 
     def test_no_internal_link_points_at_a_legacy_url(self):
         """Internal links should hit the canonical URL directly rather than
