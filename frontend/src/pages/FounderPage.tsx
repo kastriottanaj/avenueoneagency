@@ -201,6 +201,20 @@ export default function FounderPage() {
             <p className="section-lead">
               Explore the strategy, content and creator services Linda leads through Avenue One.
             </p>
+            <p>
+              See how that perspective shapes our{' '}
+              <Link className="text-link" to="/hospitality-marketing-agency-nyc/">
+                hospitality marketing
+              </Link>,{' '}
+              <Link className="text-link" to="/hotel-marketing-nyc/">
+                hotel marketing
+              </Link>{' '}
+              and{' '}
+              <Link className="text-link" to="/influencer-marketing-agency-nyc/">
+                influencer marketing
+              </Link>{' '}
+              programmes in New York City.
+            </p>
             <div className="founder-actions">
               <Link to="/services/" className="btn-primary">Explore Services</Link>
               <Link to="/case-studies/" className="btn-outline">See Client Results</Link>

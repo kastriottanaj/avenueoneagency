@@ -17,15 +17,26 @@ export default function Footer() {
             <p className="footer-founder">
               Founded by <Link to="/linda-kafexholli/">Linda Kafexholli</Link>.
             </p>
-            <a
-              href="https://www.instagram.com/avenueone.agency/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-outline"
-              style={{ marginTop: '1.25rem', fontSize: '0.8rem', padding: '0.6rem 1.25rem' }}
-            >
-              ↗ Instagram
-            </a>
+            <div className="founder-actions" style={{ marginTop: '1.25rem' }}>
+              <a
+                href="https://www.instagram.com/avenueone.agency/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline"
+                style={{ fontSize: '0.8rem', padding: '0.6rem 1.25rem' }}
+              >
+                ↗ Instagram
+              </a>
+              <a
+                href="https://www.linkedin.com/company/avenue-one-agency"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline"
+                style={{ fontSize: '0.8rem', padding: '0.6rem 1.25rem' }}
+              >
+                ↗ LinkedIn
+              </a>
+            </div>
           </div>
 
           <div className="footer-links">

@@ -150,6 +150,23 @@ export default function HomePage() {
               </Link>
             ))}
           </Reveal>
+          <div style={{ marginTop: '3rem' }}>
+            <p className="section-label">Specialist NYC Expertise</p>
+            <Reveal className="vertical-links" stagger={70}>
+              <Link to="/hospitality-marketing-agency-nyc/" className="vertical-link">
+                <span className="vertical-link__label">Hospitality Marketing Agency NYC</span>
+                <span className="vertical-link__arrow" aria-hidden="true">↗</span>
+              </Link>
+              <Link to="/hotel-marketing-nyc/" className="vertical-link">
+                <span className="vertical-link__label">Hotel Marketing Agency NYC</span>
+                <span className="vertical-link__arrow" aria-hidden="true">↗</span>
+              </Link>
+              <Link to="/influencer-marketing-agency-nyc/" className="vertical-link">
+                <span className="vertical-link__label">Influencer Marketing Agency NYC</span>
+                <span className="vertical-link__arrow" aria-hidden="true">↗</span>
+              </Link>
+            </Reveal>
+          </div>
           <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
             <Link to="/services/" className="btn-outline">View All Services</Link>
           </div>

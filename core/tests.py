@@ -4,6 +4,7 @@ Each test names the finding it locks down, so a future change that reintroduces
 one fails loudly instead of silently shipping.
 """
 
+import json
 import re
 from html import escape
 
@@ -66,6 +67,7 @@ class SeoHeadTests(TestCase):
     def test_homepage_declares_complete_icon_package(self):
         html = self.client.get('/').content.decode()
         self.assertIn('/static/core/brand/favicon.svg', html)
+        self.assertIn('/static/core/brand/favicon-48.png', html)
         self.assertIn('/favicon.ico', html)
         self.assertIn('/apple-touch-icon.png', html)
         self.assertIn('/site.webmanifest', html)
@@ -95,6 +97,22 @@ class SeoHeadTests(TestCase):
         html = self.client.get('/').content.decode()
         self.assertIn('https://www.instagram.com/avenueone.agency/', html)
         self.assertIn('https://www.linkedin.com/company/avenue-one-agency', html)
+
+    def test_priority_pages_use_clear_agency_name_in_search_titles(self):
+        expected = {
+            '/': 'Avenue One Agency | NYC Hospitality Marketing',
+            '/hospitality-marketing-agency-nyc/': (
+                'Hospitality Marketing Agency NYC | Avenue One Agency'
+            ),
+            '/influencer-marketing-agency-nyc/': (
+                'Influencer Marketing Agency NYC | Avenue One Agency'
+            ),
+            '/hotel-marketing-nyc/': 'Hotel Marketing Agency NYC | Avenue One Agency',
+        }
+        for path, title in expected.items():
+            with self.subTest(path=path):
+                self.assertEqual(PAGE_META[path]['title'], title)
+                self.assertLessEqual(len(PAGE_META[path]['description']), 160)
 
     def test_service_catalog_has_no_duplicate_service_names(self):
         html = self.client.get('/services/').content.decode()
@@ -349,6 +367,18 @@ class PrerenderTests(TestCase):
         for name in ('Social Media Strategy', 'Influencer Partnerships', 'AI Engine Optimization'):
             self.assertIn(name, html)
 
+    def test_authority_pages_link_to_priority_commercial_pages(self):
+        destinations = (
+            '/hospitality-marketing-agency-nyc/',
+            '/hotel-marketing-nyc/',
+            '/influencer-marketing-agency-nyc/',
+        )
+        for path in ('/', '/about/', '/linda-kafexholli/', '/case-studies/'):
+            html = self.client.get(path).content.decode()
+            for destination in destinations:
+                with self.subTest(path=path, destination=destination):
+                    self.assertIn(f'href="{destination}"', html)
+
     def test_404_is_rendered_too(self):
         res = self.client.get('/no-such-page/')
         self.assertEqual(res.status_code, 404)
@@ -356,6 +386,33 @@ class PrerenderTests(TestCase):
 
 
 class StructuredDataTests(TestCase):
+    def _json_ld(self, path='/'):
+        html = self.client.get(path).content.decode()
+        return [
+            json.loads(value)
+            for value in re.findall(
+                r'<script type="application/ld\+json">(.*?)</script>', html
+            )
+        ]
+
+    def test_agency_schema_has_a_distinct_brand_logo_and_contact_point(self):
+        blocks = self._json_ld()
+        organization = next(block for block in blocks if block.get('@type') == 'ProfessionalService')
+        self.assertEqual(organization['name'], 'Avenue One Agency')
+        self.assertIn('AvenueOne', organization['alternateName'])
+        self.assertEqual(organization['logo']['width'], 512)
+        self.assertEqual(organization['logo']['height'], 512)
+        self.assertEqual(organization['contactPoint']['contactType'], 'new business enquiries')
+        self.assertEqual(organization['brand']['name'], 'Avenue One Agency')
+
+    def test_founder_and_agency_social_profiles_are_not_conflated(self):
+        blocks = self._json_ld()
+        organization = next(block for block in blocks if block.get('@type') == 'ProfessionalService')
+        founder = next(block for block in blocks if block.get('@type') == 'Person')
+        self.assertIn('https://www.instagram.com/avenueone.agency/', organization['sameAs'])
+        self.assertNotIn('https://www.instagram.com/avenueone.agency/', founder['sameAs'])
+        self.assertIn('https://www.instagram.com/linda_kafexholli/', founder['sameAs'])
+
     def test_founder_is_a_named_entity_with_corroborating_links(self):
         html = self.client.get('/').content.decode()
         self.assertIn('"@type":"Person"', html)
