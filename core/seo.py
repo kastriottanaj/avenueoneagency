@@ -85,10 +85,10 @@ LOCALE = 'en_US'
 # path -> metadata. Keys must match the URLconf exactly, trailing slash included.
 PAGE_META = {
     '/': {
-        'title': 'NYC Social Media Agency for Hospitality | Avenue One',
+        'title': 'Avenue One Agency | NYC Hospitality Marketing',
         'description': (
-            'Creator-led NYC social media agency for hotels, restaurants and lifestyle '
-            'brands. Strategy, content and influencer partnerships built to drive growth.'
+            'Avenue One Agency is a creator-led NYC hospitality marketing agency for '
+            'hotels, restaurants and lifestyle brands. Social, content, creators and paid media.'
         ),
     },
     '/about/': {
@@ -142,7 +142,7 @@ PAGE_META = {
         ),
     },
     '/contact/': {
-        'title': 'Contact Avenue One Agency — NYC Creative Agency',
+        'title': 'Contact Avenue One Agency | NYC Hospitality Marketing',
         'description': (
             'Tell us about your brand and what you want to achieve. We reply within '
             '24 hours. Based in New York City, working with brands across the U.S. '
@@ -200,18 +200,39 @@ NOT_FOUND_META = {
 
 
 def _organization(base_url):
+    agency_profiles = [
+        'https://www.instagram.com/avenueone.agency/',
+        'https://www.linkedin.com/company/avenue-one-agency',
+    ]
     return {
         '@context': 'https://schema.org',
         '@type': 'ProfessionalService',
         '@id': f'{base_url}/#organization',
         'name': SITE_NAME,
-        'alternateName': 'Avenue One',
+        'alternateName': ['Avenue One', 'AvenueOne'],
         'url': f'{base_url}/',
         'image': f'{base_url}{DEFAULT_IMAGE}',
-        'logo': f'{base_url}/static/core/brand/icon-512.png',
+        'logo': {
+            '@type': 'ImageObject',
+            '@id': f'{base_url}/#logo',
+            'url': f'{base_url}/static/core/brand/icon-512.png',
+            'contentUrl': f'{base_url}/static/core/brand/icon-512.png',
+            'width': 512,
+            'height': 512,
+            'caption': SITE_NAME,
+        },
         'description': PAGE_META['/']['description'],
+        'slogan': 'Creator-led marketing for hospitality and lifestyle brands',
         'foundingDate': '2020',
         'founder': {'@id': f'{base_url}/linda-kafexholli/#person'},
+        'email': 'avenueoneagency@gmail.com',
+        'contactPoint': {
+            '@type': 'ContactPoint',
+            'contactType': 'new business enquiries',
+            'email': 'avenueoneagency@gmail.com',
+            'url': f'{base_url}/contact/',
+            'availableLanguage': ['English'],
+        },
         'address': {
             '@type': 'PostalAddress',
             'addressLocality': 'New York',
@@ -222,10 +243,15 @@ def _organization(base_url):
             {'@type': 'Place', 'name': 'United States'},
             {'@type': 'Place', 'name': 'Europe'},
         ],
-        'sameAs': [
-            'https://www.instagram.com/avenueone.agency/',
-            'https://www.linkedin.com/company/avenue-one-agency',
-        ],
+        'sameAs': agency_profiles,
+        'brand': {
+            '@type': 'Brand',
+            '@id': f'{base_url}/#brand',
+            'name': SITE_NAME,
+            'alternateName': ['Avenue One', 'AvenueOne'],
+            'logo': {'@id': f'{base_url}/#logo'},
+            'sameAs': agency_profiles,
+        },
         'knowsAbout': [
             'Social media strategy',
             'Content creation',
@@ -268,7 +294,6 @@ def _founder(base_url):
             'Hospitality marketing',
         ],
         'sameAs': [
-            'https://www.instagram.com/avenueone.agency/',
             'https://www.instagram.com/linda_kafexholli/',
             'https://www.linkedin.com/in/linda-kafexholli-a50438153',
         ],
@@ -282,6 +307,8 @@ def _website(base_url):
         '@id': f'{base_url}/#website',
         'url': f'{base_url}/',
         'name': SITE_NAME,
+        'alternateName': ['Avenue One', 'AvenueOne'],
+        'inLanguage': 'en-US',
         'publisher': {'@id': f'{base_url}/#organization'},
     }
 

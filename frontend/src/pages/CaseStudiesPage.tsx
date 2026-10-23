@@ -52,18 +52,37 @@ export default function CaseStudiesPage() {
       </section>
 
       <section className="page-section page-section--dark">
-        <div className="container two-col-grid">
-          <SectionHead label="Our Standard" title="Clear about what the evidence says" />
-          <div>
-            <p className="section-lead">
-              Strong case studies distinguish client-reported outcomes from agency
-              interpretation. These pages publish only the claims clients have supplied.
-            </p>
-            <p>
-              As richer project records become available, the same system can add the
-              brief, scope, timeline, work delivered and measurement method without
-              changing the page structure or URL.
-            </p>
+        <div className="container">
+          <div className="two-col-grid">
+            <SectionHead label="Our Standard" title="Clear about what the evidence says" />
+            <div>
+              <p className="section-lead">
+                Strong case studies distinguish client-reported outcomes from agency
+                interpretation. These pages publish only the claims clients have supplied.
+              </p>
+              <p>
+                As richer project records become available, the same system can add the
+                brief, scope, timeline, work delivered and measurement method without
+                changing the page structure or URL.
+              </p>
+            </div>
+          </div>
+          <div style={{ marginTop: '3rem' }}>
+            <p className="section-label">Build on these results</p>
+            <Reveal className="vertical-links" stagger={70}>
+              <Link to="/hospitality-marketing-agency-nyc/" className="vertical-link">
+                <span className="vertical-link__label">Hospitality Marketing Agency NYC</span>
+                <span className="vertical-link__arrow" aria-hidden="true">↗</span>
+              </Link>
+              <Link to="/hotel-marketing-nyc/" className="vertical-link">
+                <span className="vertical-link__label">Hotel Marketing Agency NYC</span>
+                <span className="vertical-link__arrow" aria-hidden="true">↗</span>
+              </Link>
+              <Link to="/influencer-marketing-agency-nyc/" className="vertical-link">
+                <span className="vertical-link__label">Influencer Marketing Agency NYC</span>
+                <span className="vertical-link__arrow" aria-hidden="true">↗</span>
+              </Link>
+            </Reveal>
           </div>
         </div>
       </section>

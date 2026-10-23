@@ -92,6 +92,29 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="page-section">
+        <div className="container">
+          <SectionHead
+            label="Our Expertise"
+            title={<>Strategy built around<br /><span className="highlight">how guests discover.</span></>}
+          />
+          <Reveal className="vertical-links" stagger={70}>
+            <Link to="/hospitality-marketing-agency-nyc/" className="vertical-link">
+              <span className="vertical-link__label">Hospitality Marketing Agency NYC</span>
+              <span className="vertical-link__arrow" aria-hidden="true">↗</span>
+            </Link>
+            <Link to="/hotel-marketing-nyc/" className="vertical-link">
+              <span className="vertical-link__label">Hotel Marketing Agency NYC</span>
+              <span className="vertical-link__arrow" aria-hidden="true">↗</span>
+            </Link>
+            <Link to="/influencer-marketing-agency-nyc/" className="vertical-link">
+              <span className="vertical-link__label">Influencer Marketing Agency NYC</span>
+              <span className="vertical-link__arrow" aria-hidden="true">↗</span>
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
       <section className="page-section" style={{ textAlign: 'center' }}>
         <div className="container">
           <span className="section-label">Ready?</span>
